@@ -1,5 +1,6 @@
-package de.geekeey.packed;
+package de.geekeey.packed.registry;
 
+import de.geekeey.packed.initialisers.Initializer;
 import de.geekeey.packed.block.TestContainer;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -13,7 +14,7 @@ public class Blocks {
     }
 
     public static void register(){
-        Registry.register(Registry.BLOCK,Initializer.id("test_container"),TEST_CONTAINER);
+        Registry.register(Registry.BLOCK, Initializer.id("test_container"),TEST_CONTAINER);
     }
 
 }

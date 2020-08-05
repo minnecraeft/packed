@@ -1,11 +1,9 @@
-package de.geekeey.packed;
+package de.geekeey.packed.initialisers;
 
-import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
+import de.geekeey.packed.registry.BlockEntities;
+import de.geekeey.packed.registry.Blocks;
+import de.geekeey.packed.registry.Items;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
 public class Initializer implements ModInitializer {

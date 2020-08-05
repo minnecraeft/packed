@@ -1,8 +1,6 @@
-package de.geekeey.packed;
+package de.geekeey.packed.registry;
 
-import de.geekeey.packed.block.TestContainer;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
+import de.geekeey.packed.initialisers.Initializer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

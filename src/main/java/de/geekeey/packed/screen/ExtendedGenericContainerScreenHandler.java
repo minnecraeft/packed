@@ -1,13 +1,10 @@
 package de.geekeey.packed.screen;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
@@ -51,7 +48,7 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
     public static ExtendedGenericContainerScreenHandler create (int syncId, PlayerInventory playerInventory,int rows,int colums){
         System.out.println("HAHAHSDHAHSD");
-        return new ExtendedGenericContainerScreenHandler(de.geekeey.packed.ScreenHandler.GENERIC3x18,syncId,playerInventory,new SimpleInventory(rows*colums),rows,colums);
+        return new ExtendedGenericContainerScreenHandler(de.geekeey.packed.registry.ScreenHandler.GENERIC,syncId,playerInventory,new SimpleInventory(rows*colums),rows,colums);
     }
 
     @Override

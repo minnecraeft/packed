@@ -1,4 +1,4 @@
-package de.geekeey.packed.server;
+package de.geekeey.packed.initialisers;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.EnvType;
