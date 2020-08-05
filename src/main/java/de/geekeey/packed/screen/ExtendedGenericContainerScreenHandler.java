@@ -10,9 +10,20 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
+    private static final int SLOT_SIZE = 18;
+    private static final int LEFT_RIGHT_PADDING = 8;
+    private static final int TOP_PADDING = 18;
+    private static final int INV_CHEST_GAP = 14;
+    private static final int INV_HOTBAR_GAP = 4;
+
+    private static final int INV_ROWS = 3;
+    private static final int INV_COLUMNS = 9;
+    private static final int HOTBAR_COLUMNS = 9;
+
     private final Inventory inventory;
     private final int rows;
     private final int columns;
+
 
     public ExtendedGenericContainerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, int columns) {
         super(de.geekeey.packed.registry.ScreenHandler.GENERIC, syncId);
@@ -21,28 +32,40 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
         this.columns = columns;
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
-        int i = (this.rows - 4) * 18;
+
+        int inventoryandhotbarstartx = (int) ((columns - INV_COLUMNS) / 2.0 * SLOT_SIZE) + LEFT_RIGHT_PADDING;
+        int cheststartx = LEFT_RIGHT_PADDING;
+        int inventorystarty = TOP_PADDING + rows * SLOT_SIZE + INV_CHEST_GAP;
+        int hotbarstarty = inventorystarty + INV_ROWS * SLOT_SIZE + INV_HOTBAR_GAP;
+
+        if (inventoryandhotbarstartx < 0) {
+            //chest columns less than inventories:
+            //Here we indent the chest, not the inventory
+            cheststartx = -inventoryandhotbarstartx;
+            inventoryandhotbarstartx = 0;
+        }
+
+        System.out.println(inventoryandhotbarstartx);
 
         int n;
         int m;
 
         for (n = 0; n < this.rows; ++n) {
             for (m = 0; m < columns; ++m) {
-                this.addSlot(new Slot(inventory, m + n * 9, 8 + m * 18, 18 + n * 18));
+                this.addSlot(new Slot(inventory, m + n * columns, cheststartx + m * SLOT_SIZE, TOP_PADDING + n * SLOT_SIZE));
             }
         }
-
         //This creates the slots for the player inventory
-        for (n = 0; n < 3; ++n) {
-            for (m = 0; m < 9; ++m) {
-                this.addSlot(new Slot(playerInventory, m + n * 9 + 9, 8 + m * 18, 103 + n * 18 + i));
+        for (n = 0; n < INV_ROWS; ++n) {
+            for (m = 0; m < INV_COLUMNS; ++m) {
+                this.addSlot(new Slot(playerInventory, m + n * INV_COLUMNS + HOTBAR_COLUMNS, inventoryandhotbarstartx + m * SLOT_SIZE, inventorystarty + n * SLOT_SIZE));
             }
         }
-        //This creates the player hotbar
-        for (n = 0; n < 9; ++n) {
-            this.addSlot(new Slot(playerInventory, n, 8 + n * 18, 161 + i));
-        }
 
+        //This creates the player hotbar
+        for (n = 0; n < HOTBAR_COLUMNS; ++n) {
+            this.addSlot(new Slot(playerInventory, n, inventoryandhotbarstartx + n * SLOT_SIZE, hotbarstarty));
+        }
     }
 
     public static ExtendedGenericContainerScreenHandler create(int id, PlayerInventory inv, PacketByteBuf buf) {
