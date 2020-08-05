@@ -45,10 +45,18 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
     }
 
-    public static ExtendedGenericContainerScreenHandler create(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
+    public static ExtendedGenericContainerScreenHandler create(int id, PlayerInventory inv, PacketByteBuf buf) {
         int rows = buf.readInt();
         int columns = buf.readInt();
-        return new ExtendedGenericContainerScreenHandler(syncId, playerInventory, new SimpleInventory(rows * columns), rows, columns);
+        return new ExtendedGenericContainerScreenHandler(id, inv, new SimpleInventory(rows * columns), rows, columns);
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
     }
 
     @Override

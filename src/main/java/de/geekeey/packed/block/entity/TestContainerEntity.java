@@ -1,18 +1,18 @@
 package de.geekeey.packed.block.entity;
 
 import de.geekeey.packed.registry.BlockEntities;
+import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.Generic3x3ContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class TestContainerEntity extends BasicContainerEntity implements ExtendedScreenHandlerFactory {
 
-    private static final int inventoryrows = 6;
-    private static final int inventorycolumns = 9;
+    private static final int rows = 10;
+    private static final int columns = 5;
 
     protected TestContainerEntity(BlockEntityType<?> blockEntityType) {
         super(blockEntityType);
@@ -23,18 +23,18 @@ public class TestContainerEntity extends BasicContainerEntity implements Extende
     }
 
     @Override
-    protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-        return new Generic3x3ContainerScreenHandler(syncId,playerInventory,this);
+    protected ScreenHandler createScreenHandler(int id, PlayerInventory inventory) {
+        return new ExtendedGenericContainerScreenHandler(id, inventory, this, rows, columns);
     }
 
     @Override
     public int size() {
-        return inventorycolumns * inventoryrows;
+        return columns * rows;
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-        packetByteBuf.writeInt(inventoryrows);
-        packetByteBuf.writeInt(inventorycolumns);
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeInt(rows);
+        buf.writeInt(columns);
     }
 }

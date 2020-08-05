@@ -16,13 +16,13 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "de.geekeey.packed.client.ClientInitializer"
+      "de.geekeey.packed.initialisers.ClientInitializer"
     ],
     "server": [
-      "de.geekeey.packed.server.ServerInitializer"
+      "de.geekeey.packed.initialisers.ServerInitializer"
     ],
     "main": [
-      "de.geekeey.packed.Initializer"
+      "de.geekeey.packed.initialisers.Initializer"
     ]
   },
   "mixins": [
