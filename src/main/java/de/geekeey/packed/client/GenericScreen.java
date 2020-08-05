@@ -9,10 +9,12 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/dispenser.png");
+    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/generic_54.png");
 
     public GenericScreen(ExtendedGenericContainerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
+        this.backgroundHeight = 114 + 6 * 18;
+        this.playerInventoryTitleY = this.backgroundHeight - 94;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
+
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         drawTexture(matrices, x, y, 0, 0, backgroundWidth, backgroundHeight);
