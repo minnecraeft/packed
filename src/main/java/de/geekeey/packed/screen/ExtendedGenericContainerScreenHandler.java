@@ -5,21 +5,20 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
 public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final int rows;
-    private final int colums;
+    private final int columns;
 
-    public ExtendedGenericContainerScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, int colums) {
-        super(type,syncId);
-        System.out.println("XOXOXOXOOXOX");
-        checkSize(inventory, rows * colums);
+    public ExtendedGenericContainerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, int columns) {
+        super(de.geekeey.packed.registry.ScreenHandler.GENERIC, syncId);
+        checkSize(inventory, rows * columns);
         this.rows = rows;
-        this.colums = colums;
+        this.columns = columns;
         this.inventory = inventory;
         inventory.onOpen(playerInventory.player);
         int i = (this.rows - 4) * 18;
@@ -27,28 +26,29 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
         int n;
         int m;
 
-        for(n = 0; n < this.rows; ++n) {
-            for(m = 0; m < colums; ++m) {
+        for (n = 0; n < this.rows; ++n) {
+            for (m = 0; m < columns; ++m) {
                 this.addSlot(new Slot(inventory, m + n * 9, 8 + m * 18, 18 + n * 18));
             }
         }
 
         //This creates the slots for the player inventory
-        for(n = 0; n < 3; ++n) {
-            for(m = 0; m < 9; ++m) {
+        for (n = 0; n < 3; ++n) {
+            for (m = 0; m < 9; ++m) {
                 this.addSlot(new Slot(playerInventory, m + n * 9 + 9, 8 + m * 18, 103 + n * 18 + i));
             }
         }
         //This creates the player hotbar
-        for(n = 0; n < 9; ++n) {
+        for (n = 0; n < 9; ++n) {
             this.addSlot(new Slot(playerInventory, n, 8 + n * 18, 161 + i));
         }
 
     }
 
-    public static ExtendedGenericContainerScreenHandler create (int syncId, PlayerInventory playerInventory,int rows,int colums){
-        System.out.println("HAHAHSDHAHSD");
-        return new ExtendedGenericContainerScreenHandler(de.geekeey.packed.registry.ScreenHandler.GENERIC,syncId,playerInventory,new SimpleInventory(rows*colums),rows,colums);
+    public static ExtendedGenericContainerScreenHandler create(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
+        int rows = buf.readInt();
+        int columns = buf.readInt();
+        return new ExtendedGenericContainerScreenHandler(syncId, playerInventory, new SimpleInventory(rows * columns), rows, columns);
     }
 
     @Override
@@ -63,15 +63,15 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = (Slot)this.slots.get(index);
+        Slot slot = this.slots.get(index);
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
-            if (index < this.rows * colums) {
-                if (!this.insertItem(itemStack2, this.rows * colums, this.slots.size(), true)) {
+            if (index < this.rows * columns) {
+                if (!this.insertItem(itemStack2, this.rows * columns, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(itemStack2, 0, this.rows * colums, false)) {
+            } else if (!this.insertItem(itemStack2, 0, this.rows * columns, false)) {
                 return ItemStack.EMPTY;
             }
 

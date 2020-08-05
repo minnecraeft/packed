@@ -9,6 +9,6 @@ public class ScreenHandler {
     public static final ScreenHandlerType<ExtendedGenericContainerScreenHandler> GENERIC;
 
     static {
-        GENERIC = ScreenHandlerRegistry.registerSimple(Initializer.id("generic"),(syncid, inv) -> ExtendedGenericContainerScreenHandler.create(syncid,inv,3,18));
+        GENERIC = ScreenHandlerRegistry.registerExtended(Initializer.id("generic"), ExtendedGenericContainerScreenHandler::create);
     }
 }
