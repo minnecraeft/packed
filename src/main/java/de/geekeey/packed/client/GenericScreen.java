@@ -35,24 +35,33 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
     private final int rows;
     private final int columns;
 
-    private final int playerInventoryX;
+    private final int containerOffsetX;
+    private final int playerInventoryOffsetX;
 
     public GenericScreen(ExtendedGenericContainerScreenHandler handler, PlayerInventory inv, Text title) {
         super(handler, inv, title);
         rows = handler.getRows();
         columns = handler.getColumns();
 
-        backgroundHeight = FIX_HEIGHT_MIN + rows * SLOT_SIZE;
-        backgroundWidth = max(PLAYER_INVENTORY_WIDTH, CONTAINER_HORIZONTAL_PADDING + columns * SLOT_SIZE);
+        int containerInventoryWidth = CONTAINER_HORIZONTAL_PADDING + columns * SLOT_SIZE;
 
-        playerInventoryX = max(0, (backgroundWidth - PLAYER_INVENTORY_WIDTH) / 2);
+        backgroundWidth = max(PLAYER_INVENTORY_WIDTH, containerInventoryWidth);
+        backgroundHeight = FIX_HEIGHT_MIN + rows * SLOT_SIZE;
+
+        if (containerInventoryWidth < PLAYER_INVENTORY_WIDTH) {
+            containerOffsetX = (PLAYER_INVENTORY_WIDTH - containerInventoryWidth) / 2;
+            playerInventoryOffsetX = 0;
+        } else {
+            containerOffsetX = 0;
+            playerInventoryOffsetX = (containerInventoryWidth - PLAYER_INVENTORY_WIDTH) / 2;
+        }
 
         // change player inventory title x offset if our container shifts the
         // player inventory to center the whole screen
-        playerInventoryTitleX += playerInventoryX;
+        playerInventoryTitleX += playerInventoryOffsetX;
         // 94 is the distance from to bottom of the inventory up to the
         // space between the container and the player inventory
-        playerInventoryTitleY = backgroundHeight - 94+4;
+        playerInventoryTitleY = backgroundHeight - 94;
     }
 
     @Override
@@ -67,16 +76,16 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         client.getTextureManager().bindTexture(TEXTURE);
 
-        int offsetX = (this.width - this.backgroundWidth) / 2;
-        int offsetY = (this.height - this.backgroundHeight) / 2;
+        int offsetX = (width - backgroundWidth) / 2;
+        int offsetY = (height - backgroundHeight) / 2;
 
-        int originX = offsetX + CONTAINER_LEFT_PADDING;
+        int originX = offsetX + CONTAINER_LEFT_PADDING + containerOffsetX;
         int originY = offsetY + CONTAINER_TOP_PADDING + rows * SLOT_SIZE;
 
         // corner top left
-        drawTexture(matrices, offsetX, offsetY, 0, 0, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
+        drawTexture(matrices, offsetX + containerOffsetX, offsetY, 0, 0, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
         // corner bottom left
-        drawTexture(matrices, offsetX, originY, 0, 215, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
+        drawTexture(matrices, offsetX + containerOffsetX, originY, 0, 215, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
 
         for (int c = 0; c < columns; c++) {
             // border top
@@ -92,7 +101,7 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         for (int r = 0; r < rows; r++) {
             originY = offsetY + CONTAINER_TOP_PADDING + r * SLOT_SIZE;
             // border left
-            drawTexture(matrices, offsetX, originY, 0, CONTAINER_TOP_PADDING, CONTAINER_LEFT_PADDING, SLOT_SIZE);
+            drawTexture(matrices, offsetX + containerOffsetX, originY, 0, CONTAINER_TOP_PADDING, CONTAINER_LEFT_PADDING, SLOT_SIZE);
             for (int c = 0; c < columns; c++) {
                 // slot background
                 drawTexture(matrices, originX + SLOT_SIZE * c, originY, 7, 17, SLOT_SIZE, SLOT_SIZE);
@@ -102,6 +111,6 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         }
 
         // player inventory
-        //drawTexture(matrices, offsetX + playerInventoryX, offsetY + rows * SLOT_SIZE + 17+4, 0, 126, PLAYER_INVENTORY_WIDTH, 96);
+        drawTexture(matrices, offsetX + playerInventoryOffsetX, offsetY + rows * SLOT_SIZE + 17, 0, 126, PLAYER_INVENTORY_WIDTH, 96);
     }
 }
