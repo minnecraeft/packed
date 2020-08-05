@@ -19,6 +19,7 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
     public ExtendedGenericContainerScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, int colums) {
         super(type,syncId);
+        System.out.println("XOXOXOXOOXOX");
         checkSize(inventory, rows * colums);
         this.rows = rows;
         this.colums = colums;
@@ -49,6 +50,7 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
     }
 
     public static ExtendedGenericContainerScreenHandler create (int syncId, PlayerInventory playerInventory,int rows,int colums){
+        System.out.println("HAHAHSDHAHSD");
         return new ExtendedGenericContainerScreenHandler(de.geekeey.packed.ScreenHandler.GENERIC3x18,syncId,playerInventory,new SimpleInventory(rows*colums),rows,colums);
     }
 
