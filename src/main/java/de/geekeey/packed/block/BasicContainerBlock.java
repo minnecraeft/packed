@@ -59,10 +59,10 @@ public abstract class BasicContainerBlock extends BlockWithEntity {
 
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if(itemStack.hasCustomName()){
+        if (itemStack.hasCustomName()) {
             BlockEntity be = world.getBlockEntity(pos);
-            if(be instanceof BasicContainerEntity){
-                ((BasicContainerEntity)be).setCustomName(itemStack.getName());
+            if (be instanceof BasicContainerEntity) {
+                ((BasicContainerEntity) be).setCustomName(itemStack.getName());
             }
         }
     }

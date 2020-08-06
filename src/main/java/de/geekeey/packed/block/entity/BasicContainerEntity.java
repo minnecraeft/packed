@@ -37,7 +37,7 @@ public abstract class BasicContainerEntity extends LootableContainerBlockEntity 
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state,tag);
+        super.fromTag(state, tag);
         if (!this.deserializeLootTable(tag)) {
             Inventories.fromTag(tag, inventory);
         }

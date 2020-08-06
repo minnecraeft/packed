@@ -4,6 +4,7 @@
   "package": "de.geekeey.packed.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BarrelMixin"
   ],
   "client": [
   ],

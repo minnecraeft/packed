@@ -10,6 +10,10 @@ public class Initializer implements ModInitializer {
 
     public static final String ID = "packed";
 
+    public static Identifier id(String path) {
+        return new Identifier(ID, path);
+    }
+
     @Override
     public void onInitialize() {
         BlockEntities.register();
@@ -17,9 +21,5 @@ public class Initializer implements ModInitializer {
         Items.register();
 
 
-    }
-
-    public static Identifier id(String path) {
-        return new Identifier(ID, path);
     }
 }
