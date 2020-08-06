@@ -1,6 +1,7 @@
 package de.geekeey.packed.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import de.geekeey.packed.initialisers.Initializer;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -30,12 +31,16 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
 
     private static final int SLOT_SIZE = 18;
 
-    private static final Identifier TEXTURE = new Identifier("textures/gui/container/generic_54.png");
+    private static final Identifier TEXTURE = Initializer.id("textures/gui/panel.png");
+//    private static final Identifier TEXTURE = new Identifier("textures/gui/container/generic_54.png");
 
     private final int rows;
     private final int columns;
 
-    private final int containerOffsetX;
+    private final int containerHeight;
+    private final int containerWidth;
+
+    private final int containerInventoryOffsetX;
     private final int playerInventoryOffsetX;
 
     public GenericScreen(ExtendedGenericContainerScreenHandler handler, PlayerInventory inv, Text title) {
@@ -43,16 +48,19 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         rows = handler.getRows();
         columns = handler.getColumns();
 
+        containerHeight = 17 + rows * 18 + 7;
+        containerWidth = 7 + columns * 18 + 7;
+
         int containerInventoryWidth = CONTAINER_HORIZONTAL_PADDING + columns * SLOT_SIZE;
 
         backgroundWidth = max(PLAYER_INVENTORY_WIDTH, containerInventoryWidth);
         backgroundHeight = FIX_HEIGHT_MIN + rows * SLOT_SIZE;
 
         if (containerInventoryWidth < PLAYER_INVENTORY_WIDTH) {
-            containerOffsetX = (PLAYER_INVENTORY_WIDTH - containerInventoryWidth) / 2;
+            containerInventoryOffsetX = (PLAYER_INVENTORY_WIDTH - containerInventoryWidth) / 2;
             playerInventoryOffsetX = 0;
         } else {
-            containerOffsetX = 0;
+            containerInventoryOffsetX = 0;
             playerInventoryOffsetX = (containerInventoryWidth - PLAYER_INVENTORY_WIDTH) / 2;
         }
 
@@ -79,38 +87,78 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         int offsetX = (width - backgroundWidth) / 2;
         int offsetY = (height - backgroundHeight) / 2;
 
-        int originX = offsetX + CONTAINER_LEFT_PADDING + containerOffsetX;
-        int originY = offsetY + CONTAINER_TOP_PADDING + rows * SLOT_SIZE;
+        int cox = containerInventoryOffsetX;
 
-        // corner top left
-        drawTexture(matrices, offsetX + containerOffsetX, offsetY, 0, 0, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
-        // corner bottom left
-        drawTexture(matrices, offsetX + containerOffsetX, originY, 0, 215, CONTAINER_LEFT_PADDING, CONTAINER_TOP_PADDING);
+        int pox = playerInventoryOffsetX;
+        int poy = containerHeight;
 
-        for (int c = 0; c < columns; c++) {
-            // border top
-            drawTexture(matrices, originX + SLOT_SIZE * c, offsetY, CONTAINER_LEFT_PADDING, 0, SLOT_SIZE, CONTAINER_TOP_PADDING);
-            drawTexture(matrices, originX + SLOT_SIZE * c, originY, CONTAINER_LEFT_PADDING, 215, SLOT_SIZE, CONTAINER_TOP_PADDING);
+        int cp = 18;
+        int rp = 17;
+
+        drawTexture(matrices, offsetX + cox, offsetY, 0, 0, 25, 17);
+        for (int column = 1; column < columns; column++) {
+            drawTexture(matrices, offsetX + cox + 7 + cp, offsetY, 7, 0, 18, 17);
+            cp += 18;
         }
+        drawTexture(matrices, offsetX + cox + 7 + cp, offsetY, 25, 0, 7, 17);
 
-        // corner top right
-        drawTexture(matrices, originX + columns * SLOT_SIZE, offsetY, 169, 0, CONTAINER_RIGHT_PADDING, CONTAINER_TOP_PADDING);
-        // corner bottom right
-        drawTexture(matrices, originX + columns * SLOT_SIZE, originY, 169, 215, CONTAINER_RIGHT_PADDING, CONTAINER_TOP_PADDING);
-
-        for (int r = 0; r < rows; r++) {
-            originY = offsetY + CONTAINER_TOP_PADDING + r * SLOT_SIZE;
-            // border left
-            drawTexture(matrices, offsetX + containerOffsetX, originY, 0, CONTAINER_TOP_PADDING, CONTAINER_LEFT_PADDING, SLOT_SIZE);
-            for (int c = 0; c < columns; c++) {
-                // slot background
-                drawTexture(matrices, originX + SLOT_SIZE * c, originY, 7, 17, SLOT_SIZE, SLOT_SIZE);
+        for (int row = 0; row < rows; row++) {
+            cp = 18;
+            drawTexture(matrices, offsetX + cox, offsetY + rp, 0, 17, 25, 18);
+            for (int column = 1; column < columns; column++) {
+                drawTexture(matrices, offsetX + cox + 7 + cp, offsetY + rp, 7, 17, 18, 18);
+                cp += 18;
             }
-            // border right
-            drawTexture(matrices, originX + SLOT_SIZE * columns, originY, 169, CONTAINER_TOP_PADDING, CONTAINER_RIGHT_PADDING, SLOT_SIZE);
+            drawTexture(matrices, offsetX + cox + 7 + cp, offsetY + rp, 25, 17, 7, 18);
+            rp += 18;
         }
 
-        // player inventory
-        drawTexture(matrices, offsetX + playerInventoryOffsetX, offsetY + rows * SLOT_SIZE + 17, 0, 126, PLAYER_INVENTORY_WIDTH, 96);
+
+        int piw = PLAYER_INVENTORY_WIDTH;
+        int drx = cox;
+        int itx = drx / 18;
+        int xp = cox + 7;
+
+        if (containerInventoryOffsetX > 0) {
+
+            for (int column = 0; column < columns; column++) {
+                drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 49, 18, 7);
+                xp += 18;
+            }
+
+            xp = 7;
+            for (int column = 0; column < itx; column++) {
+                drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, 18, 7);
+                drawTexture(matrices, offsetX + piw - 18 - xp, offsetY + rp, 7, 42, 18, 7);
+                xp += 18;
+            }
+
+            // corners
+            drawTexture(matrices, offsetX, offsetY + rp, 0, 42, 7, 7);
+            drawTexture(matrices, offsetX + 2 * cox + 7 + cp, offsetY + rp, 25, 42, 7, 7);
+            // transition
+            drawTexture(matrices, offsetX + cox, offsetY + rp, 64, 42, 7, 7);
+            drawTexture(matrices, offsetX + cox + cp + 7, offsetY + rp, 88, 42, 7, 7);
+
+            drawTexture(matrices, offsetX + pox, offsetY + poy - 1, 0, 56, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT);
+        } else if (playerInventoryOffsetX > 0) {
+
+            for (int column = 0; column < columns; column++) {
+                int i = column * 18 + 7;
+                if (i < pox || i + 18 >= pox + PLAYER_INVENTORY_WIDTH)
+                    drawTexture(matrices, offsetX + i, offsetY + rp, 39, 42, 18, 7);
+            }
+
+            // corners
+            drawTexture(matrices, offsetX, offsetY + rp, 32, 42, 7, 7);
+            drawTexture(matrices, offsetX + 2 * cox + 7 + cp, offsetY + rp, 57, 42, 7, 7);
+            // transition
+            drawTexture(matrices, offsetX + pox + 1, offsetY + rp, 96, 42, 7, 7);
+            drawTexture(matrices, offsetX - pox + 1 + cp + 7, offsetY + rp, 120, 42, 7, 7);
+
+            drawTexture(matrices, offsetX + pox, offsetY + poy - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
+        }
+
+        drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, cox - itx * 18 - 7, 7);
     }
 }

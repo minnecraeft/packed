@@ -11,7 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class TestContainerEntity extends BasicContainerEntity implements ExtendedScreenHandlerFactory {
 
-    private static final int rows = 10;
+    private static final int rows = 5;
     private static final int columns = 5;
 
     protected TestContainerEntity(BlockEntityType<?> blockEntityType) {
