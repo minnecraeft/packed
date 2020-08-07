@@ -45,7 +45,6 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
             inventoryandhotbarstartx = 0;
         }
 
-        System.out.println(inventoryandhotbarstartx);
 
         int n;
         int m;

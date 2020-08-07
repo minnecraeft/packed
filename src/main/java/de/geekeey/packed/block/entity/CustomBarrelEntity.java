@@ -14,7 +14,10 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 
+import java.util.function.Supplier;
+
 public class CustomBarrelEntity extends BarrelBlockEntity implements ExtendedScreenHandlerFactory {
+
     int rows;
     int columns;
 
@@ -25,16 +28,20 @@ public class CustomBarrelEntity extends BarrelBlockEntity implements ExtendedScr
         setInvStackList(DefaultedList.ofSize(rows * columns, ItemStack.EMPTY));
     }
 
+    public static CustomBarrelEntity create3x9() {
+        return new CustomBarrelEntity(BlockEntities.BARREL_3_9, 3, 9);
+    }
+
     public static CustomBarrelEntity create4x9() {
-        return new CustomBarrelEntity(BlockEntities.CUSTOM_BARREL_ENTITY4x9, 4, 9);
+        return new CustomBarrelEntity(BlockEntities.BARREL_4_9, 4, 9);
     }
 
     public static CustomBarrelEntity create5x9() {
-        return new CustomBarrelEntity(BlockEntities.CUSTOM_BARREL_ENTITY5x9, 5, 9);
+        return new CustomBarrelEntity(BlockEntities.BARREL_5_9, 5, 9);
     }
 
     public static CustomBarrelEntity create6x9() {
-        return new CustomBarrelEntity(BlockEntities.CUSTOM_BARREL_ENTITY6x9, 6, 9);
+        return new CustomBarrelEntity(BlockEntities.BARREL_6_9, 6, 9);
     }
 
     @Override
@@ -52,8 +59,8 @@ public class CustomBarrelEntity extends BarrelBlockEntity implements ExtendedScr
     }
 
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-        packetByteBuf.writeInt(rows);
-        packetByteBuf.writeInt(columns);
+    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf buf) {
+        buf.writeInt(rows);
+        buf.writeInt(columns);
     }
 }

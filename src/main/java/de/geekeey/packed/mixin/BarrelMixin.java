@@ -16,7 +16,6 @@ public class BarrelMixin {
             target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"
     ))
     public boolean isOfProxy(BlockState state, Block block) {
-        System.out.println("Hallo Barrel");
         return state.getBlock() instanceof BarrelBlock;
     }
 }

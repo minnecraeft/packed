@@ -1,29 +1,34 @@
 package de.geekeey.packed.registry;
 
 import de.geekeey.packed.initialisers.Initializer;
+import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
 public class Items {
-    public static final Item TEST_CONTAINER_ITEM;
-    public static final Item CUSTOM_BARREL_ITEM4x9;
-    public static final Item CUSTOM_BARREL_ITEM5x9;
-    public static final Item CUSTOM_BARREL_ITEM6x9;
+    public static final Item OAK_BARREL;
+    public static final Item SPRUCE_BARREL;
+    public static final Item BIRCH_BARREL;
+    public static final Item JUNGLE_BARREL;
+    public static final Item ACACIA_BARREL;
+    public static final Item DARK_OAK_BARREL;
 
     static {
-        TEST_CONTAINER_ITEM = new BlockItem(Blocks.TEST_CONTAINER, new Item.Settings().group(ItemGroup.DECORATIONS));
-        CUSTOM_BARREL_ITEM4x9 = new BlockItem(Blocks.CUSTOM_BARREL4x9, new Item.Settings().group(ItemGroup.DECORATIONS));
-        CUSTOM_BARREL_ITEM5x9 = new BlockItem(Blocks.CUSTOM_BARREL5x9, new Item.Settings().group(ItemGroup.DECORATIONS));
-        CUSTOM_BARREL_ITEM6x9 = new BlockItem(Blocks.CUSTOM_BARREL6x9, new Item.Settings().group(ItemGroup.DECORATIONS));
+        OAK_BARREL = register("barrel_oak", Blocks.OAK_BARREL, ItemGroup.DECORATIONS);
+        SPRUCE_BARREL = register("barrel_spruce", Blocks.SPRUCE_BARREL, ItemGroup.DECORATIONS);
+        BIRCH_BARREL = register("barrel_birch", Blocks.BIRCH_BARREL, ItemGroup.DECORATIONS);
+        JUNGLE_BARREL = register("barrel_jungle", Blocks.JUNGLE_BARREL, ItemGroup.DECORATIONS);
+        ACACIA_BARREL = register("barrel_acacia", Blocks.ACACIA_BARREL, ItemGroup.DECORATIONS);
+        DARK_OAK_BARREL = register("barrel_dark_oak", Blocks.DARK_OAK_BARREL, ItemGroup.DECORATIONS);
+    }
+
+    private static Item register(String identifier, Block block, ItemGroup group) {
+        return Registry.register(Registry.ITEM, Initializer.id(identifier), new BlockItem(block, new Item.Settings().group(group)));
     }
 
     public static void register() {
-        Registry.register(Registry.ITEM, Initializer.id("test_container"), TEST_CONTAINER_ITEM);
-        Registry.register(Registry.ITEM, Initializer.id("custom_barrel4x9"), CUSTOM_BARREL_ITEM4x9);
-        Registry.register(Registry.ITEM, Initializer.id("custom_barrel5x9"), CUSTOM_BARREL_ITEM5x9);
-        Registry.register(Registry.ITEM, Initializer.id("custom_barrel6x9"), CUSTOM_BARREL_ITEM6x9);
     }
 
 }
