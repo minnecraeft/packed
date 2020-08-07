@@ -23,12 +23,12 @@ public class BarrelBlocks {
     public Set<Block> all = new HashSet<>();
 
     public BarrelBlocks(BarrelTiers tiers) {
-        oak = register("oak_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
-        birch = register("birch_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
-        spruce = register("spruce_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
-        acacia = register("acacia_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
-        jungle = register("jungle_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
-        darkOak = register("dark_oak_barrel_"+tiers.name().toLowerCase(), createBarrel(tiers));
+        oak = register("oak_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
+        birch = register("birch_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
+        spruce = register("spruce_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
+        acacia = register("acacia_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
+        jungle = register("jungle_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
+        darkOak = register("dark_oak_barrel_" + tiers.name().toLowerCase(), createBarrel(tiers));
     }
 
     private static <T extends Block> T register(String identifier, T block) {

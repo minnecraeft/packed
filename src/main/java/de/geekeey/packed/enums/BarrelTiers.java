@@ -4,7 +4,7 @@ import de.geekeey.packed.block.entity.CustomBarrelEntity;
 
 import java.util.function.Supplier;
 
-public enum BarrelTiers{
+public enum BarrelTiers {
     DEFAULT {
         @Override
         public Supplier<CustomBarrelEntity> factory() {

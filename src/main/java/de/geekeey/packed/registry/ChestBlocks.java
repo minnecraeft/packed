@@ -23,12 +23,12 @@ public class ChestBlocks {
     public Set<Block> all = new HashSet<>();
 
     public ChestBlocks(ChestTiers tiers) {
-        oak = register("oak_chest_"+tiers.name().toLowerCase(), createChest(tiers));
-        birch = register("birch_chest_"+tiers.name().toLowerCase(), createChest(tiers));
-        spruce = register("spruce_chest_"+tiers.name().toLowerCase(), createChest(tiers));
-        acacia = register("acacia_chest_"+tiers.name().toLowerCase(), createChest(tiers));
-        jungle = register("jungle_chest_"+tiers.name().toLowerCase(), createChest(tiers));
-        darkOak = register("dark_oak_chest_"+tiers.name().toLowerCase(), createChest(tiers));
+        oak = register("oak_chest_" + tiers.name().toLowerCase(), createChest(tiers));
+        birch = register("birch_chest_" + tiers.name().toLowerCase(), createChest(tiers));
+        spruce = register("spruce_chest_" + tiers.name().toLowerCase(), createChest(tiers));
+        acacia = register("acacia_chest_" + tiers.name().toLowerCase(), createChest(tiers));
+        jungle = register("jungle_chest_" + tiers.name().toLowerCase(), createChest(tiers));
+        darkOak = register("dark_oak_chest_" + tiers.name().toLowerCase(), createChest(tiers));
     }
 
     private static <T extends Block> T register(String identifier, T block) {
