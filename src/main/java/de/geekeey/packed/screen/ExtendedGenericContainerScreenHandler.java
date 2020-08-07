@@ -114,4 +114,8 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
         return itemStack;
     }
+
+    public Inventory getInventory() {
+        return this.inventory;
+    }
 }

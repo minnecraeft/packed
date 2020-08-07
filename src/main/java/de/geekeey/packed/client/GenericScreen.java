@@ -158,6 +158,8 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
 
             drawTexture(matrices, offsetX + pox, offsetY + poy - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
         }
+        else
+            drawTexture(matrices, offsetX + pox, offsetY + poy - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
 
         drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, cox - itx * 18 - 7, 7);
     }

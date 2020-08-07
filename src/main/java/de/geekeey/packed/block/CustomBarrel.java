@@ -14,16 +14,16 @@ public class CustomBarrel extends BarrelBlock {
     public static final BarrelSize SIZE_5_9 = new BarrelSize(CustomBarrelEntity::create5x9);
     public static final BarrelSize SIZE_6_9 = new BarrelSize(CustomBarrelEntity::create6x9);
 
-    private final Supplier<CustomBarrelEntity> factory;
+    private final Supplier<CustomBarrelEntity> supplier;
 
     public CustomBarrel(Settings settings, Supplier<CustomBarrelEntity> supplier) {
         super(settings);
-        this.factory = supplier;
+        this.supplier = supplier;
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return factory.get();
+        return supplier.get();
     }
 
     public static class BarrelSize {

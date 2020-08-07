@@ -14,12 +14,10 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 
-import java.util.function.Supplier;
-
 public class CustomBarrelEntity extends BarrelBlockEntity implements ExtendedScreenHandlerFactory {
 
-    int rows;
-    int columns;
+    public int rows;
+    public int columns;
 
     public CustomBarrelEntity(BlockEntityType<?> type, int rows, int columns) {
         super(type);
