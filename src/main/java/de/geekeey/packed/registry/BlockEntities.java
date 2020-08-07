@@ -20,20 +20,20 @@ public class BlockEntities {
     public static final BlockEntityType<CustomBarrelEntity> BARREL_6_9;
 
     public static final BlockEntityType<CustomChestEntity> CHEST_3_9;
-    //public static final BlockEntityType<CustomChestEntity> CHEST_4_9;
-    //public static final BlockEntityType<CustomChestEntity> CHEST_5_9;
-    //public static final BlockEntityType<CustomChestEntity> CHEST_6_9;
+    public static final BlockEntityType<CustomChestEntity> CHEST_4_9;
+    public static final BlockEntityType<CustomChestEntity> CHEST_5_9;
+    public static final BlockEntityType<CustomChestEntity> CHEST_6_9;
 
     static {
-        BARREL_3_9 = create("barrel_3_9", create(CustomBarrelEntity::create3x9, Blocks.BARRELS_3_9));
-        BARREL_4_9 = create("barrel_4_9", create(CustomBarrelEntity::create4x9, Blocks.BARRELS_4_9));
-        BARREL_5_9 = create("barrel_5_9", create(CustomBarrelEntity::create5x9, Blocks.BARRELS_5_9));
-        BARREL_6_9 = create("barrel_6_9", create(CustomBarrelEntity::create6x9, Blocks.BARRELS_6_9));
+        BARREL_3_9 = create("barrel_3_9", create(CustomBarrelEntity::create3x9, Blocks.BARREL_DEFAULT_TIER.all));
+        BARREL_4_9 = create("barrel_4_9", create(CustomBarrelEntity::create4x9, Blocks.BARREL_TIER_1.all));
+        BARREL_5_9 = create("barrel_5_9", create(CustomBarrelEntity::create5x9, Blocks.BARREL_TIER_2.all));
+        BARREL_6_9 = create("barrel_6_9", create(CustomBarrelEntity::create6x9, Blocks.BARREL_TIER_3.all));
 
-        CHEST_3_9 = create("chest_3_9", create(CustomChestEntity::create3x9, Blocks.CHESTS_3_9));
-        //CHEST_4_9 = create("chest_4_9", create(CustomChestEntity::create4x9, Blocks.BARRELS_4_9));
-        //CHEST_5_9 = create("chest_5_9", create(CustomChestEntity::create5x9, Blocks.BARRELS_5_9));
-        //CHEST_6_9 = create("chest_6_9", create(CustomChestEntity::create6x9, Blocks.BARRELS_6_9));
+        CHEST_3_9 = create("chest_3_9", create(CustomChestEntity::create3x9, Blocks.CHEST_DEFAULT_TIER.all));
+        CHEST_4_9 = create("chest_4_9", create(CustomChestEntity::create4x9, Blocks.CHEST_TIER_1.all));
+        CHEST_5_9 = create("chest_5_9", create(CustomChestEntity::create5x9, Blocks.CHEST_TIER_2.all));
+        CHEST_6_9 = create("chest_6_9", create(CustomChestEntity::create6x9, Blocks.CHEST_TIER_3.all));
     }
 
     private static <T extends BlockEntity> Builder<T> create(Supplier<T> supplier, Set<? extends Block> blocks) {
@@ -47,4 +47,5 @@ public class BlockEntities {
     public static void register() {
 
     }
+
 }

@@ -27,11 +27,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class CustomChestBlock extends ChestBlock {
+public class CustomChest extends ChestBlock {
 
     private final Supplier<CustomChestEntity> supplier;
 
-    public CustomChestBlock(Settings settings, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier, Supplier<CustomChestEntity> factory) {
+    public CustomChest(Settings settings, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier, Supplier<CustomChestEntity> factory) {
         super(settings, supplier);
         this.supplier = factory;
     }
@@ -55,7 +55,7 @@ public class CustomChestBlock extends ChestBlock {
 
             CustomChestEntity fcce = (CustomChestEntity) first;
             CustomChestEntity scce = (CustomChestEntity) second;
-
+            //TODO There needs to be a better way for this
             if(fcce.rows == 3){
                 rows = 6;
                 columns = 9;
@@ -78,10 +78,8 @@ public class CustomChestBlock extends ChestBlock {
                     if (first.checkUnlocked(playerEntity) && second.checkUnlocked(playerEntity)) {
                         first.checkLootInteraction(playerInventory.player);
                         second.checkLootInteraction(playerInventory.player);
-                        //todo remove hardcodedness
                         return new ExtendedGenericContainerScreenHandler(i, playerInventory, inventory, rows, columns);
                     } else {
-                        System.out.println("Uff");
                         return null;
                     }
                 }

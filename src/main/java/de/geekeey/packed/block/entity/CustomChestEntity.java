@@ -29,6 +29,16 @@ public class CustomChestEntity extends ChestBlockEntity implements ExtendedScree
     public static CustomChestEntity create3x9() {
         return new CustomChestEntity(BlockEntities.CHEST_3_9, 3, 9);
     }
+    public static CustomChestEntity create4x9() {
+        return new CustomChestEntity(BlockEntities.CHEST_4_9, 4, 9);
+    }
+    public static CustomChestEntity create5x9() {
+        return new CustomChestEntity(BlockEntities.CHEST_5_9, 5, 9);
+    }
+    public static CustomChestEntity create6x9() {
+        return new CustomChestEntity(BlockEntities.CHEST_6_9, 6, 9);
+    }
+
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
