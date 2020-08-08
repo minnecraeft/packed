@@ -1,6 +1,6 @@
 package de.geekeey.packed.mixin;
 
-import de.geekeey.packed.mixinimplementations.ChestBlockEntityExtra;
+import de.geekeey.packed.inject.ChestBlockEntityExtra;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.item.ItemStack;

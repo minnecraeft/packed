@@ -1,7 +1,7 @@
 package de.geekeey.packed.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import de.geekeey.packed.initialisers.Initializer;
+import de.geekeey.packed.Packed;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -31,7 +31,7 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
 
     private static final int SLOT_SIZE = 18;
 
-    private static final Identifier TEXTURE = Initializer.id("textures/gui/panel.png");
+    private static final Identifier TEXTURE = Packed.id("textures/gui/panel.png");
 //    private static final Identifier TEXTURE = new Identifier("textures/gui/container/generic_54.png");
 
     private final int rows;

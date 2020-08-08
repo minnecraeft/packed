@@ -1,5 +1,6 @@
 package de.geekeey.packed.screen;
 
+import de.geekeey.packed.init.PackedScreenHandlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -26,7 +27,7 @@ public class ExtendedGenericContainerScreenHandler extends ScreenHandler {
 
 
     public ExtendedGenericContainerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, int rows, int columns) {
-        super(de.geekeey.packed.registry.ScreenHandler.GENERIC, syncId);
+        super(PackedScreenHandlers.GENERIC, syncId);
         checkSize(inventory, rows * columns);
         this.rows = rows;
         this.columns = columns;

@@ -1,6 +1,6 @@
 package de.geekeey.packed.block.entity;
 
-import de.geekeey.packed.registry.BlockEntities;
+import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.entity.BlockEntityType;
@@ -27,19 +27,19 @@ public class CustomChestEntity extends ChestBlockEntity implements ExtendedScree
     }
 
     public static CustomChestEntity create3x9() {
-        return new CustomChestEntity(BlockEntities.CHEST_3_9, 3, 9);
+        return new CustomChestEntity(PackedEntities.CHEST_3_9, 3, 9);
     }
 
     public static CustomChestEntity create4x9() {
-        return new CustomChestEntity(BlockEntities.CHEST_4_9, 4, 9);
+        return new CustomChestEntity(PackedEntities.CHEST_4_9, 4, 9);
     }
 
     public static CustomChestEntity create5x9() {
-        return new CustomChestEntity(BlockEntities.CHEST_5_9, 5, 9);
+        return new CustomChestEntity(PackedEntities.CHEST_5_9, 5, 9);
     }
 
     public static CustomChestEntity create6x9() {
-        return new CustomChestEntity(BlockEntities.CHEST_6_9, 6, 9);
+        return new CustomChestEntity(PackedEntities.CHEST_6_9, 6, 9);
     }
 
     @Override
