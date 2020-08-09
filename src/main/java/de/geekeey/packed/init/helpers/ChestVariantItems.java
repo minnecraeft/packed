@@ -7,6 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ChestVariantItems {
 
     public final Item oak;
@@ -15,6 +18,8 @@ public class ChestVariantItems {
     public final Item acacia;
     public final Item jungle;
     public final Item darkOak;
+
+    public final Set<Item> variants = new HashSet<>();
 
     public ChestVariantItems(ChestTier tier, ChestVariantBlocks blocks, ItemGroup group) {
         oak = register(tier.identifier("oak_chest"), blocks.oak, group);
@@ -25,8 +30,10 @@ public class ChestVariantItems {
         darkOak = register(tier.identifier("dark_oak_chest"), blocks.darkOak, group);
     }
 
-    private static Item register(String identifier, Block block, ItemGroup group) {
-        return Registry.register(Registry.ITEM, Packed.id(identifier), new BlockItem(block, new Item.Settings().group(group)));
+    private Item register(String identifier, Block block, ItemGroup group) {
+        BlockItem item = new BlockItem(block, new Item.Settings().group(group));
+        variants.add(item);
+        return Registry.register(Registry.ITEM, Packed.id(identifier), item);
     }
 
 }

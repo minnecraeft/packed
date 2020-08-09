@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "top": "packed:block/acacia_barrel_tier1_top_open",
+        "top": "packed:block/acacia_barrel_top_open",
         "side": "packed:block/acacia_barrel_side",
         "bottom": "packed:block/acacia_barrel_bottom"
     }

@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "top": "packed:block/oak_barrel_tier3_top_open",
+        "top": "packed:block/oak_barrel_top_open",
         "side": "packed:block/oak_barrel_side",
         "bottom": "packed:block/oak_barrel_bottom"
     }

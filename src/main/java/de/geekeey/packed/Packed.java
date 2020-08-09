@@ -13,7 +13,7 @@ public class Packed implements ModInitializer {
 
     public static final String ID = "packed";
 
-    public static final ItemGroup packed = FabricItemGroupBuilder.build(new Identifier(ID, ID), () -> new ItemStack(PackedItems.BARREL_DEFAULT_TIER.oak));
+    public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(ID, ID), () -> new ItemStack(PackedItems.BARREL_DEFAULT_TIER.oak));
 
     public static Identifier id(String path) {
         return new Identifier(ID, path);

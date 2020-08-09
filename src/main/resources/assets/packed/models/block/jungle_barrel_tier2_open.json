@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "top": "packed:block/jungle_barrel_tier2_top_open",
+        "top": "packed:block/jungle_barrel_top_open",
         "side": "packed:block/jungle_barrel_side",
         "bottom": "packed:block/jungle_barrel_bottom"
     }
