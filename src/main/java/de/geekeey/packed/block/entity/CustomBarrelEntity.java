@@ -1,6 +1,6 @@
 package de.geekeey.packed.block.entity;
 
-import de.geekeey.packed.registry.BlockEntities;
+import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.entity.BarrelBlockEntity;
@@ -27,19 +27,19 @@ public class CustomBarrelEntity extends BarrelBlockEntity implements ExtendedScr
     }
 
     public static CustomBarrelEntity create3x9() {
-        return new CustomBarrelEntity(BlockEntities.BARREL_3_9, 3, 9);
+        return new CustomBarrelEntity(PackedEntities.BARREL_3_9, 3, 9);
     }
 
     public static CustomBarrelEntity create4x9() {
-        return new CustomBarrelEntity(BlockEntities.BARREL_4_9, 4, 9);
+        return new CustomBarrelEntity(PackedEntities.BARREL_4_9, 4, 9);
     }
 
     public static CustomBarrelEntity create5x9() {
-        return new CustomBarrelEntity(BlockEntities.BARREL_5_9, 5, 9);
+        return new CustomBarrelEntity(PackedEntities.BARREL_5_9, 5, 9);
     }
 
     public static CustomBarrelEntity create6x9() {
-        return new CustomBarrelEntity(BlockEntities.BARREL_6_9, 6, 9);
+        return new CustomBarrelEntity(PackedEntities.BARREL_6_9, 6, 9);
     }
 
     @Override
