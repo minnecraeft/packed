@@ -4,6 +4,7 @@ import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.CustomBarrel;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 
 import java.util.HashSet;
@@ -18,6 +19,8 @@ public class BarrelVariantBlocks {
     public final Block acacia;
     public final Block jungle;
     public final Block darkOak;
+    public final Block crimson;
+    public final Block warped;
 
     public final Set<Block> variants = new HashSet<>();
 
@@ -28,6 +31,8 @@ public class BarrelVariantBlocks {
         acacia = register(tier.identifier("acacia_barrel"), createBarrel(tier));
         jungle = register(tier.identifier("jungle_barrel"), createBarrel(tier));
         darkOak = register(tier.identifier("dark_oak_barrel"), createBarrel(tier));
+        crimson = register(tier.identifier("crimson_barrel"), createBarrel(tier));
+        warped = register(tier.identifier("warped_barrel"), createBarrel(tier));
     }
 
     private static <T extends Block> T register(String identifier, T block) {

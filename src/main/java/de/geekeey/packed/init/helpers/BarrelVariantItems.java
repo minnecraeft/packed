@@ -15,6 +15,8 @@ public class BarrelVariantItems {
     public final Item acacia;
     public final Item jungle;
     public final Item darkOak;
+    public final Item crimson;
+    public final Item warped;
 
     public BarrelVariantItems(BarrelTier tier, BarrelVariantBlocks blocks, ItemGroup group) {
         oak = register(tier.identifier("oak_barrel"), blocks.oak, group);
@@ -23,6 +25,8 @@ public class BarrelVariantItems {
         acacia = register(tier.identifier("acacia_barrel"), blocks.acacia, group);
         jungle = register(tier.identifier("jungle_barrel"), blocks.jungle, group);
         darkOak = register(tier.identifier("dark_oak_barrel"), blocks.darkOak, group);
+        crimson = register(tier.identifier("crimson_barrel"), blocks.crimson, group);
+        warped = register(tier.identifier("warped_barrel"), blocks.warped, group);
     }
 
     private static Item register(String identifier, Block block, ItemGroup group) {
