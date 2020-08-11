@@ -30,19 +30,6 @@ public class PackedClient implements ClientModInitializer {
     public void onInitializeClient() {
         ScreenRegistry.register(PackedScreenHandlers.GENERIC, GenericScreen::new);
 
-        // register entity type renderer and second register item rendere to use this entity type renderer internally
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_3_9, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_DEFAULT_TIER, CustomChestEntity.create3x9());
-
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_4_9, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_TIER_1, CustomChestEntity.create4x9());
-
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_5_9, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_TIER_2, CustomChestEntity.create5x9());
-
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_6_9, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_TIER_3, CustomChestEntity.create6x9());
-
         //registration of chest textures
         for (WoodVariants value : WoodVariants.values()) {
             ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal")));
@@ -56,6 +43,19 @@ public class PackedClient implements ClientModInitializer {
             ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "_left")));
             ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "_right")));
         }
+
+        // register entity type renderer and second register item rendere to use this entity type renderer internally
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_3_9, PackedClient::createDefaultRenderer);
+        register(PackedItems.CHEST_DEFAULT_TIER, CustomChestEntity.create3x9());
+
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_4_9, PackedClient::createDefaultRenderer);
+        register(PackedItems.CHEST_TIER_1, CustomChestEntity.create4x9());
+
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_5_9, PackedClient::createDefaultRenderer);
+        register(PackedItems.CHEST_TIER_2, CustomChestEntity.create5x9());
+
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_6_9, PackedClient::createDefaultRenderer);
+        register(PackedItems.CHEST_TIER_3, CustomChestEntity.create6x9());
     }
 
     private static CustomChestEntityRenderer createDefaultRenderer(BlockEntityRenderDispatcher dispatcher) {
