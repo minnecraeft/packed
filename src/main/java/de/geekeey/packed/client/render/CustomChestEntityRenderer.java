@@ -53,7 +53,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         this.lidSingleModel.pivotY = 9.0F;
         this.lidSingleModel.pivotZ = 1.0F;
 
-        this.lockSingleModel = new ModelPart(64, 64, 0, 0);
+        this.lockSingleModel = new ModelPart(6, 5, 0, 0);
         this.lockSingleModel.addCuboid(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
         this.lockSingleModel.pivotY = 8.0F;
 
@@ -65,7 +65,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         this.lidRightModel.pivotY = 9.0F;
         this.lidRightModel.pivotZ = 1.0F;
 
-        this.lockRightModel = new ModelPart(64, 64, 0, 0);
+        this.lockRightModel = new ModelPart(6, 5, 0, 0);
         this.lockRightModel.addCuboid(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
         this.lockRightModel.pivotY = 8.0F;
 
@@ -77,7 +77,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         this.lidLeftModel.pivotY = 9.0F;
         this.lidLeftModel.pivotZ = 1.0F;
 
-        this.lockLeftModel = new ModelPart(64, 64, 0, 0);
+        this.lockLeftModel = new ModelPart(6, 5, 0, 0);
         this.lockLeftModel.addCuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
         this.lockLeftModel.pivotY = 8.0F;
     }
