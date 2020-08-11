@@ -27,7 +27,7 @@ public enum ChestTiers implements ChestTier {
     }
 
     public static Identifier identifier(ChestTier tier, WoodVariant variant) {
-        return Packed.id(String.format("%s_chest_%s", variant.getIdentifier(), tier.identifier()));
+        return Packed.id(String.format("%s_chest_%s", variant.identifier(), tier.identifier()));
     }
 
     @Override

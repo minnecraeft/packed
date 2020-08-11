@@ -18,7 +18,7 @@ public enum WoodVariants implements WoodVariant {
     }
 
     @Override
-    public String getIdentifier() {
+    public String identifier() {
         return identifier;
     }
 }

@@ -22,7 +22,7 @@ public enum BarrelTiers implements BarrelTier {
     }
 
     public static Identifier identifier(BarrelTier tier, WoodVariant variant) {
-        return Packed.id(String.format("%s_barrel_%s", variant.getIdentifier(), tier.identifier()));
+        return Packed.id(String.format("%s_barrel_%s", variant.identifier(), tier.identifier()));
     }
 
     @Override
