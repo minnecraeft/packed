@@ -1,10 +1,13 @@
 package de.geekeey.packed.client.render;
 
+import com.google.common.collect.ImmutableMap;
 import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.CustomChest;
 import de.geekeey.packed.block.entity.CustomChestEntity;
 import de.geekeey.packed.init.helpers.ChestTier;
 import de.geekeey.packed.init.helpers.ChestTiers;
+import de.geekeey.packed.init.helpers.WoodVariant;
+import de.geekeey.packed.init.helpers.WoodVariants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -33,6 +36,16 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
     private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(ChestTiers.TIER1.identifier());
     private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(ChestTiers.TIER2.identifier());
     private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(ChestTiers.TIER3.identifier());
+
+    private static final ImmutableMap<WoodVariant, ChestTextureSprites> WOOD_VARIANT_SPRITES;
+
+    static {
+        ImmutableMap.Builder<WoodVariant, ChestTextureSprites> builder = ImmutableMap.builder();
+        for (WoodVariant variant : WoodVariants.values()) {
+            builder.put(variant, new ChestTextureSprites(variant));
+        }
+        WOOD_VARIANT_SPRITES = builder.build();
+    }
 
     private final ModelPart headerSingleModel;
     private final ModelPart footerSingleModel;
@@ -104,6 +117,18 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         return CLINCH_DEFAULT;
     }
 
+    private static class ChestTextureSprites {
+        public final SpriteIdentifier normal;
+        public final SpriteIdentifier left;
+        public final SpriteIdentifier right;
+
+        public ChestTextureSprites(WoodVariant variant) {
+            left = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal_left"));
+            right = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal_right"));
+            normal = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal"));
+        }
+    }
+
     public void render(CustomChestEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
         World world = entity.getWorld();
         boolean cache = world != null;
@@ -132,7 +157,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
             g = 1.0F - g * g * g;
             int i = source.apply(new LightmapCoordinatesRetriever<>()).applyAsInt(light);
 
-            SpriteIdentifier foundation = getChestTexture(chestBlock, type);
+            SpriteIdentifier foundation = fromWoodVariant(chestBlock.getVariant(), type);
             VertexConsumer verticesFoundation = foundation.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
 
             SpriteIdentifier clinch = fromChestTier(chestBlock.getTier());
@@ -160,15 +185,16 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         footer.render(matrices, chestVertices, light, overlay);
     }
 
-    private static SpriteIdentifier getChestTexture(CustomChest chest, ChestType type) {
+    private static SpriteIdentifier fromWoodVariant(WoodVariant chest, ChestType type) {
+        ChestTextureSprites sprites = WOOD_VARIANT_SPRITES.get(chest);
         switch (type) {
             case LEFT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal_left"));
+                return sprites.left;
             case RIGHT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal_right"));
+                return sprites.right;
             case SINGLE:
             default:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal"));
+                return sprites.normal;
         }
     }
 
