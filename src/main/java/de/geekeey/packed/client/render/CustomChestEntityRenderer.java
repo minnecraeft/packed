@@ -3,6 +3,8 @@ package de.geekeey.packed.client.render;
 import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.CustomChest;
 import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.init.helpers.ChestTier;
+import de.geekeey.packed.init.helpers.ChestTiers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -27,17 +29,22 @@ import net.minecraft.world.World;
 public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEntity> {
     private static final Identifier CHEST_ATLAS_TEXTURE = TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
 
-    private final ModelPart lidSingleModel;
-    private final ModelPart baseSingleModel;
-    private final ModelPart lockSingleModel;
+    private static final SpriteIdentifier CLINCH_DEFAULT = createChestTextureId(ChestTiers.DEFAULT.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(ChestTiers.TIER1.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(ChestTiers.TIER2.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(ChestTiers.TIER3.identifier());
 
-    private final ModelPart lidRightModel;
-    private final ModelPart baseRightModel;
-    private final ModelPart lockRightModel;
+    private final ModelPart headerSingleModel;
+    private final ModelPart footerSingleModel;
+    private final ModelPart clinchSingleModel;
 
-    private final ModelPart lidLeftModel;
-    private final ModelPart baseLeftModel;
-    private final ModelPart lockLeftModel;
+    private final ModelPart headerRightModel;
+    private final ModelPart footerRightModel;
+    private final ModelPart clinchRightModel;
+
+    private final ModelPart headerLeftModel;
+    private final ModelPart footerLeftModel;
+    private final ModelPart clinchLeftModel;
 
     private final Block fallback;
 
@@ -45,41 +52,56 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         super(dispatcher);
         this.fallback = fallback;
 
-        this.baseSingleModel = new ModelPart(64, 64, 0, 19);
-        this.baseSingleModel.addCuboid(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
+        this.footerSingleModel = new ModelPart(64, 64, 0, 19);
+        this.footerSingleModel.addCuboid(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
 
-        this.lidSingleModel = new ModelPart(64, 64, 0, 0);
-        this.lidSingleModel.addCuboid(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
-        this.lidSingleModel.pivotY = 9.0F;
-        this.lidSingleModel.pivotZ = 1.0F;
+        this.headerSingleModel = new ModelPart(64, 64, 0, 0);
+        this.headerSingleModel.addCuboid(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
+        this.headerSingleModel.pivotY = 9.0F;
+        this.headerSingleModel.pivotZ = 1.0F;
 
-        this.lockSingleModel = new ModelPart(6, 5, 0, 0);
-        this.lockSingleModel.addCuboid(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
-        this.lockSingleModel.pivotY = 8.0F;
+        this.clinchSingleModel = new ModelPart(16, 16, 0, 0);
+        this.clinchSingleModel.addCuboid(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
+        this.clinchSingleModel.pivotY = 8.0F;
 
-        this.baseRightModel = new ModelPart(64, 64, 0, 19);
-        this.baseRightModel.addCuboid(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
+        this.footerRightModel = new ModelPart(64, 64, 0, 19);
+        this.footerRightModel.addCuboid(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
 
-        this.lidRightModel = new ModelPart(64, 64, 0, 0);
-        this.lidRightModel.addCuboid(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.lidRightModel.pivotY = 9.0F;
-        this.lidRightModel.pivotZ = 1.0F;
+        this.headerRightModel = new ModelPart(64, 64, 0, 0);
+        this.headerRightModel.addCuboid(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
+        this.headerRightModel.pivotY = 9.0F;
+        this.headerRightModel.pivotZ = 1.0F;
 
-        this.lockRightModel = new ModelPart(6, 5, 0, 0);
-        this.lockRightModel.addCuboid(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.lockRightModel.pivotY = 8.0F;
+        this.clinchRightModel = new ModelPart(16, 16, 8, 0);
+        this.clinchRightModel.addCuboid(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
+        this.clinchRightModel.pivotY = 8.0F;
 
-        this.baseLeftModel = new ModelPart(64, 64, 0, 19);
-        this.baseLeftModel.addCuboid(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
+        this.footerLeftModel = new ModelPart(64, 64, 0, 19);
+        this.footerLeftModel.addCuboid(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
 
-        this.lidLeftModel = new ModelPart(64, 64, 0, 0);
-        this.lidLeftModel.addCuboid(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.lidLeftModel.pivotY = 9.0F;
-        this.lidLeftModel.pivotZ = 1.0F;
+        this.headerLeftModel = new ModelPart(64, 64, 0, 0);
+        this.headerLeftModel.addCuboid(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
+        this.headerLeftModel.pivotY = 9.0F;
+        this.headerLeftModel.pivotZ = 1.0F;
 
-        this.lockLeftModel = new ModelPart(6, 5, 0, 0);
-        this.lockLeftModel.addCuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.lockLeftModel.pivotY = 8.0F;
+        this.clinchLeftModel = new ModelPart(16, 16, 0, 8);
+        this.clinchLeftModel.addCuboid(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
+        this.clinchLeftModel.pivotY = 8.0F;
+    }
+
+    private static SpriteIdentifier createChestTextureId(String path) {
+        return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + path));
+    }
+
+    private static SpriteIdentifier fromChestTier(ChestTier tier) {
+        if (tier == ChestTiers.TIER1) {
+            return CLINCH_TIER_1;
+        } else if (tier == ChestTiers.TIER2) {
+            return CLINCH_TIER_2;
+        } else if (tier == ChestTiers.TIER3) {
+            return CLINCH_TIER_3;
+        }
+        return CLINCH_DEFAULT;
     }
 
     public void render(CustomChestEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
@@ -91,7 +113,6 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
 
         if (block instanceof CustomChest) {
             CustomChest chestBlock = (CustomChest) block;
-            boolean doubleChest = type != ChestType.SINGLE;
             matrices.push();
 
             float facing = state.get(ChestBlock.FACING).asRotation();
@@ -111,32 +132,32 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
             g = 1.0F - g * g * g;
             int i = source.apply(new LightmapCoordinatesRetriever<>()).applyAsInt(light);
 
-            SpriteIdentifier sprite = getChestTexture(chestBlock, type);
-            VertexConsumer consumer = sprite.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
+            SpriteIdentifier foundation = getChestTexture(chestBlock, type);
+            VertexConsumer verticesFoundation = foundation.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
 
-            SpriteIdentifier lockSprite = getLockTexture(chestBlock, type);
-            VertexConsumer lockConsumer = lockSprite.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
+            SpriteIdentifier clinch = fromChestTier(chestBlock.getTier());
+            VertexConsumer verticesClinch = clinch.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
 
-            if (doubleChest) {
-                if (type == ChestType.LEFT) {
-                    this.renderParts(matrices, consumer, lockConsumer, this.lidLeftModel, this.lockLeftModel, this.baseLeftModel, g, i, overlay);
-                } else {
-                    this.renderParts(matrices, consumer, lockConsumer, this.lidRightModel, this.lockRightModel, this.baseRightModel, g, i, overlay);
-                }
+            if (type == ChestType.SINGLE) {
+                this.renderParts(matrices, verticesFoundation, verticesClinch, this.headerSingleModel, this.clinchSingleModel, this.footerSingleModel, g, i, overlay);
             } else {
-                this.renderParts(matrices, consumer, lockConsumer, this.lidSingleModel, this.lockSingleModel, this.baseSingleModel, g, i, overlay);
+                if (type == ChestType.LEFT) {
+                    this.renderParts(matrices, verticesFoundation, verticesClinch, this.headerLeftModel, this.clinchLeftModel, this.footerLeftModel, g, i, overlay);
+                } else {
+                    this.renderParts(matrices, verticesFoundation, verticesClinch, this.headerRightModel, this.clinchRightModel, this.footerRightModel, g, i, overlay);
+                }
             }
 
             matrices.pop();
         }
     }
 
-    private void renderParts(MatrixStack matrices, VertexConsumer chestVerticies, VertexConsumer lockVerticies, ModelPart lidModel, ModelPart lockModel, ModelPart baseModel, float f, int light, int overlay) {
-        lidModel.pitch = -(f * 1.5707964F);
-        lockModel.pitch = lidModel.pitch;
-        lidModel.render(matrices, chestVerticies, light, overlay);
-        lockModel.render(matrices, lockVerticies, light, overlay);
-        baseModel.render(matrices, chestVerticies, light, overlay);
+    private void renderParts(MatrixStack matrices, VertexConsumer chestVertices, VertexConsumer lockVertices, ModelPart header, ModelPart clinch, ModelPart footer, float f, int light, int overlay) {
+        header.pitch = -(f * 1.5707964F);
+        clinch.pitch = header.pitch;
+        header.render(matrices, chestVertices, light, overlay);
+        clinch.render(matrices, lockVertices, light, overlay);
+        footer.render(matrices, chestVertices, light, overlay);
     }
 
     private static SpriteIdentifier getChestTexture(CustomChest chest, ChestType type) {
@@ -148,18 +169,6 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
             case SINGLE:
             default:
                 return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal"));
-        }
-    }
-
-    private static SpriteIdentifier getLockTexture(CustomChest chest, ChestType type) {
-        switch (type) {
-            case LEFT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getTier().identifier() + "_left"));
-            case RIGHT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getTier().identifier() + "_right"));
-            case SINGLE:
-            default:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getTier().identifier() + "_normal"));
         }
     }
 
