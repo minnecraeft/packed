@@ -142,9 +142,9 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
     private static SpriteIdentifier getChestTexture(CustomChest chest, ChestType type) {
         switch (type) {
             case LEFT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/left"));
+                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal_left"));
             case RIGHT:
-                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/right"));
+                return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal_right"));
             case SINGLE:
             default:
                 return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + chest.getVariant().identifier() + "/normal"));
