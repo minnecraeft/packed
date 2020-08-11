@@ -18,9 +18,9 @@ public class PackedItems {
     public static final WoodItemVariants<ChestTier, CustomChest> CHEST_TIER_3;
 
     static {
-        BARREL_DEFAULT_TIER = new WoodItemVariants<>(BarrelTiers.DEFAULT, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
-        BARREL_TIER_1 = new WoodItemVariants<>(BarrelTiers.TIER1, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
-        BARREL_TIER_2 = new WoodItemVariants<>(BarrelTiers.TIER2, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
+        BARREL_DEFAULT_TIER = new WoodItemVariants<>(BarrelTiers.DEFAULT, BarrelTiers::identifier, PackedBlocks.BARREL_DEFAULT_TIER, Packed.ITEM_GROUP);
+        BARREL_TIER_1 = new WoodItemVariants<>(BarrelTiers.TIER1, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_1, Packed.ITEM_GROUP);
+        BARREL_TIER_2 = new WoodItemVariants<>(BarrelTiers.TIER2, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_2, Packed.ITEM_GROUP);
         BARREL_TIER_3 = new WoodItemVariants<>(BarrelTiers.TIER3, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
 
         CHEST_DEFAULT_TIER = new WoodItemVariants<>(ChestTiers.DEFAULT, ChestTiers::identifier, PackedBlocks.CHEST_DEFAULT_TIER, Packed.ITEM_GROUP);
