@@ -1,40 +1,48 @@
 package de.geekeey.packed.init.helpers;
 
+import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.entity.CustomChestEntity;
 import de.geekeey.packed.init.PackedEntities;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Supplier;
 
 public enum ChestTiers implements ChestTier {
 
-    DEFAULT(() -> PackedEntities.CHEST_3_9, CustomChestEntity::create3x9),
-    TIER1(() -> PackedEntities.CHEST_4_9, CustomChestEntity::create4x9),
-    TIER2(() -> PackedEntities.CHEST_5_9, CustomChestEntity::create5x9),
-    TIER3(() -> PackedEntities.CHEST_6_9, CustomChestEntity::create6x9);
+    DEFAULT("default", CustomChestEntity::create3x9, () -> PackedEntities.CHEST_3_9),
+    TIER1("tier1", CustomChestEntity::create4x9, () -> PackedEntities.CHEST_4_9),
+    TIER2("tier2", CustomChestEntity::create5x9, () -> PackedEntities.CHEST_5_9),
+    TIER3("tier3", CustomChestEntity::create6x9, () -> PackedEntities.CHEST_6_9);
 
-    private final Supplier<BlockEntityType<? extends ChestBlockEntity>> blockEntityTypeSupplier;
-    private final Supplier<CustomChestEntity> factory;
+    private final String identifier;
+    private final Supplier<BlockEntityType<? extends ChestBlockEntity>> type;
+    private final Supplier<CustomChestEntity> supplier;
 
-    ChestTiers(Supplier<BlockEntityType<? extends ChestBlockEntity>> blockEntityTypeSupplier, Supplier<CustomChestEntity> factory) {
-        this.blockEntityTypeSupplier = blockEntityTypeSupplier;
-        this.factory = factory;
+    ChestTiers(String identifier, Supplier<CustomChestEntity> supplier, Supplier<BlockEntityType<? extends ChestBlockEntity>> type) {
+        this.identifier = identifier;
+        this.supplier = supplier;
+        this.type = type;
+    }
+
+    public static Identifier identifier(ChestTier tier, WoodVariant variant) {
+        return Packed.id(String.format("%s_chest_%s", variant.getIdentifier(), tier.identifier()));
     }
 
     @Override
     public Supplier<BlockEntityType<? extends ChestBlockEntity>> getBlockEntityType() {
-        return blockEntityTypeSupplier;
+        return type;
     }
 
     @Override
-    public Supplier<CustomChestEntity> newBlockEntity() {
-        return factory;
+    public CustomChestEntity newBlockEntity() {
+        return supplier.get();
     }
 
     @Override
-    public String identifier(String name) {
-        return name + '_' + name().toLowerCase();
+    public String identifier() {
+        return identifier;
     }
 
 }

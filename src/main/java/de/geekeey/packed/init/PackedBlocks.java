@@ -1,33 +1,31 @@
 package de.geekeey.packed.init;
 
-import de.geekeey.packed.init.helpers.BarrelTiers;
-import de.geekeey.packed.init.helpers.ChestTiers;
-import de.geekeey.packed.init.helpers.BarrelVariantBlocks;
-import de.geekeey.packed.init.helpers.ChestVariantBlocks;
-import net.fabricmc.loader.FabricLoader;
+import de.geekeey.packed.block.CustomBarrel;
+import de.geekeey.packed.block.CustomChest;
+import de.geekeey.packed.init.helpers.*;
 
 public class PackedBlocks {
 
-    public static final ChestVariantBlocks CHEST_DEFAULT_TIER;
-    public static final ChestVariantBlocks CHEST_TIER_1;
-    public static final ChestVariantBlocks CHEST_TIER_2;
-    public static final ChestVariantBlocks CHEST_TIER_3;
+    public static final WoodBlockVariants<ChestTier, CustomChest> CHEST_DEFAULT_TIER;
+    public static final WoodBlockVariants<ChestTier, CustomChest> CHEST_TIER_1;
+    public static final WoodBlockVariants<ChestTier, CustomChest> CHEST_TIER_2;
+    public static final WoodBlockVariants<ChestTier, CustomChest> CHEST_TIER_3;
 
-    public static final BarrelVariantBlocks BARREL_DEFAULT_TIER;
-    public static final BarrelVariantBlocks BARREL_TIER_1;
-    public static final BarrelVariantBlocks BARREL_TIER_2;
-    public static final BarrelVariantBlocks BARREL_TIER_3;
+    public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_DEFAULT_TIER;
+    public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_1;
+    public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_2;
+    public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_3;
 
     static {
-        CHEST_DEFAULT_TIER = new ChestVariantBlocks(ChestTiers.DEFAULT);
-        CHEST_TIER_1 = new ChestVariantBlocks(ChestTiers.TIER1);
-        CHEST_TIER_2 = new ChestVariantBlocks(ChestTiers.TIER2);
-        CHEST_TIER_3 = new ChestVariantBlocks(ChestTiers.TIER3);
+        CHEST_DEFAULT_TIER = new WoodBlockVariants<>(ChestTiers.DEFAULT, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_1 = new WoodBlockVariants<>(ChestTiers.TIER1, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_2 = new WoodBlockVariants<>(ChestTiers.TIER2, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_3 = new WoodBlockVariants<>(ChestTiers.TIER3, ChestTiers::identifier, CustomChest::new);
 
-        BARREL_DEFAULT_TIER = new BarrelVariantBlocks(BarrelTiers.DEFAULT);
-        BARREL_TIER_1 = new BarrelVariantBlocks(BarrelTiers.TIER1);
-        BARREL_TIER_2 = new BarrelVariantBlocks(BarrelTiers.TIER2);
-        BARREL_TIER_3 = new BarrelVariantBlocks(BarrelTiers.TIER3);
+        BARREL_DEFAULT_TIER = new WoodBlockVariants<>(BarrelTiers.DEFAULT, BarrelTiers::identifier, CustomBarrel::new);
+        BARREL_TIER_1 = new WoodBlockVariants<>(BarrelTiers.TIER1, BarrelTiers::identifier, CustomBarrel::new);
+        BARREL_TIER_2 = new WoodBlockVariants<>(BarrelTiers.TIER2, BarrelTiers::identifier, CustomBarrel::new);
+        BARREL_TIER_3 = new WoodBlockVariants<>(BarrelTiers.TIER3, BarrelTiers::identifier, CustomBarrel::new);
     }
 
     public static void register() {

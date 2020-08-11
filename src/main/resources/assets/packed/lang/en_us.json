@@ -7,13 +7,17 @@
   "block.packed.acacia_chest_default": "Acacia Chest",
   "block.packed.jungle_chest_default": "Jungle Chest",
   "block.packed.dark_oak_chest_default": "Dark Oak Chest",
-  
+  "block.packed.crimson_chest_default": "Crimson Chest",
+  "block.packed.warped_chest_default": "Warped Chest",
+
   "block.packed.oak_chest_tier1": "Oak Chest Tier 1",
   "block.packed.birch_chest_tier1": "Birch Chest Tier 1",
   "block.packed.spruce_chest_tier1": "Spruce Chest Tier 1",
   "block.packed.acacia_chest_tier1": "Acacia Chest Tier 1",
   "block.packed.jungle_chest_tier1": "Jungle Chest Tier 1",
   "block.packed.dark_oak_chest_tier1": "Dark Oak Chest Tier 1",
+  "block.packed.crimson_chest_tier1": "Crimson Chest Tier 1",
+  "block.packed.warped_chest_tier1": "Warped Chest Tier 1",
 
   "block.packed.oak_chest_tier2": "Oak Chest Tier 2",
   "block.packed.birch_chest_tier2": "Birch Chest Tier 2",
@@ -21,6 +25,8 @@
   "block.packed.acacia_chest_tier2": "Acacia Chest Tier 2",
   "block.packed.jungle_chest_tier2": "Jungle Chest Tier 2",
   "block.packed.dark_oak_chest_tier2": "Dark Oak Chest Tier 2",
+  "block.packed.crimson_chest_tier2": "Crimson Chest Tier 2",
+  "block.packed.warped_chest_tier2": "Warped Chest Tier 2",
 
   "block.packed.oak_chest_tier3": "Oak Chest Tier 3",
   "block.packed.birch_chest_tier3": "Birch Chest Tier 3",
@@ -28,6 +34,8 @@
   "block.packed.acacia_chest_tier3": "Acacia Chest Tier 3",
   "block.packed.jungle_chest_tier3": "Jungle Chest Tier 3",
   "block.packed.dark_oak_chest_tier3": "Dark Oak Chest Tier 3",
+  "block.packed.crimson_chest_tier3": "Crimson Chest Tier 3",
+  "block.packed.warped_chest_tier3": "Warped Chest Tier 3",
 
   "block.packed.oak_barrel_default": "Oak Barrel",
   "block.packed.birch_barrel_default": "Birch Barrel",
@@ -35,6 +43,8 @@
   "block.packed.acacia_barrel_default": "Acacia Barrel",
   "block.packed.jungle_barrel_default": "Jungle Barrel",
   "block.packed.dark_oak_barrel_default": "Dark Oak Barrel",
+  "block.packed.crimson_barrel_default": "Crimson Barrel",
+  "block.packed.warped_barrel_default": "Warped Barrel",
 
   "block.packed.oak_barrel_tier1": "Oak Barrel Tier 1",
   "block.packed.birch_barrel_tier1": "Birch Barrel Tier 1",
@@ -42,6 +52,8 @@
   "block.packed.acacia_barrel_tier1": "Acacia Barrel Tier 1",
   "block.packed.jungle_barrel_tier1": "Jungle Barrel Tier 1",
   "block.packed.dark_oak_barrel_tier1": "Dark Oak Barrel Tier 1",
+  "block.packed.crimson_barrel_tier1": "Crimson Barrel Tier 1",
+  "block.packed.warped_barrel_tier1": "Warped Barrel Tier 1",
 
   "block.packed.oak_barrel_tier2": "Oak Barrel Tier 2",
   "block.packed.birch_barrel_tier2": "Birch Barrel Tier 2",
@@ -49,11 +61,15 @@
   "block.packed.acacia_barrel_tier2": "Acacia Barrel Tier 2",
   "block.packed.jungle_barrel_tier2": "Jungle Barrel Tier 2",
   "block.packed.dark_oak_barrel_tier2": "Dark Oak Barrel Tier 2",
+  "block.packed.crimson_barrel_tier2": "Crimson Barrel Tier 2",
+  "block.packed.warped_barrel_tier2": "Warped Barrel Tier 2",
 
   "block.packed.oak_barrel_tier3": "Oak Barrel Tier 3",
   "block.packed.birch_barrel_tier3": "Birch Barrel Tier 3",
   "block.packed.spruce_barrel_tier3": "Spruce Barrel Tier 3",
   "block.packed.acacia_barrel_tier3": "Acacia Barrel Tier 3",
   "block.packed.jungle_barrel_tier3": "Jungle Barrel Tier 3",
-  "block.packed.dark_oak_barrel_tier3": "Dark Oak Barrel Tier 3"
+  "block.packed.dark_oak_barrel_tier3": "Dark Oak Barrel Tier 3",
+  "block.packed.crimson_barrel_tier3": "Crimson Barrel Tier 3",
+  "block.packed.warped_barrel_tier3": "Warped Barrel Tier 3"
 }

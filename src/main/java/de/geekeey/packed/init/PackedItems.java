@@ -1,44 +1,36 @@
 package de.geekeey.packed.init;
 
 import de.geekeey.packed.Packed;
-import de.geekeey.packed.init.helpers.BarrelTiers;
-import de.geekeey.packed.init.helpers.BarrelVariantItems;
-import de.geekeey.packed.init.helpers.ChestTiers;
-import de.geekeey.packed.init.helpers.ChestVariantItems;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.collection.DefaultedList;
+import de.geekeey.packed.block.CustomBarrel;
+import de.geekeey.packed.block.CustomChest;
+import de.geekeey.packed.init.helpers.*;
 
 public class PackedItems {
 
-    public static final BarrelVariantItems BARREL_DEFAULT_TIER;
-    public static final BarrelVariantItems BARREL_TIER_1;
-    public static final BarrelVariantItems BARREL_TIER_2;
-    public static final BarrelVariantItems BARREL_TIER_3;
+    public static final WoodItemVariants<BarrelTier, CustomBarrel> BARREL_DEFAULT_TIER;
+    public static final WoodItemVariants<BarrelTier, CustomBarrel> BARREL_TIER_1;
+    public static final WoodItemVariants<BarrelTier, CustomBarrel> BARREL_TIER_2;
+    public static final WoodItemVariants<BarrelTier, CustomBarrel> BARREL_TIER_3;
 
-    public static final ChestVariantItems CHEST_DEFAULT_TIER;
-    public static final ChestVariantItems CHEST_TIER_1;
-    public static final ChestVariantItems CHEST_TIER_2;
-    public static final ChestVariantItems CHEST_TIER_3;
+    public static final WoodItemVariants<ChestTier, CustomChest> CHEST_DEFAULT_TIER;
+    public static final WoodItemVariants<ChestTier, CustomChest> CHEST_TIER_1;
+    public static final WoodItemVariants<ChestTier, CustomChest> CHEST_TIER_2;
+    public static final WoodItemVariants<ChestTier, CustomChest> CHEST_TIER_3;
 
     static {
-        BARREL_DEFAULT_TIER = new BarrelVariantItems(BarrelTiers.DEFAULT, PackedBlocks.BARREL_DEFAULT_TIER, Packed.ITEM_GROUP);
-        BARREL_TIER_1 = new BarrelVariantItems(BarrelTiers.TIER1, PackedBlocks.BARREL_TIER_1, Packed.ITEM_GROUP);
-        BARREL_TIER_2 = new BarrelVariantItems(BarrelTiers.TIER2, PackedBlocks.BARREL_TIER_2, Packed.ITEM_GROUP);
-        BARREL_TIER_3 = new BarrelVariantItems(BarrelTiers.TIER3, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
+        BARREL_DEFAULT_TIER = new WoodItemVariants<>(BarrelTiers.DEFAULT, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
+        BARREL_TIER_1 = new WoodItemVariants<>(BarrelTiers.TIER1, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
+        BARREL_TIER_2 = new WoodItemVariants<>(BarrelTiers.TIER2, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
+        BARREL_TIER_3 = new WoodItemVariants<>(BarrelTiers.TIER3, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
 
-        CHEST_DEFAULT_TIER = new ChestVariantItems(ChestTiers.DEFAULT, PackedBlocks.CHEST_DEFAULT_TIER, Packed.ITEM_GROUP);
-        CHEST_TIER_1 = new ChestVariantItems(ChestTiers.TIER1, PackedBlocks.CHEST_TIER_1, Packed.ITEM_GROUP);
-        CHEST_TIER_2 = new ChestVariantItems(ChestTiers.TIER2, PackedBlocks.CHEST_TIER_2, Packed.ITEM_GROUP);
-        CHEST_TIER_3 = new ChestVariantItems(ChestTiers.TIER3, PackedBlocks.CHEST_TIER_3, Packed.ITEM_GROUP);
+        CHEST_DEFAULT_TIER = new WoodItemVariants<>(ChestTiers.DEFAULT, ChestTiers::identifier, PackedBlocks.CHEST_DEFAULT_TIER, Packed.ITEM_GROUP);
+        CHEST_TIER_1 = new WoodItemVariants<>(ChestTiers.TIER1, ChestTiers::identifier, PackedBlocks.CHEST_TIER_1, Packed.ITEM_GROUP);
+        CHEST_TIER_2 = new WoodItemVariants<>(ChestTiers.TIER2, ChestTiers::identifier, PackedBlocks.CHEST_TIER_2, Packed.ITEM_GROUP);
+        CHEST_TIER_3 = new WoodItemVariants<>(ChestTiers.TIER3, ChestTiers::identifier, PackedBlocks.CHEST_TIER_3, Packed.ITEM_GROUP);
     }
 
     public static void register() {
         // keep so class will get called and initialized
-    }
-
-    private static void align() {
-        Packed.ITEM_GROUP.appendStacks(DefaultedList.ofSize(2, new ItemStack(Items.AIR)));
     }
 
 }

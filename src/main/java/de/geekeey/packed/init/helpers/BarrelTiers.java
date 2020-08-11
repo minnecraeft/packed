@@ -1,29 +1,37 @@
 package de.geekeey.packed.init.helpers;
 
+import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.entity.CustomBarrelEntity;
+import net.minecraft.util.Identifier;
 
 import java.util.function.Supplier;
 
 public enum BarrelTiers implements BarrelTier {
 
-    DEFAULT(CustomBarrelEntity::create3x9),
-    TIER1(CustomBarrelEntity::create4x9),
-    TIER2(CustomBarrelEntity::create5x9),
-    TIER3(CustomBarrelEntity::create6x9);
+    DEFAULT("default", CustomBarrelEntity::create3x9),
+    TIER1("tier1", CustomBarrelEntity::create4x9),
+    TIER2("tier2", CustomBarrelEntity::create5x9),
+    TIER3("tier3", CustomBarrelEntity::create6x9);
 
+    private final String identifier;
     private final Supplier<CustomBarrelEntity> supplier;
 
-    BarrelTiers(Supplier<CustomBarrelEntity> supplier) {
+    BarrelTiers(String identifier, Supplier<CustomBarrelEntity> supplier) {
+        this.identifier = identifier;
         this.supplier = supplier;
     }
 
-    @Override
-    public Supplier<CustomBarrelEntity> newBlockEntity() {
-        return supplier;
+    public static Identifier identifier(BarrelTier tier, WoodVariant variant) {
+        return Packed.id(String.format("%s_barrel_%s", variant.getIdentifier(), tier.identifier()));
     }
 
     @Override
-    public String identifier(String name) {
-        return name + '_' + name().toLowerCase();
+    public CustomBarrelEntity newBlockEntity() {
+        return supplier.get();
+    }
+
+    @Override
+    public String identifier() {
+        return identifier;
     }
 }

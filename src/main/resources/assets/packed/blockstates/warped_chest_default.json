@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "packed:block/warped_chest_default"
+    }
+  }
+}

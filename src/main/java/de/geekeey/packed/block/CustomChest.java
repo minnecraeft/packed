@@ -1,13 +1,15 @@
 package de.geekeey.packed.block;
 
 import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.init.helpers.ChestTier;
+import de.geekeey.packed.init.helpers.WoodVariant;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,25 +27,36 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
-import java.util.function.Supplier;
+
+import static net.minecraft.block.Blocks.CHEST;
 
 public class CustomChest extends ChestBlock {
 
-    private final Supplier<CustomChestEntity> supplier;
+    private final ChestTier tier;
+    private final WoodVariant variant;
 
-    public CustomChest(Settings settings, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier, Supplier<CustomChestEntity> factory) {
-        super(settings, supplier);
-        this.supplier = factory;
+    public CustomChest(ChestTier tier, WoodVariant variant) {
+        super(FabricBlockSettings.copyOf(CHEST), tier.getBlockEntityType());
+        this.tier = tier;
+        this.variant = variant;
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return supplier.get();
+        return tier.newBlockEntity();
     }
 
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
         return this.getBlockEntitySource(state, world, pos, false).apply(NAME_RETRIEVER).orElse(null);
+    }
+
+    public ChestTier getTier() {
+        return tier;
+    }
+
+    public WoodVariant getVariant() {
+        return variant;
     }
 
     private static final DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> NAME_RETRIEVER = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {

@@ -10,8 +10,8 @@ public interface ChestTier {
 
     Supplier<BlockEntityType<? extends ChestBlockEntity>> getBlockEntityType();
 
-    Supplier<CustomChestEntity> newBlockEntity();
+    CustomChestEntity newBlockEntity();
 
-    String identifier(String name);
+    String identifier();
 
 }

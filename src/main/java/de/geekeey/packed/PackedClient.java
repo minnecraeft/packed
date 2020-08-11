@@ -1,11 +1,13 @@
 package de.geekeey.packed;
 
+import de.geekeey.packed.block.CustomChest;
 import de.geekeey.packed.block.entity.CustomChestEntity;
 import de.geekeey.packed.client.GenericScreen;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.PackedItems;
 import de.geekeey.packed.init.PackedScreenHandlers;
-import de.geekeey.packed.init.helpers.ChestVariantItems;
+import de.geekeey.packed.init.helpers.ChestTier;
+import de.geekeey.packed.init.helpers.WoodItemVariants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,8 +36,8 @@ public class PackedClient implements ClientModInitializer {
         register(PackedItems.CHEST_TIER_3, CustomChestEntity.create6x9());
     }
 
-    private static void register(ChestVariantItems items, CustomChestEntity entity) {
-        items.variants.forEach(item -> {
+    private static void register(WoodItemVariants<ChestTier, CustomChest> items, CustomChestEntity entity) {
+        items.forEach(item -> {
             BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, matrices, vertices, light, overlay) -> {
                 BlockEntityRenderDispatcher.INSTANCE.renderEntity(entity, matrices, vertices, light, overlay);
             });

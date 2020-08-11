@@ -1,37 +1,35 @@
 package de.geekeey.packed.block;
 
-import de.geekeey.packed.block.entity.CustomBarrelEntity;
+import de.geekeey.packed.init.helpers.BarrelTier;
+import de.geekeey.packed.init.helpers.WoodVariant;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.world.BlockView;
 
-import java.util.function.Supplier;
+import static net.minecraft.block.Blocks.BARREL;
 
 public class CustomBarrel extends BarrelBlock {
 
-    public static final BarrelSize SIZE_3_9 = new BarrelSize(CustomBarrelEntity::create3x9);
-    public static final BarrelSize SIZE_4_9 = new BarrelSize(CustomBarrelEntity::create4x9);
-    public static final BarrelSize SIZE_5_9 = new BarrelSize(CustomBarrelEntity::create5x9);
-    public static final BarrelSize SIZE_6_9 = new BarrelSize(CustomBarrelEntity::create6x9);
+    private final BarrelTier tier;
+    private final WoodVariant variant;
 
-    private final Supplier<CustomBarrelEntity> supplier;
-
-    public CustomBarrel(Settings settings, Supplier<CustomBarrelEntity> supplier) {
-        super(settings);
-        this.supplier = supplier;
+    public CustomBarrel(BarrelTier tier, WoodVariant variant) {
+        super(FabricBlockSettings.copyOf(BARREL));
+        this.tier = tier;
+        this.variant = variant;
     }
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return supplier.get();
+        return tier.newBlockEntity();
     }
 
-    public static class BarrelSize {
-        public final Supplier<CustomBarrelEntity> supplier;
-
-        public BarrelSize(Supplier<CustomBarrelEntity> supplier) {
-            this.supplier = supplier;
-        }
+    public BarrelTier getTier() {
+        return tier;
     }
 
+    public WoodVariant getVariant() {
+        return variant;
+    }
 }
