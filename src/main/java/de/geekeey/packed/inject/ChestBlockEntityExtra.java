@@ -13,6 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ChestBlockEntityExtra {
+    //This is the logic we redirect towards in ChestBlockEntityMixin and BarrelBlockEntityMixin, as Mixins don't allow
+    //non-Mixin classes in the mixin package this needs to be outside so we don't have to write the same code twice
     public static int countViewersHandler(World world, LockableContainerBlockEntity container, int ticksOpen, int x, int y) {
         int i = 0;
         float f = 5.0F;

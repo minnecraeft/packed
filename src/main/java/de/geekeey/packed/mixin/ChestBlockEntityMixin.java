@@ -16,11 +16,13 @@ public class ChestBlockEntityMixin {
     @Shadow
     private DefaultedList<ItemStack> inventory;
 
+    //This is necessary as countViewers only checks for Vanilla genericContainerScreenHandler classes, but our
+    //extended ScreenHandler class does not subclass this. Therefore custom logic is needed.
+    //This logic is identical to the BarrelBlockEntity Mixin
     @Redirect(method = "tickViewerCount", at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/block/entity/ChestBlockEntity;countViewers(Lnet/minecraft/world/World;Lnet/minecraft/block/entity/LockableContainerBlockEntity;III)I"
     ))
-    //Needs to be redirected to account for our own screenHandler classes
     private static int countViewers(World world, LockableContainerBlockEntity container, int ticksOpen, int x, int y) {
         return ChestBlockEntityExtra.countViewersHandler(world,container,ticksOpen,x,y);
     }
