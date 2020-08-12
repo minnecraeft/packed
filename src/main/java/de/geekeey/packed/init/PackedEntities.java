@@ -23,6 +23,7 @@ public class PackedEntities {
 
     public static final ImmutableSet<BlockEntityType<CustomBarrelEntity>> BARREL_ENTITY_TYPES;
 
+    public static final BlockEntityType<CustomChestEntity> CHEST_COMMON;
     public static final BlockEntityType<CustomChestEntity> CHEST_3_9;
     public static final BlockEntityType<CustomChestEntity> CHEST_4_9;
     public static final BlockEntityType<CustomChestEntity> CHEST_5_9;
@@ -41,7 +42,9 @@ public class PackedEntities {
 
         BARREL_ENTITY_TYPES = ImmutableSet.of(BARREL_3_9, BARREL_4_9, BARREL_5_9, BARREL_6_9);
 
-        CHEST_3_9 = register("chest_3_9", create(CustomChestEntity::create3x9, PackedBlocks.CHEST_DEFAULT_TIER));
+        CHEST_COMMON = register("chest_common", create(CustomChestEntity::new, PackedBlocks.CHEST_DEFAULT_TIER));
+
+        CHEST_3_9 = register("chest_3_9", create(CustomChestEntity::create3x9, PackedBlocks.CHEST_TIER_1));
         CHEST_4_9 = register("chest_4_9", create(CustomChestEntity::create4x9, PackedBlocks.CHEST_TIER_1));
         CHEST_5_9 = register("chest_5_9", create(CustomChestEntity::create5x9, PackedBlocks.CHEST_TIER_2));
         CHEST_6_9 = register("chest_6_9", create(CustomChestEntity::create6x9, PackedBlocks.CHEST_TIER_3));

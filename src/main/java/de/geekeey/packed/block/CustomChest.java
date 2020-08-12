@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,6 +28,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static net.minecraft.block.Blocks.CHEST;
 
@@ -41,6 +43,12 @@ public class CustomChest extends ChestBlock {
         this.variant = variant;
     }
 
+    public CustomChest(ChestTier tier, WoodVariant variant , Supplier<BlockEntityType<? extends ChestBlockEntity>> s) {
+        super(FabricBlockSettings.copyOf(CHEST), s);
+        this.tier = tier;
+        this.variant = variant;
+    }
+
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
         return tier.newBlockEntity();
@@ -48,6 +56,8 @@ public class CustomChest extends ChestBlock {
 
     @Override
     public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
+        System.out.println("CustomChest.createScreenHandlerFactory");
+        System.out.println("state = " + state + ", world = " + world + ", pos = " + pos);
         return this.getBlockEntitySource(state, world, pos, false).apply(NAME_RETRIEVER).orElse(null);
     }
 
@@ -108,6 +118,7 @@ public class CustomChest extends ChestBlock {
         }
 
         public Optional<NamedScreenHandlerFactory> getFrom(ChestBlockEntity chestBlockEntity) {
+            System.out.println("CustomChest.getFrom");
             return Optional.of(chestBlockEntity);
         }
 
