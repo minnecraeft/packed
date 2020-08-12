@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#i#",
+        "#P#",
+        "#_#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:spruce_planks"
+        },
+        "i": {
+            "item": "minecraft:diamond"
+        },
+        "P": {
+            "item": "packed:spruce_barrel_tier2"
+        },
+        "_": {
+            "item": "minecraft:spruce_slab"
+        }
+    },
+    "result": {
+        "item": "packed:spruce_barrel_tier3",
+        "count": 1
+    },
+    "group": "barrel_tier3"
+}

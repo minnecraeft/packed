@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "P  ",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:air"
+    }
+  },
+  "result": {
+    "item": "minecraft:air"
+  }
+}

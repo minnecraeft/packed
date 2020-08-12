@@ -30,6 +30,18 @@ public class PackedClient implements ClientModInitializer {
     public void onInitializeClient() {
         ScreenRegistry.register(PackedScreenHandlers.GENERIC, GenericScreen::new);
 
+        //registration of chest textures
+        for (WoodVariants value : WoodVariants.values()) {
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal")));
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal_left")));
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal_right")));
+        }
+
+        //Registration of lock textures
+        for (ChestTiers value : ChestTiers.values()) {
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier())));
+        }
+
         // register entity type renderer and second register item rendere to use this entity type renderer internally
         BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_3_9, PackedClient::createDefaultRenderer);
         register(PackedItems.CHEST_DEFAULT_TIER, CustomChestEntity.create3x9());
@@ -42,18 +54,6 @@ public class PackedClient implements ClientModInitializer {
 
         BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_6_9, PackedClient::createDefaultRenderer);
         register(PackedItems.CHEST_TIER_3, CustomChestEntity.create6x9());
-
-        //registration of chest textures
-        for (WoodVariants value : WoodVariants.values()) {
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal")));
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal_left")));
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier() + "/normal_right")));
-        }
-
-        //Registration of lock textures
-        for (ChestTiers value : ChestTiers.values()) {
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier())));
-        }
     }
 
     private static CustomChestEntityRenderer createDefaultRenderer(BlockEntityRenderDispatcher dispatcher) {
