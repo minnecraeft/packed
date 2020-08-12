@@ -13,6 +13,13 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+/**
+ * This class is the extension for {@link WoodBlockVariants} which will register a Item for each {@link WoodVariant}.
+ *
+ * @param <T> Represent the additional parameter for the blocks
+ * @param <B> Represent the block which will exist in different variants
+ * @see WoodBlockVariants
+ */
 public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem> {
 
     public final BlockItem oak;
@@ -26,6 +33,15 @@ public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem>
 
     private final Set<BlockItem> variants = new HashSet<>();
 
+    /**
+     * Creates new instance of WoodItemVariants which will internally register all {@link BlockItem BlockItems} one for
+     * each variant defined in WoodBlockVariants.
+     *
+     * @param tier   The additional parameter for the common tier usage
+     * @param id     A function creating an {@link Identifier} to register a item by its {@link WoodVariant}
+     * @param blocks The corresponding WoodBlockVariants to register the {@link BlockItem} for
+     * @param group  The {@link ItemGroup} in which the item will be registered
+     */
     public WoodItemVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, WoodBlockVariants<T, B> blocks, ItemGroup group) {
         oak = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.OAK), newBlockItem(blocks.oak, group));
         spruce = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.SPRUCE), newBlockItem(blocks.spruce, group));
