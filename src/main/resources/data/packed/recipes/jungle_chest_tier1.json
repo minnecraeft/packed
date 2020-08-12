@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#A#",
+        "#_#",
+        "#A#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:jungle_planks"
+        },
+        "_": {
+            "item": "packed:jungle_chest_default"
+        },
+        "A": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "packed:jungle_chest_tier1",
+        "count": 1
+    },
+    "group": "chest_tier1"
+}
