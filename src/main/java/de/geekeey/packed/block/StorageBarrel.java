@@ -43,30 +43,50 @@ public class StorageBarrel extends BlockWithEntity {
         return new StorageBarrelEntity();
     }
 
+    /**
+     * When the player right clicks the block we insert the entire Stack in the players Hand into the barrel,
+     * If the Items in the Barrel do not match those in the players Hand we do nothing.
+     **/
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             Inventory inv = (Inventory) world.getBlockEntity(pos);
 
+            assert inv != null;
             ItemStack stackInHand = player.getStackInHand(hand);
             ItemStack barrelStack = inv.getStack(0);
 
-            if (barrelStack == stackInHand || barrelStack.isEmpty()) {
-                //we need this to set the final item count in the barrel
-                int barrelCount = inv.getStack(0).getCount();
-
+            //we do not allow items which are not stackable in the barrel.
+            if (barrelStack.isEmpty() && stackInHand.isStackable()) {
                 inv.setStack(0, stackInHand.copy());
-                inv.getStack(0).setCount(stackInHand.getCount() + barrelCount);
                 stackInHand.setCount(0);
                 return ActionResult.SUCCESS;
             }
-            return ActionResult.FAIL;
+            else if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
+                int barrelCount = inv.getStack(0).getCount();
+
+                int remainingSpace = inv.getMaxCountPerStack() - inv.getStack(0).getCount();
+
+                if (remainingSpace < stackInHand.getCount()) {
+                    inv.getStack(0).setCount(inv.getMaxCountPerStack());
+                    stackInHand.setCount(stackInHand.getCount() - remainingSpace);
+                }
+                else {
+                    inv.getStack(0).setCount(barrelCount+stackInHand.getCount());
+                    stackInHand.setCount(0);
+                }
+                return ActionResult.SUCCESS;
+            }
+
         }
+        //Consume is needed so that client does not place block in front of barrel
         return ActionResult.CONSUME;
     }
 
     /**
-     * When player starts hitting block we extract Items from the Barrel,
+     * When player starts hitting block we extract Items from the Barrel, the amount is dependent on the
+     * {@link StorageBarrel#dropSize} variable. When there is no space in the player inventory the items
+     * get dropped onto the ground
      **/
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
@@ -74,7 +94,10 @@ public class StorageBarrel extends BlockWithEntity {
             Inventory inv = (Inventory) world.getBlockEntity(pos);
 
             //removed stack from inventory
+            assert inv != null;
             ItemStack stack = inv.removeStack(0, dropSize);
+            if (inv.getStack(0).isEmpty())
+                inv.removeStack(0);
 
             player.inventory.offerOrDrop(world, stack);
         }
@@ -101,7 +124,7 @@ public class StorageBarrel extends BlockWithEntity {
         return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
     }
 
-    //Inheritance from BlockWithEntity results in the rendertype being invisible, so we have to fix that
+    //Inheritance from BlockWithEntity results in the renderType being invisible, so we have to fix that
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
