@@ -1,5 +1,6 @@
 package de.geekeey.packed.init.helpers;
 
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -8,9 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.function.BiFunction;
 
 /**
@@ -22,16 +21,7 @@ import java.util.function.BiFunction;
  */
 public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem> {
 
-    public final BlockItem oak;
-    public final BlockItem spruce;
-    public final BlockItem birch;
-    public final BlockItem acacia;
-    public final BlockItem jungle;
-    public final BlockItem darkOak;
-    public final BlockItem crimson;
-    public final BlockItem warped;
-
-    private final Set<BlockItem> variants = new HashSet<>();
+    public final ImmutableMap<WoodVariant, BlockItem> variants;
 
     /**
      * Creates new instance of WoodItemVariants which will internally register all {@link BlockItem BlockItems} one for
@@ -43,26 +33,54 @@ public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem>
      * @param group  The {@link ItemGroup} in which the item will be registered
      */
     public WoodItemVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, WoodBlockVariants<T, B> blocks, ItemGroup group) {
-        oak = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.OAK), newBlockItem(blocks.oak, group));
-        spruce = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.SPRUCE), newBlockItem(blocks.spruce, group));
-        birch = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.BIRCH), newBlockItem(blocks.birch, group));
-        acacia = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.ACACIA), newBlockItem(blocks.acacia, group));
-        jungle = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.JUNGLE), newBlockItem(blocks.jungle, group));
-        darkOak = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.DARK_OAK), newBlockItem(blocks.darkOak, group));
-        crimson = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.CRIMSON), newBlockItem(blocks.crimson, group));
-        warped = Registry.register(Registry.ITEM, id.apply(tier, WoodVariants.WARPED), newBlockItem(blocks.warped, group));
+        ImmutableMap.Builder<WoodVariant, BlockItem> builder = ImmutableMap.builder();
+
+        for (var variant : blocks.variants.keySet()) {
+            var identifier = id.apply(tier, variant);
+            var item = new BlockItem(blocks.variants.get(variant), new Item.Settings().group(group));
+            Registry.register(Registry.ITEM, identifier, item);
+            builder.put(variant, item);
+        }
+
+        variants = builder.build();
     }
 
-    private BlockItem newBlockItem(B block, ItemGroup group) {
-        BlockItem item = new BlockItem(block, new Item.Settings().group(group));
-        variants.add(item);
-        return item;
+    public BlockItem oak() {
+        return variants.get(WoodVariants.OAK);
+    }
+
+    public BlockItem spruce() {
+        return variants.get(WoodVariants.SPRUCE);
+    }
+
+    public BlockItem birch() {
+        return variants.get(WoodVariants.BIRCH);
+    }
+
+    public BlockItem acacia() {
+        return variants.get(WoodVariants.ACACIA);
+    }
+
+    public BlockItem jungle() {
+        return variants.get(WoodVariants.JUNGLE);
+    }
+
+    public BlockItem darkOak() {
+        return variants.get(WoodVariants.DARK_OAK);
+    }
+
+    public BlockItem crimson() {
+        return variants.get(WoodVariants.CRIMSON);
+    }
+
+    public BlockItem warped() {
+        return variants.get(WoodVariants.WARPED);
     }
 
     @NotNull
     @Override
     public Iterator<BlockItem> iterator() {
-        return variants.iterator();
+        return variants.values().iterator();
     }
 }
 

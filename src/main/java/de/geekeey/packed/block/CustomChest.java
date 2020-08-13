@@ -1,6 +1,7 @@
 package de.geekeey.packed.block;
 
 import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.helpers.ChestTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
@@ -36,14 +37,14 @@ public class CustomChest extends ChestBlock {
     private final WoodVariant variant;
 
     public CustomChest(ChestTier tier, WoodVariant variant) {
-        super(FabricBlockSettings.copyOf(CHEST), tier.getBlockEntityType());
+        super(FabricBlockSettings.copyOf(CHEST), () -> PackedEntities.CUSTOM_CHEST);
         this.tier = tier;
         this.variant = variant;
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return tier.newBlockEntity();
+    public BlockEntity createBlockEntity(BlockView view) {
+        return new CustomChestEntity(tier, variant);
     }
 
     @Override
@@ -60,37 +61,36 @@ public class CustomChest extends ChestBlock {
     }
 
     private static final DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>> NAME_RETRIEVER = new DoubleBlockProperties.PropertyRetriever<ChestBlockEntity, Optional<NamedScreenHandlerFactory>>() {
-        public Optional<NamedScreenHandlerFactory> getFromBoth(final ChestBlockEntity first, final ChestBlockEntity second) {
-            final Inventory inventory = new DoubleInventory(first, second);
+        public Optional<NamedScreenHandlerFactory> getFromBoth(final ChestBlockEntity a, final ChestBlockEntity b) {
+            final Inventory inventory = new DoubleInventory(a, b);
 
             int rows;
             int columns;
 
-            CustomChestEntity fcce = (CustomChestEntity) first;
-            CustomChestEntity scce = (CustomChestEntity) second;
-            //TODO There needs to be a better way for this
-            if(fcce.rows == 3){
+            CustomChestEntity chestA = (CustomChestEntity) a;
+            CustomChestEntity chestB = (CustomChestEntity) b;
+            // TODO: Changes for some proper checks with more logic
+            if (chestA.getTier().rows() == 3) {
                 rows = 6;
                 columns = 9;
-            }
-            else{
-                rows = fcce.rows;
-                columns = fcce.columns + scce.columns;
+            } else {
+                rows = chestA.getTier().rows();
+                columns = chestA.getTier().columns() + chestB.getTier().columns();
             }
 
 
             return Optional.of(new ExtendedScreenHandlerFactory() {
                 @Override
-                public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-                    packetByteBuf.writeInt(rows);
-                    packetByteBuf.writeInt(columns);
+                public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+                    buf.writeInt(rows);
+                    buf.writeInt(columns);
                 }
 
                 @Nullable
                 public ScreenHandler createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-                    if (first.checkUnlocked(playerEntity) && second.checkUnlocked(playerEntity)) {
-                        first.checkLootInteraction(playerInventory.player);
-                        second.checkLootInteraction(playerInventory.player);
+                    if (a.checkUnlocked(playerEntity) && b.checkUnlocked(playerEntity)) {
+                        a.checkLootInteraction(playerInventory.player);
+                        b.checkLootInteraction(playerInventory.player);
                         return new ExtendedGenericContainerScreenHandler(i, playerInventory, inventory, rows, columns);
                     } else {
                         return null;
@@ -98,10 +98,10 @@ public class CustomChest extends ChestBlock {
                 }
 
                 public Text getDisplayName() {
-                    if (first.hasCustomName()) {
-                        return first.getDisplayName();
+                    if (a.hasCustomName()) {
+                        return a.getDisplayName();
                     } else {
-                        return (Text) (second.hasCustomName() ? second.getDisplayName() : new TranslatableText("container.chestDouble"));
+                        return b.hasCustomName() ? b.getDisplayName() : new TranslatableText("container.chestDouble");
                     }
                 }
             });

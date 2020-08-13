@@ -33,9 +33,9 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
     private static final Identifier CHEST_ATLAS_TEXTURE = TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
 
     private static final SpriteIdentifier CLINCH_DEFAULT = createChestTextureId(ChestTiers.DEFAULT.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(ChestTiers.TIER1.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(ChestTiers.TIER2.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(ChestTiers.TIER3.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(ChestTiers.TIER_1.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(ChestTiers.TIER_2.identifier());
+    private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(ChestTiers.TIER_3.identifier());
 
     private static final ImmutableMap<WoodVariant, ChestTextureSprites> WOOD_VARIANT_SPRITES;
 
@@ -102,17 +102,23 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         this.clinchLeftModel.pivotY = 8.0F;
     }
 
-    private static SpriteIdentifier createChestTextureId(String path) {
-        return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + path));
+    private static SpriteIdentifier createChestTextureId(Identifier path) {
+        return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + path.getPath()));
     }
 
-    private static SpriteIdentifier fromChestTier(ChestTier tier) {
-        if (tier == ChestTiers.TIER1) {
-            return CLINCH_TIER_1;
-        } else if (tier == ChestTiers.TIER2) {
-            return CLINCH_TIER_2;
-        } else if (tier == ChestTiers.TIER3) {
-            return CLINCH_TIER_3;
+    private static SpriteIdentifier forChestTier(ChestTier tier) {
+        if (tier instanceof ChestTiers) {
+            ChestTiers tiers = (ChestTiers) tier;
+            switch (tiers) {
+                case DEFAULT:
+                    return CLINCH_DEFAULT;
+                case TIER_1:
+                    return CLINCH_TIER_1;
+                case TIER_2:
+                    return CLINCH_TIER_2;
+                case TIER_3:
+                    return CLINCH_TIER_3;
+            }
         }
         return CLINCH_DEFAULT;
     }
@@ -129,15 +135,17 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         }
     }
 
-    public void render(CustomChestEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
+    public void render(CustomChestEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
         World world = entity.getWorld();
-        boolean cache = world != null;
-        BlockState state = cache ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+        boolean inWorld = world != null;
+
+        BlockState state = inWorld ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         ChestType type = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
+
         Block block = state.getBlock();
 
         if (block instanceof CustomChest) {
-            CustomChest chestBlock = (CustomChest) block;
+            CustomChest chest = (CustomChest) block;
             matrices.push();
 
             float facing = state.get(ChestBlock.FACING).asRotation();
@@ -146,21 +154,21 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
             matrices.translate(-0.5D, -0.5D, -0.5D);
 
             DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> source;
-            if (cache) {
-                source = chestBlock.getBlockEntitySource(state, world, entity.getPos(), true);
+            if (inWorld) {
+                source = chest.getBlockEntitySource(state, world, entity.getPos(), true);
             } else {
                 source = DoubleBlockProperties.PropertyRetriever::getFallback;
             }
 
-            float g = source.apply(ChestBlock.getAnimationProgressRetriever(entity)).get(tickDelta);
+            float g = source.apply(ChestBlock.getAnimationProgressRetriever(entity)).get(delta);
             g = 1.0F - g;
             g = 1.0F - g * g * g;
             int i = source.apply(new LightmapCoordinatesRetriever<>()).applyAsInt(light);
 
-            SpriteIdentifier foundation = fromWoodVariant(chestBlock.getVariant(), type);
+            SpriteIdentifier foundation = fromWoodVariant(chest.getVariant(), type);
             VertexConsumer verticesFoundation = foundation.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
 
-            SpriteIdentifier clinch = fromChestTier(chestBlock.getTier());
+            SpriteIdentifier clinch = forChestTier(entity.getTier());
             VertexConsumer verticesClinch = clinch.getVertexConsumer(vertices, RenderLayer::getEntityCutout);
 
             if (type == ChestType.SINGLE) {

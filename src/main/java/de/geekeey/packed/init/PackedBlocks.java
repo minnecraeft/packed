@@ -20,19 +20,21 @@ public class PackedBlocks {
     public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_1;
     public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_2;
     public static final WoodBlockVariants<BarrelTier, CustomBarrel> BARREL_TIER_3;
-    
-    public static final StorageBarrel STORAGE_BARREL = Registry.register(Registry.BLOCK, Packed.id("storage_barrel"),new StorageBarrel(FabricBlockSettings.copyOf(Blocks.CHEST)));
+
+    public static final StorageBarrel STORAGE_BARREL;
 
     static {
         CHEST_DEFAULT_TIER = new WoodBlockVariants<>(ChestTiers.DEFAULT, ChestTiers::identifier, CustomChest::new);
-        CHEST_TIER_1 = new WoodBlockVariants<>(ChestTiers.TIER1, ChestTiers::identifier, CustomChest::new);
-        CHEST_TIER_2 = new WoodBlockVariants<>(ChestTiers.TIER2, ChestTiers::identifier, CustomChest::new);
-        CHEST_TIER_3 = new WoodBlockVariants<>(ChestTiers.TIER3, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_1 = new WoodBlockVariants<>(ChestTiers.TIER_1, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_2 = new WoodBlockVariants<>(ChestTiers.TIER_2, ChestTiers::identifier, CustomChest::new);
+        CHEST_TIER_3 = new WoodBlockVariants<>(ChestTiers.TIER_3, ChestTiers::identifier, CustomChest::new);
 
         BARREL_DEFAULT_TIER = new WoodBlockVariants<>(BarrelTiers.DEFAULT, BarrelTiers::identifier, CustomBarrel::new);
         BARREL_TIER_1 = new WoodBlockVariants<>(BarrelTiers.TIER1, BarrelTiers::identifier, CustomBarrel::new);
         BARREL_TIER_2 = new WoodBlockVariants<>(BarrelTiers.TIER2, BarrelTiers::identifier, CustomBarrel::new);
         BARREL_TIER_3 = new WoodBlockVariants<>(BarrelTiers.TIER3, BarrelTiers::identifier, CustomBarrel::new);
+
+        STORAGE_BARREL = Registry.register(Registry.BLOCK, Packed.id("storage_barrel"), new StorageBarrel(FabricBlockSettings.copyOf(Blocks.CHEST)));
     }
 
     public static void register() {
