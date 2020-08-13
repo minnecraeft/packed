@@ -121,7 +121,7 @@ public class StorageBarrel extends BlockWithEntity {
     }
 
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerLookDirection().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
     }
 
     //Inheritance from BlockWithEntity results in the renderType being invisible, so we have to fix that

@@ -4,6 +4,7 @@ import de.geekeey.packed.block.CustomChest;
 import de.geekeey.packed.block.entity.CustomChestEntity;
 import de.geekeey.packed.client.GenericScreen;
 import de.geekeey.packed.client.render.CustomChestEntityRenderer;
+import de.geekeey.packed.client.render.StorageBarrelEntityRenderer;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.PackedItems;
 import de.geekeey.packed.init.PackedScreenHandlers;
@@ -54,6 +55,8 @@ public class PackedClient implements ClientModInitializer {
 
         BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CHEST_6_9, PackedClient::createDefaultRenderer);
         register(PackedItems.CHEST_TIER_3, CustomChestEntity.create6x9());
+
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.STORAGE_BARREL_ENTITY, StorageBarrelEntityRenderer::new);
     }
 
     private static CustomChestEntityRenderer createDefaultRenderer(BlockEntityRenderDispatcher dispatcher) {
