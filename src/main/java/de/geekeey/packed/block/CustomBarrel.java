@@ -32,4 +32,6 @@ public class CustomBarrel extends BarrelBlock {
     public WoodVariant getVariant() {
         return variant;
     }
+
+
 }

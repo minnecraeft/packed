@@ -30,9 +30,9 @@ public class PackedItems {
         BARREL_TIER_3 = new WoodItemVariants<>(BarrelTiers.TIER3, BarrelTiers::identifier, PackedBlocks.BARREL_TIER_3, Packed.ITEM_GROUP);
 
         CHEST_DEFAULT_TIER = new WoodItemVariants<>(ChestTiers.DEFAULT, ChestTiers::identifier, PackedBlocks.CHEST_DEFAULT_TIER, Packed.ITEM_GROUP);
-        CHEST_TIER_1 = new WoodItemVariants<>(ChestTiers.TIER1, ChestTiers::identifier, PackedBlocks.CHEST_TIER_1, Packed.ITEM_GROUP);
-        CHEST_TIER_2 = new WoodItemVariants<>(ChestTiers.TIER2, ChestTiers::identifier, PackedBlocks.CHEST_TIER_2, Packed.ITEM_GROUP);
-        CHEST_TIER_3 = new WoodItemVariants<>(ChestTiers.TIER3, ChestTiers::identifier, PackedBlocks.CHEST_TIER_3, Packed.ITEM_GROUP);
+        CHEST_TIER_1 = new WoodItemVariants<>(ChestTiers.TIER_1, ChestTiers::identifier, PackedBlocks.CHEST_TIER_1, Packed.ITEM_GROUP);
+        CHEST_TIER_2 = new WoodItemVariants<>(ChestTiers.TIER_2, ChestTiers::identifier, PackedBlocks.CHEST_TIER_2, Packed.ITEM_GROUP);
+        CHEST_TIER_3 = new WoodItemVariants<>(ChestTiers.TIER_3, ChestTiers::identifier, PackedBlocks.CHEST_TIER_3, Packed.ITEM_GROUP);
     }
 
     public static void register() {
