@@ -1,6 +1,5 @@
-package de.geekeey.packed.block;
+package de.geekeey.packed.block.misc;
 
-import de.geekeey.packed.block.entity.BasicContainerEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;

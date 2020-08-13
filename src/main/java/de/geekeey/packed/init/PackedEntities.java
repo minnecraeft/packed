@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.entity.CustomBarrelEntity;
 import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.block.entity.StorageBarrelEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -29,6 +30,9 @@ public class PackedEntities {
 
     public static final ImmutableSet<BlockEntityType<CustomChestEntity>> CHEST_ENTITY_TYPES;
 
+
+    public static final BlockEntityType<StorageBarrelEntity> STORAGE_BARREL_ENTITY;
+
     static {
         BARREL_3_9 = register("barrel_3_9", create(CustomBarrelEntity::create3x9, PackedBlocks.BARREL_DEFAULT_TIER));
         BARREL_4_9 = register("barrel_4_9", create(CustomBarrelEntity::create4x9, PackedBlocks.BARREL_TIER_1));
@@ -43,6 +47,8 @@ public class PackedEntities {
         CHEST_6_9 = register("chest_6_9", create(CustomChestEntity::create6x9, PackedBlocks.CHEST_TIER_3));
 
         CHEST_ENTITY_TYPES = ImmutableSet.of(CHEST_3_9, CHEST_4_9, CHEST_5_9, CHEST_6_9);
+
+        STORAGE_BARREL_ENTITY = register("storage_barrel", Builder.create(StorageBarrelEntity::new, PackedBlocks.STORAGE_BARREL));
     }
 
     private static <T extends BlockEntity, B extends Block> Builder<T> create(Supplier<T> supplier, Iterable<B> blocks) {

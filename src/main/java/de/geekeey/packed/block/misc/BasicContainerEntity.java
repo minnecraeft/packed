@@ -1,4 +1,4 @@
-package de.geekeey.packed.block.entity;
+package de.geekeey.packed.block.misc;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
