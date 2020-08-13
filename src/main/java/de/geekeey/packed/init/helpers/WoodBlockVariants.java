@@ -10,6 +10,18 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+/**
+ * WoodBlockVariants represent a collection of blocks which exists in a different {@link WoodVariant}. These blocks are
+ * also depending on another parameter in the most cases some kind of tier, like {@link BarrelTier} or {@link ChestTier}.
+ * This class will register a new block based on a identifier for each {@link WoodVariant} defined in {@link WoodVariants}.
+ * <p>
+ * This should only be used if the block behaves the same for all variants of wood.
+ * <p>
+ * All variants can be iterated by iterating over this class.
+ *
+ * @param <T> Represent the additional parameter for the blocks
+ * @param <B> Represent the block which will exist in different variants
+ */
 public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
 
     public final B oak;
@@ -23,6 +35,14 @@ public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
 
     private final Set<B> variants = new HashSet<>();
 
+    /**
+     * Creates new instance of WoodBlockVariants which will internally register all blocks one of each variant defined
+     * in {@link WoodVariants}.
+     *
+     * @param tier  The additional parameter for the common tier usage
+     * @param id    A function creating an {@link Identifier} to register a block by its {@link WoodVariant}
+     * @param block A function creating an {@link Block} to register withs its {@link Identifier}
+     */
     public WoodBlockVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, BiFunction<T, WoodVariant, B> block) {
         oak = register(tier, WoodVariants.OAK, id, block);
         spruce = register(tier, WoodVariants.SPRUCE, id, block);
