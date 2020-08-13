@@ -9,7 +9,6 @@ import de.geekeey.packed.init.helpers.ChestTiers;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import de.geekeey.packed.init.helpers.WoodVariants;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -137,9 +136,9 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
 
     public void render(CustomChestEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
         World world = entity.getWorld();
-        boolean inWorld = world != null;
+        boolean hasWorld = world != null;
 
-        BlockState state = inWorld ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+        var state = hasWorld ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         ChestType type = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 
         Block block = state.getBlock();
@@ -154,7 +153,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
             matrices.translate(-0.5D, -0.5D, -0.5D);
 
             DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> source;
-            if (inWorld) {
+            if (hasWorld) {
                 source = chest.getBlockEntitySource(state, world, entity.getPos(), true);
             } else {
                 source = DoubleBlockProperties.PropertyRetriever::getFallback;

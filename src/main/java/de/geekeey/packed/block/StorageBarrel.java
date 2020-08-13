@@ -50,7 +50,7 @@ public class StorageBarrel extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            Inventory inv = (Inventory) world.getBlockEntity(pos);
+            StorageBarrelEntity inv = (StorageBarrelEntity) world.getBlockEntity(pos);
 
             assert inv != null;
             ItemStack stackInHand = player.getStackInHand(hand);
@@ -59,10 +59,10 @@ public class StorageBarrel extends BlockWithEntity {
             //we do not allow items which are not stackable in the barrel.
             if (barrelStack.isEmpty() && stackInHand.isStackable()) {
                 inv.setStack(0, stackInHand.copy());
+                inv.sync();
                 stackInHand.setCount(0);
                 return ActionResult.SUCCESS;
-            }
-            else if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
+            } else if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
                 int barrelCount = inv.getStack(0).getCount();
 
                 int remainingSpace = inv.getMaxCountPerStack() - inv.getStack(0).getCount();
@@ -70,9 +70,8 @@ public class StorageBarrel extends BlockWithEntity {
                 if (remainingSpace < stackInHand.getCount()) {
                     inv.getStack(0).setCount(inv.getMaxCountPerStack());
                     stackInHand.setCount(stackInHand.getCount() - remainingSpace);
-                }
-                else {
-                    inv.getStack(0).setCount(barrelCount+stackInHand.getCount());
+                } else {
+                    inv.getStack(0).setCount(barrelCount + stackInHand.getCount());
                     stackInHand.setCount(0);
                 }
                 return ActionResult.SUCCESS;
@@ -91,16 +90,19 @@ public class StorageBarrel extends BlockWithEntity {
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient) {
-            Inventory inv = (Inventory) world.getBlockEntity(pos);
+            StorageBarrelEntity inv = (StorageBarrelEntity) world.getBlockEntity(pos);
 
             //removed stack from inventory
             assert inv != null;
             ItemStack stack = inv.removeStack(0, dropSize);
-            if (inv.getStack(0).isEmpty())
+            if (inv.getStack(0).isEmpty()) {
                 inv.removeStack(0);
+                inv.sync();
+            }
 
             player.inventory.offerOrDrop(world, stack);
         }
+
         super.onBlockBreakStart(state, world, pos, player);
     }
 
