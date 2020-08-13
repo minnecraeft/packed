@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PPP",
+        "PLP",
+        "PPP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:${VARIANT}_planks"
+        },
+        "L": {
+            "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
+        }
+    },
+    "result": {
+        "item": "packed:${VARIANT}_chest_tier3",
+        "count": 1
+    },
+    "group": "chest_tier3"
+}

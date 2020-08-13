@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "packed:block/${VARIANT}_chest_${TIER}"
+    }
+  }
+}
