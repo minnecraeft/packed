@@ -31,7 +31,7 @@ for VARIANT in "${VARIANTS[@]}"; do
     file="${VARIANT}_storage_barrel_${TIER}"
     envsubst <"${BASE}/presets/storage_barrel/blockstate.json" >"${BLOCK_STATES}/${file}.json"
 
-    envsubst <"${BASE}/presets/storage_barrel/model_block.json" >"${MODELS_BLOCK}/${file}.json"
+    envsubst <"${BASE}/presets/storage_barrel/model_block_${TIER}.json" >"${MODELS_BLOCK}/${file}.json"
     envsubst <"${BASE}/presets/storage_barrel/model_item.json" >"${MODELS_ITEM}/${file}.json"
 
     #envsubst <"${BASE}/presets/barrel/recipe_${TIER}.json" >"${RECIPES}/${file}.json"

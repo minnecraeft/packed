@@ -2,12 +2,12 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/cube_bottom_top",
 	"textures": {
-		"0": "packed:block/warped_barrel_bottom",
-		"1": "packed:block/warped_barrel_tier3_top",
-		"2": "packed:block/warped_barrel_side",
-		"4": "minecraft:block/warped_stem_top",
-		"5": "minecraft:block/diamond_block",
-		"particle": "packed:block/warped_barrel_side"
+		"0": "packed:block/${VARIANT}_barrel_bottom",
+		"1": "packed:block/${VARIANT}_barrel_${TIER}_top",
+		"2": "packed:block/${VARIANT}_barrel_side",
+		"4": "minecraft:block/${VARIANT_LOG}_top",
+		"5": "minecraft:block/iron_block",
+		"particle": "packed:block/${VARIANT}_barrel_side"
 	},
 	"elements": [
 		{
