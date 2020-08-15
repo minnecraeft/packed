@@ -22,6 +22,18 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
     private StorageBarrelTier tier;
     private WoodVariant variant;
 
+    public StorageBarrelTier getTier() {
+        return tier;
+    }
+
+    public void setTier(StorageBarrelTier tier) {
+        this.tier = tier;
+    }
+
+    public WoodVariant getVariant() {
+        return variant;
+    }
+
     public StorageBarrelEntity() {
         super(PackedEntities.STORAGE_BARREL_ENTITY);
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);

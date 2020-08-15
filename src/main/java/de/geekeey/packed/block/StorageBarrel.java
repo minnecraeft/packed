@@ -3,6 +3,7 @@ package de.geekeey.packed.block;
 import de.geekeey.packed.block.entity.StorageBarrelEntity;
 import de.geekeey.packed.init.helpers.StorageBarrelTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
+import de.geekeey.packed.item.StorageUpgrader;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -76,10 +77,12 @@ public class StorageBarrel extends BlockWithEntity {
             ItemStack stackInHand = player.getStackInHand(hand);
             ItemStack barrelStack = inv.getStack(0);
             int barrelCount = barrelStack.getCount();
-
+            if(player.getStackInHand(hand).getItem() instanceof StorageUpgrader){
+                return ActionResult.SUCCESS;
+            }
             //First case: The player has recently right clicked the barrel
             //we will insert all items matching the ones in the barrel from the player inventory
-            if (player.getUuid() == lastUsedPlayer && world.getTime() - lastUsedTime < doubleUseInterval) {
+            else if (player.getUuid() == lastUsedPlayer && world.getTime() - lastUsedTime < doubleUseInterval) {
                 int slot;
                 while ((slot = player.inventory.getSlotWithStack(barrelStack)) > -1) {
                     var removedStack = player.inventory.removeStack(slot);
