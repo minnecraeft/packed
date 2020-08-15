@@ -2,7 +2,7 @@ package de.geekeey.packed.block.entity;
 
 import de.geekeey.packed.block.misc.ImplementedInventory;
 import de.geekeey.packed.init.PackedEntities;
-import de.geekeey.packed.init.helpers.StorageBarrelTier;
+import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
@@ -13,25 +13,37 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.NotNull;
 
-public class StorageBarrelEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable {
+public class VariantStorageBarrelBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable {
 
-    private static final int maxItems = 32 * 64;
     private final DefaultedList<ItemStack> inventory;
 
-    private StorageBarrelTier tier;
+    private StorageTier tier;
     private WoodVariant variant;
 
-    public StorageBarrelEntity() {
-        super(PackedEntities.STORAGE_BARREL_ENTITY);
+    public VariantStorageBarrelBlockEntity() {
+        super(PackedEntities.STORAGE_BARREL);
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
-    public StorageBarrelEntity(StorageBarrelTier tier, WoodVariant variant) {
-        super(PackedEntities.STORAGE_BARREL_ENTITY);
+    public VariantStorageBarrelBlockEntity(StorageTier tier, WoodVariant variant) {
+        super(PackedEntities.STORAGE_BARREL);
         this.tier = tier;
         this.variant = variant;
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    }
+
+    public @NotNull StorageTier getTier() {
+        return tier;
+    }
+
+    public void setTier(@NotNull StorageTier tier) {
+        this.tier = tier;
+    }
+
+    public @NotNull WoodVariant getVariant() {
+        return variant;
     }
 
     public boolean isFull(){
@@ -45,7 +57,7 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
 
     @Override
     public int getMaxCountPerStack() {
-        return tier.capacity();
+        return getTier().getMaxStackSize();
     }
 
     @Override
@@ -61,7 +73,9 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         }
 
         if (tag.contains("tier", 8)) {
-            this.tier = StorageBarrelTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+            var tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+            if (tier != null)
+                setTier(tier);
         }
 
         super.fromTag(state, tag);
@@ -78,7 +92,7 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         item.putInt("count", stack.getCount());
 
         tag.put("item", item);
-        tag.putString("tier", tier.identifier().toString());
+        tag.putString("tier", getTier().getIdentifier().toString());
 
         return super.toTag(tag);
     }
@@ -95,17 +109,5 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         Identifier identifier = Registry.ITEM.getId(inventory.get(0).getItem());
         compound.putString("item", identifier.toString());
         return compound;
-    }
-
-    public StorageBarrelTier getTier() {
-        return tier;
-    }
-
-    public void setTier(StorageBarrelTier tier) {
-        this.tier = tier;
-    }
-
-    public WoodVariant getVariant() {
-        return variant;
     }
 }

@@ -1,8 +1,8 @@
 package de.geekeey.packed.block;
 
-import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.block.entity.VariantChestBlockEntity;
 import de.geekeey.packed.init.PackedEntities;
-import de.geekeey.packed.init.helpers.ChestTier;
+import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -25,18 +25,19 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 import static net.minecraft.block.Blocks.CHEST;
 
-public class CustomChest extends ChestBlock {
+public class VariantChestBlock extends ChestBlock {
 
-    private final ChestTier tier;
+    private final StorageTier tier;
     private final WoodVariant variant;
 
-    public CustomChest(ChestTier tier, WoodVariant variant) {
+    public VariantChestBlock(@NotNull StorageTier tier, @NotNull WoodVariant variant) {
         super(FabricBlockSettings.copyOf(CHEST), () -> PackedEntities.CUSTOM_CHEST);
         this.tier = tier;
         this.variant = variant;
@@ -44,7 +45,7 @@ public class CustomChest extends ChestBlock {
 
     @Override
     public BlockEntity createBlockEntity(BlockView view) {
-        return new CustomChestEntity(tier, variant);
+        return new VariantChestBlockEntity(getTier(), getVariant());
     }
 
     @Override
@@ -52,11 +53,11 @@ public class CustomChest extends ChestBlock {
         return this.getBlockEntitySource(state, world, pos, false).apply(NAME_RETRIEVER).orElse(null);
     }
 
-    public ChestTier getTier() {
+    public @NotNull StorageTier getTier() {
         return tier;
     }
 
-    public WoodVariant getVariant() {
+    public @NotNull WoodVariant getVariant() {
         return variant;
     }
 
@@ -67,15 +68,15 @@ public class CustomChest extends ChestBlock {
             int rows;
             int columns;
 
-            CustomChestEntity chestA = (CustomChestEntity) a;
-            CustomChestEntity chestB = (CustomChestEntity) b;
+            VariantChestBlockEntity chestA = (VariantChestBlockEntity) a;
+            VariantChestBlockEntity chestB = (VariantChestBlockEntity) b;
             // TODO: Changes for some proper checks with more logic
-            if (chestA.getTier().rows() == 3) {
+            if (chestA.getTier().getInventoryHeight() == 3) {
                 rows = 6;
                 columns = 9;
             } else {
-                rows = chestA.getTier().rows();
-                columns = chestA.getTier().columns() + chestB.getTier().columns();
+                rows = chestA.getTier().getInventoryHeight();
+                columns = chestA.getTier().getInventoryWidth() + chestB.getTier().getInventoryWidth();
             }
 
 

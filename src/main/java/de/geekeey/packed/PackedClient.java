@@ -1,7 +1,7 @@
 package de.geekeey.packed;
 
-import de.geekeey.packed.block.CustomChest;
-import de.geekeey.packed.block.entity.CustomChestEntity;
+import de.geekeey.packed.block.VariantChestBlock;
+import de.geekeey.packed.block.entity.VariantChestBlockEntity;
 import de.geekeey.packed.client.GenericScreen;
 import de.geekeey.packed.client.render.CustomChestEntityRenderer;
 import de.geekeey.packed.client.render.StorageBarrelEntityRenderer;
@@ -38,17 +38,17 @@ public class PackedClient implements ClientModInitializer {
         }
 
         //Registration of lock textures
-        for (ChestTiers value : ChestTiers.values()) {
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.identifier().getPath())));
+        for (StorageTiers value : StorageTiers.values()) {
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier().getPath())));
         }
 
         BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CUSTOM_CHEST, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_DEFAULT_TIER, variant -> new CustomChestEntity(ChestTiers.DEFAULT, variant));
-        register(PackedItems.CHEST_TIER_1, variant -> new CustomChestEntity(ChestTiers.TIER_1, variant));
-        register(PackedItems.CHEST_TIER_2, variant -> new CustomChestEntity(ChestTiers.TIER_2, variant));
-        register(PackedItems.CHEST_TIER_3, variant -> new CustomChestEntity(ChestTiers.TIER_3, variant));
+        register(PackedItems.CHEST_DEFAULT_TIER, variant -> new VariantChestBlockEntity(StorageTiers.DEFAULT, variant));
+        register(PackedItems.CHEST_TIER_1, variant -> new VariantChestBlockEntity(StorageTiers.TIER_1, variant));
+        register(PackedItems.CHEST_TIER_2, variant -> new VariantChestBlockEntity(StorageTiers.TIER_2, variant));
+        register(PackedItems.CHEST_TIER_3, variant -> new VariantChestBlockEntity(StorageTiers.TIER_3, variant));
 
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.STORAGE_BARREL_ENTITY, StorageBarrelEntityRenderer::new);
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.STORAGE_BARREL, StorageBarrelEntityRenderer::new);
 
     }
 
@@ -56,7 +56,7 @@ public class PackedClient implements ClientModInitializer {
         return new CustomChestEntityRenderer(dispatcher, Blocks.CHEST);
     }
 
-    private static void register(WoodItemVariants<ChestTier, CustomChest> items, Function<WoodVariant, CustomChestEntity> factory) {
+    private static void register(WoodItemVariants<StorageTier, VariantChestBlock> items, Function<WoodVariant, VariantChestBlockEntity> factory) {
         items.variants.forEach((variant, item) -> {
             Block block = item.getBlock();
             CustomChestEntityRenderer renderer = new CustomChestEntityRenderer(BlockEntityRenderDispatcher.INSTANCE, block);

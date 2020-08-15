@@ -2,12 +2,9 @@ package de.geekeey.packed.client.render;
 
 import com.google.common.collect.ImmutableMap;
 import de.geekeey.packed.Packed;
-import de.geekeey.packed.block.CustomChest;
-import de.geekeey.packed.block.entity.CustomChestEntity;
-import de.geekeey.packed.init.helpers.ChestTier;
-import de.geekeey.packed.init.helpers.ChestTiers;
-import de.geekeey.packed.init.helpers.WoodVariant;
-import de.geekeey.packed.init.helpers.WoodVariants;
+import de.geekeey.packed.block.VariantChestBlock;
+import de.geekeey.packed.block.entity.VariantChestBlockEntity;
+import de.geekeey.packed.init.helpers.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
@@ -28,13 +25,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEntity> {
+public class CustomChestEntityRenderer extends BlockEntityRenderer<VariantChestBlockEntity> {
     private static final Identifier CHEST_ATLAS_TEXTURE = TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
 
-    private static final SpriteIdentifier CLINCH_DEFAULT = createChestTextureId(ChestTiers.DEFAULT.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(ChestTiers.TIER_1.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(ChestTiers.TIER_2.identifier());
-    private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(ChestTiers.TIER_3.identifier());
+    private static final SpriteIdentifier CLINCH_DEFAULT = createChestTextureId(StorageTiers.DEFAULT.getIdentifier());
+    private static final SpriteIdentifier CLINCH_TIER_1 = createChestTextureId(StorageTiers.TIER_1.getIdentifier());
+    private static final SpriteIdentifier CLINCH_TIER_2 = createChestTextureId(StorageTiers.TIER_2.getIdentifier());
+    private static final SpriteIdentifier CLINCH_TIER_3 = createChestTextureId(StorageTiers.TIER_3.getIdentifier());
 
     private static final ImmutableMap<WoodVariant, ChestTextureSprites> WOOD_VARIANT_SPRITES;
 
@@ -105,9 +102,9 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         return new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + path.getPath()));
     }
 
-    private static SpriteIdentifier forChestTier(ChestTier tier) {
-        if (tier instanceof ChestTiers) {
-            ChestTiers tiers = (ChestTiers) tier;
+    private static SpriteIdentifier forChestTier(StorageTier tier) {
+        if (tier instanceof StorageTiers) {
+            StorageTiers tiers = (StorageTiers) tier;
             switch (tiers) {
                 case DEFAULT:
                     return CLINCH_DEFAULT;
@@ -134,7 +131,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
         }
     }
 
-    public void render(CustomChestEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
+    public void render(VariantChestBlockEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
         World world = entity.getWorld();
         boolean hasWorld = world != null;
 
@@ -143,8 +140,8 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<CustomChestEn
 
         Block block = state.getBlock();
 
-        if (block instanceof CustomChest) {
-            CustomChest chest = (CustomChest) block;
+        if (block instanceof VariantChestBlock) {
+            VariantChestBlock chest = (VariantChestBlock) block;
             matrices.push();
 
             float facing = state.get(ChestBlock.FACING).asRotation();

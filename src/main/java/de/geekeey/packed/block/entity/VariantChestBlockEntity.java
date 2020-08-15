@@ -1,7 +1,7 @@
 package de.geekeey.packed.block.entity;
 
 import de.geekeey.packed.init.PackedEntities;
-import de.geekeey.packed.init.helpers.ChestTier;
+import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import de.geekeey.packed.screen.ExtendedGenericContainerScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -17,46 +17,51 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
+import org.jetbrains.annotations.NotNull;
 
-public class CustomChestEntity extends ChestBlockEntity implements ExtendedScreenHandlerFactory {
+public class VariantChestBlockEntity extends ChestBlockEntity implements ExtendedScreenHandlerFactory {
 
-    private ChestTier tier;
+    private StorageTier tier;
     private WoodVariant variant;
 
-    /**
-     * IMPORTANT: This constructor is only for the entity type serialisation.
-     * Do not use this anywhere else it depends on the deserialization of {@link #fromTag(BlockState, CompoundTag)}.
-     */
-    public CustomChestEntity() {
+    public VariantChestBlockEntity() {
         super(PackedEntities.CUSTOM_CHEST);
     }
 
-    public CustomChestEntity(ChestTier tier, WoodVariant variant) {
+    public VariantChestBlockEntity(@NotNull StorageTier tier, @NotNull WoodVariant variant) {
         super(PackedEntities.CUSTOM_CHEST);
         this.tier = tier;
         this.variant = variant;
-        setInvStackList(DefaultedList.ofSize(tier.rows() * tier.columns(), ItemStack.EMPTY));
+        setInvStackList(createInventory(tier));
     }
 
-    public ChestTier getTier() {
+    private static DefaultedList<ItemStack> createInventory(StorageTier tier) {
+        return DefaultedList.ofSize(tier.getInventoryWidth() * tier.getInventoryHeight(), ItemStack.EMPTY);
+    }
+
+    public @NotNull StorageTier getTier() {
         return tier;
     }
 
-    public WoodVariant getVariant() {
+    public void setTier(@NotNull StorageTier tier) {
+        this.tier = tier;
+    }
+
+    public @NotNull WoodVariant getVariant() {
         return variant;
     }
 
     @Override
     public int size() {
-        return getTier().rows() * getTier().columns();
+        return getTier().getInventoryWidth() * getTier().getInventoryHeight();
     }
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         if (tag.contains("tier", 8)) {
-            this.tier = ChestTier.REGISTRY.get(new Identifier(tag.getString("tier")));
-            if (size() != getInvStackList().size())
-                setInvStackList(DefaultedList.ofSize(size(), ItemStack.EMPTY));
+            var tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+            if (tier != null)
+                setTier(tier);
         }
         super.fromTag(state, tag);
     }
@@ -64,22 +69,25 @@ public class CustomChestEntity extends ChestBlockEntity implements ExtendedScree
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
-        tag.putString("tier", tier.identifier().toString());
+        tag.putString("tier", getTier().getIdentifier().toString());
         return tag;
     }
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeInt(getTier().rows());
-        buf.writeInt(getTier().columns());
+        buf.writeInt(getTier().getInventoryHeight());
+        buf.writeInt(getTier().getInventoryWidth());
     }
 
     @Override
     protected ScreenHandler createScreenHandler(int id, PlayerInventory inventory) {
-        return new ExtendedGenericContainerScreenHandler(id, inventory, this, getTier().rows(), getTier().columns());
+        var rows = getTier().getInventoryHeight();
+        var columns = getTier().getInventoryWidth();
+        return new ExtendedGenericContainerScreenHandler(id, inventory, this, rows, columns);
     }
 
     protected Text getContainerName() {
-        return new TranslatableText(getCachedState().getBlock().getTranslationKey());
+        var name = getCustomName();
+        return name != null ? name : new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
 }

@@ -1,20 +1,19 @@
 package de.geekeey.packed.item;
 
-import de.geekeey.packed.block.StorageBarrel;
-import de.geekeey.packed.block.entity.StorageBarrelEntity;
-import de.geekeey.packed.init.helpers.StorageBarrelTier;
-import de.geekeey.packed.init.helpers.StorageBarrelTiers;
+import de.geekeey.packed.block.VariantStorageBarrel;
+import de.geekeey.packed.block.entity.VariantStorageBarrelBlockEntity;
+import de.geekeey.packed.init.PackedBlocks;
+import de.geekeey.packed.init.helpers.StorageTier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class StorageUpgrader extends Item {
-    private final StorageBarrelTier fromTier;
-    private final StorageBarrelTier toTier;
+    private final StorageTier fromTier;
+    private final StorageTier toTier;
 
-    public StorageUpgrader(Settings settings, StorageBarrelTier fromTier, StorageBarrelTier toTier) {
+    public StorageUpgrader(Settings settings, StorageTier fromTier, StorageTier toTier) {
         super(settings);
         this.fromTier = fromTier;
         this.toTier = toTier;
@@ -27,12 +26,12 @@ public class StorageUpgrader extends Item {
             var blockState = context.getWorld().getBlockState(pos);
             var blockEntity = context.getWorld().getBlockEntity(pos);
 
-            if (blockEntity instanceof StorageBarrelEntity) {
-                var entity = (StorageBarrelEntity) blockEntity;
-                if(entity.getTier().equals(fromTier)){
+            if (blockEntity instanceof VariantStorageBarrelBlockEntity) {
+                var entity = (VariantStorageBarrelBlockEntity) blockEntity;
+                if (entity.getTier().equals(fromTier)) {
                     entity.setTier(toTier);
-                    Identifier newBlockIdentifier = StorageBarrelTiers.identifier(entity.getTier(), entity.getVariant());
-                    var newBlockState = Registry.BLOCK.get(newBlockIdentifier).getDefaultState().with(StorageBarrel.FACING, blockState.get(StorageBarrel.FACING));
+                    var identifier = PackedBlocks.storageBarrel(entity.getTier(), entity.getVariant());
+                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantStorageBarrel.FACING, blockState.get(VariantStorageBarrel.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
                     return ActionResult.SUCCESS;
                 }

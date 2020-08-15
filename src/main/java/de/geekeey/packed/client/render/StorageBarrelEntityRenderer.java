@@ -1,6 +1,6 @@
 package de.geekeey.packed.client.render;
 
-import de.geekeey.packed.block.entity.StorageBarrelEntity;
+import de.geekeey.packed.block.entity.VariantStorageBarrelBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BarrelBlock;
@@ -20,14 +20,14 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
-public class StorageBarrelEntityRenderer extends BlockEntityRenderer<StorageBarrelEntity> {
+public class StorageBarrelEntityRenderer extends BlockEntityRenderer<VariantStorageBarrelBlockEntity> {
 
     public StorageBarrelEntityRenderer(BlockEntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
 
     @Override
-    public void render(StorageBarrelEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
+    public void render(VariantStorageBarrelBlockEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
         var stack = entity.getStack(0);
 
         if (!stack.isEmpty()) {
