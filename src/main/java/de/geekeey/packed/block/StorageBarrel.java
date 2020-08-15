@@ -3,7 +3,6 @@ package de.geekeey.packed.block;
 import de.geekeey.packed.block.entity.StorageBarrelEntity;
 import de.geekeey.packed.init.helpers.StorageBarrelTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
-import de.geekeey.packed.item.StorageUpgrader;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -76,44 +75,31 @@ public class StorageBarrel extends BlockWithEntity {
             assert inv != null;
             ItemStack stackInHand = player.getStackInHand(hand);
             ItemStack barrelStack = inv.getStack(0);
-            int barrelCount = barrelStack.getCount();
-            if(player.getStackInHand(hand).getItem() instanceof StorageUpgrader){
-                return ActionResult.SUCCESS;
-            }
-            //First case: The player has recently right clicked the barrel
-            //we will insert all items matching the ones in the barrel from the player inventory
-            else if (player.getUuid() == lastUsedPlayer && world.getTime() - lastUsedTime < doubleUseInterval) {
-                int slot;
-                while ((slot = player.inventory.getSlotWithStack(barrelStack)) > -1) {
-                    var removedStack = player.inventory.removeStack(slot);
-                    //we don't use the barrelCount variable here because we would need to refresh it every iteration
-                    barrelStack.setCount(barrelStack.getCount() + removedStack.getCount());
-                }
-            }
-            //Second case: The Barrel is empty and the player right clicks it with a stackable item without NBT
-            //we will insert all items the player has in his hand into the barrel and remove the items from the player
-            else if (barrelStack.isEmpty() && stackInHand.isStackable() && !stackInHand.hasTag()) {
-                inv.setStack(0, stackInHand.copy());
-                inv.sync();
-                stackInHand.setCount(0);
-            }
-            //Third case: The Barrel already has an Item in it and the player right clicks with an identical item
-            //we will insert all items in the players hand into the barrel and remove the items from the player
-            //we do not check against NBT here as there cant be an item in the barrel with NBT because of the previous if
-            else if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
-                int remainingSpace = inv.getMaxCountPerStack() - barrelStack.getCount();
 
-                //This transaction would fill the barrel completely
-                if (remainingSpace < stackInHand.getCount()) {
-                    barrelStack.setCount(inv.getMaxCountPerStack());
-                    stackInHand.setCount(stackInHand.getCount() - remainingSpace);
+            if (!inv.isFull())
+                //First case: The Barrel already has an Item in it and the player right clicks with an identical item
+                //we will insert all items in the players hand into the barrel and remove the items from the player
+                //we do not check against NBT here as there cant be an item in the barrel with NBT because of the next if
+                if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
+                    insertInBarrel(stackInHand, inv);
                 }
-                //There is enough space in the barrel for the entire stack
-                else {
-                    barrelStack.setCount(barrelCount + stackInHand.getCount());
+                //Second case: The Barrel is empty and the player right clicks it with a stackable item without NBT
+                //we will insert all items the player has in his hand into the barrel and remove the items from the player
+                else if (barrelStack.isEmpty() && stackInHand.isStackable() && !stackInHand.hasTag()) {
+                    inv.setStack(0, stackInHand.copy());
+                    //Sync here because the item to be displayed in the front changed
+                    inv.sync();
                     stackInHand.setCount(0);
                 }
-            }
+                //Third case: The player has recently right clicked the barrel
+                //we will insert all items matching the ones in the barrel from the player inventory
+                else if (player.getUuid() == lastUsedPlayer && world.getTime() - lastUsedTime < doubleUseInterval) {
+                    int slot;
+                    while ((slot = player.inventory.getSlotWithStack(barrelStack)) > -1) {
+                        var removedStack = player.inventory.removeStack(slot);
+                        if (!insertInBarrel(removedStack, inv)) break;
+                    }
+                }
 
             //save the last used player and time so we can check against them next time.
             lastUsedPlayer = player.getUuid();
@@ -122,6 +108,30 @@ public class StorageBarrel extends BlockWithEntity {
         }
         //Consume is needed so that client does not place block in front of barrel
         return ActionResult.CONSUME;
+    }
+
+    //Helper function to insert items into our storageBarrel,
+    //returns weather itemStack could be inserted fully
+    private boolean insertInBarrel(ItemStack insert, StorageBarrelEntity inv) {
+        var barrelStack = inv.getStack(0);
+        var barrelCount = barrelStack.getCount();
+
+        if (barrelStack.getItem() != insert.getItem())
+            throw new IllegalArgumentException("Stack to be inserted must have same item as barrel content");
+
+        int remainingSpace = inv.getMaxCountPerStack() - barrelStack.getCount();
+        //This transaction would fill the barrel completely
+        if (remainingSpace < insert.getCount()) {
+            barrelStack.setCount(inv.getMaxCountPerStack());
+            insert.setCount(insert.getCount() - remainingSpace);
+            return false;
+        }
+        //There is enough space in the barrel for the entire stack
+        else {
+            barrelStack.setCount(barrelCount + insert.getCount());
+            insert.setCount(0);
+            return true;
+        }
     }
 
     /**
@@ -145,13 +155,12 @@ public class StorageBarrel extends BlockWithEntity {
 
             if (inv.getStack(0).isEmpty()) {
                 inv.removeStack(0);
+                //Sync here because the item to be displayed in the front changed as the barrel is now empty
                 inv.sync();
             }
 
             player.inventory.offerOrDrop(world, stack);
         }
-
-        super.onBlockBreakStart(state, world, pos, player);
     }
 
     /**

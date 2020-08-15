@@ -22,18 +22,6 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
     private StorageBarrelTier tier;
     private WoodVariant variant;
 
-    public StorageBarrelTier getTier() {
-        return tier;
-    }
-
-    public void setTier(StorageBarrelTier tier) {
-        this.tier = tier;
-    }
-
-    public WoodVariant getVariant() {
-        return variant;
-    }
-
     public StorageBarrelEntity() {
         super(PackedEntities.STORAGE_BARREL_ENTITY);
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
@@ -44,6 +32,10 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         this.tier = tier;
         this.variant = variant;
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    }
+
+    public boolean isFull(){
+        return inventory.get(0).getCount() >= getMaxCountPerStack();
     }
 
     @Override
@@ -103,5 +95,17 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         Identifier identifier = Registry.ITEM.getId(inventory.get(0).getItem());
         compound.putString("item", identifier.toString());
         return compound;
+    }
+
+    public StorageBarrelTier getTier() {
+        return tier;
+    }
+
+    public void setTier(StorageBarrelTier tier) {
+        this.tier = tier;
+    }
+
+    public WoodVariant getVariant() {
+        return variant;
     }
 }
