@@ -1,5 +1,6 @@
 package de.geekeey.packed.block.entity;
 
+import de.geekeey.packed.block.misc.Upgradable;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
@@ -19,7 +20,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.NotNull;
 
-public class VariantChestBlockEntity extends ChestBlockEntity implements ExtendedScreenHandlerFactory {
+public class VariantChestBlockEntity extends ChestBlockEntity implements ExtendedScreenHandlerFactory, Upgradable {
 
     private StorageTier tier;
     private WoodVariant variant;
@@ -37,18 +38,6 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
 
     private static DefaultedList<ItemStack> createInventory(StorageTier tier) {
         return DefaultedList.ofSize(tier.getInventoryWidth() * tier.getInventoryHeight(), ItemStack.EMPTY);
-    }
-
-    public @NotNull StorageTier getTier() {
-        return tier;
-    }
-
-    public void setTier(@NotNull StorageTier tier) {
-        this.tier = tier;
-    }
-
-    public @NotNull WoodVariant getVariant() {
-        return variant;
     }
 
     @Override
@@ -89,5 +78,20 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
     protected Text getContainerName() {
         var name = getCustomName();
         return name != null ? name : new TranslatableText(getCachedState().getBlock().getTranslationKey());
+    }
+
+    public void setVariant(WoodVariant variant) { this.variant = variant; }
+
+    public @NotNull StorageTier getTier() {
+        return tier;
+    }
+
+    public void setTier(@NotNull StorageTier tier) {
+        setInvStackList(Upgradable.ExtendInventory(getInvStackList(),tier.getInventoryHeight()*tier.getInventoryWidth()));
+        this.tier = tier;
+    }
+
+    public @NotNull WoodVariant getVariant() {
+        return variant;
     }
 }

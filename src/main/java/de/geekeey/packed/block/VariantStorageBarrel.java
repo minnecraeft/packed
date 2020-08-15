@@ -177,13 +177,14 @@ public class VariantStorageBarrel extends BlockWithEntity {
      **/
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        //Do not items when new state is a storage barrel, this would mean the barrel was upgraded!
         if (!state.isOf(newState.getBlock()) && !(newState.getBlock() instanceof VariantStorageBarrel)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof Inventory) {
                 ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
                 world.updateComparators(pos, this);
             }
+            //This super call will kill the BlockEntity, so this only gets called when we're not upgrading our block
+            super.onStateReplaced(state, world, pos, newState, moved);
         }
     }
 

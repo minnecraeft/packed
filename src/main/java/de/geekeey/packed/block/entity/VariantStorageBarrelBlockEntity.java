@@ -1,6 +1,7 @@
 package de.geekeey.packed.block.entity;
 
 import de.geekeey.packed.block.misc.ImplementedInventory;
+import de.geekeey.packed.block.misc.Upgradable;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
@@ -15,7 +16,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
-public class VariantStorageBarrelBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable {
+public class VariantStorageBarrelBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable, Upgradable {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -32,18 +33,6 @@ public class VariantStorageBarrelBlockEntity extends BlockEntity implements Impl
         this.tier = tier;
         this.variant = variant;
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
-    }
-
-    public @NotNull StorageTier getTier() {
-        return tier;
-    }
-
-    public void setTier(@NotNull StorageTier tier) {
-        this.tier = tier;
-    }
-
-    public @NotNull WoodVariant getVariant() {
-        return variant;
     }
 
     public boolean isFull(){
@@ -109,5 +98,22 @@ public class VariantStorageBarrelBlockEntity extends BlockEntity implements Impl
         Identifier identifier = Registry.ITEM.getId(inventory.get(0).getItem());
         compound.putString("item", identifier.toString());
         return compound;
+    }
+
+    public @NotNull StorageTier getTier() {
+        return tier;
+    }
+
+    public void setTier(@NotNull StorageTier tier) {
+        this.tier = tier;
+    }
+
+    public @NotNull WoodVariant getVariant() {
+        return variant;
+    }
+
+    @Override
+    public void setVariant(WoodVariant variant) {
+        this.variant = variant;
     }
 }
