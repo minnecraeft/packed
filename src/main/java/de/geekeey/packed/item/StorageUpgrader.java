@@ -1,9 +1,8 @@
 package de.geekeey.packed.item;
 
 import de.geekeey.packed.block.StorageBarrel;
-import de.geekeey.packed.block.entity.CustomBarrelEntity;
-import de.geekeey.packed.block.entity.CustomChestEntity;
 import de.geekeey.packed.block.entity.StorageBarrelEntity;
+import de.geekeey.packed.init.helpers.StorageBarrelTier;
 import de.geekeey.packed.init.helpers.StorageBarrelTiers;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
@@ -12,8 +11,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class StorageUpgrader extends Item {
-    public StorageUpgrader(Settings settings) {
+    private final StorageBarrelTier fromTier;
+    private final StorageBarrelTier toTier;
+
+    public StorageUpgrader(Settings settings, StorageBarrelTier fromTier, StorageBarrelTier toTier) {
         super(settings);
+        this.fromTier = fromTier;
+        this.toTier = toTier;
     }
 
     @Override
@@ -25,20 +29,17 @@ public class StorageUpgrader extends Item {
 
             if (blockEntity instanceof StorageBarrelEntity) {
                 var entity = (StorageBarrelEntity) blockEntity;
-                entity.setTier(entity.getTier().upgrade().orElse(entity.getTier()));
-                Identifier newBlockIdentifier = StorageBarrelTiers.identifier(entity.getTier(), entity.getVariant());
-                var newBlockState = Registry.BLOCK.get(newBlockIdentifier).getDefaultState().with(StorageBarrel.FACING, blockState.get(StorageBarrel.FACING));
-                context.getWorld().setBlockState(pos, newBlockState);
-                return ActionResult.SUCCESS;
+                if(entity.getTier().equals(fromTier)){
+                    entity.setTier(toTier);
+                    Identifier newBlockIdentifier = StorageBarrelTiers.identifier(entity.getTier(), entity.getVariant());
+                    var newBlockState = Registry.BLOCK.get(newBlockIdentifier).getDefaultState().with(StorageBarrel.FACING, blockState.get(StorageBarrel.FACING));
+                    context.getWorld().setBlockState(pos, newBlockState);
+                    return ActionResult.SUCCESS;
+                }
             }
-            else if(blockEntity instanceof CustomBarrelEntity){
-
-            }
-            else if(blockEntity instanceof CustomChestEntity){
-
-            }
+            return ActionResult.PASS;
         }
 
-        return ActionResult.FAIL;
+        return ActionResult.PASS;
     }
 }

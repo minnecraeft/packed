@@ -50,7 +50,7 @@ public class PackedItems {
         STORAGE_BARREL_TIER_2 = new WoodItemVariants<>(StorageBarrelTiers::identifier, PackedBlocks.STORAGE_BARREL_TIER_2, Packed.ITEM_GROUP);
         STORAGE_BARREL_TIER_3 = new WoodItemVariants<>(StorageBarrelTiers::identifier, PackedBlocks.STORAGE_BARREL_TIER_3, Packed.ITEM_GROUP);
 
-        STORAGE_UPGRADER = Registry.register(Registry.ITEM,Packed.id("storage_upgrader"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP)));
+        STORAGE_UPGRADER = Registry.register(Registry.ITEM,Packed.id("storage_upgrader"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageBarrelTiers.DEFAULT, StorageBarrelTiers.TIER_1));
     }
 
     public static void register() {
