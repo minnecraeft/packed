@@ -26,7 +26,9 @@ public class PackedItems {
     public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_TIER_2;
     public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_TIER_3;
 
-    public static final StorageUpgrader STORAGE_UPGRADER;
+    public static final StorageUpgrader STORAGE_UPGRADER_DEFAULT;
+    public static final StorageUpgrader STORAGE_UPGRADER_TIER1;
+    public static final StorageUpgrader STORAGE_UPGRADER_TIER2;
 
     static {
         BARREL_DEFAULT_TIER = new WoodItemVariants<>(PackedBlocks::barrel, PackedBlocks.BARREL_DEFAULT, Packed.ITEM_GROUP);
@@ -44,7 +46,9 @@ public class PackedItems {
         STORAGE_BARREL_TIER_2 = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_TIER_2, Packed.ITEM_GROUP);
         STORAGE_BARREL_TIER_3 = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_TIER_3, Packed.ITEM_GROUP);
 
-        STORAGE_UPGRADER = Registry.register(Registry.ITEM,Packed.id("storage_upgrader"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.DEFAULT, StorageTiers.TIER_1));
+        STORAGE_UPGRADER_DEFAULT = Registry.register(Registry.ITEM,Packed.id("storage_upgrader_default"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.DEFAULT, StorageTiers.TIER_1));
+        STORAGE_UPGRADER_TIER1 = Registry.register(Registry.ITEM,Packed.id("storage_upgrader_tier1"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.TIER_1, StorageTiers.TIER_2));
+        STORAGE_UPGRADER_TIER2 = Registry.register(Registry.ITEM,Packed.id("storage_upgrader_tier2"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.TIER_2, StorageTiers.TIER_3));
     }
 
     public static void register() {
