@@ -19,17 +19,22 @@ TIERS=('default' 'tier1' 'tier2' 'tier3')
 
 for VARIANT in "${VARIANTS[@]}"; do
   export VARIANT
+  export VARIANT_LOG
+  if [[ "${VARIANT}" == "crimson" || "${VARIANT}" == "warped" ]]; then
+    VARIANT_LOG="${VARIANT}_stem"
+  else
+    VARIANT_LOG="${VARIANT}_log"
+  fi
   for TIER in "${TIERS[@]}"; do
     export TIER
     export PREVIOUS_TIER
-    file="${VARIANT}_barrel_${TIER}"
-    envsubst <"${BASE}/presets/barrel/blockstate.json" >"${BLOCK_STATES}/${file}.json"
+    file="${VARIANT}_storage_barrel_${TIER}"
+    envsubst <"${BASE}/presets/storage_barrel/blockstate.json" >"${BLOCK_STATES}/${file}.json"
 
-    envsubst <"${BASE}/presets/barrel/model_block.json" >"${MODELS_BLOCK}/${file}.json"
-    envsubst <"${BASE}/presets/barrel/model_block_open.json" >"${MODELS_BLOCK}/${file}_open.json"
-    envsubst <"${BASE}/presets/barrel/model_item.json" >"${MODELS_ITEM}/${file}.json"
+    envsubst <"${BASE}/presets/storage_barrel/model_block.json" >"${MODELS_BLOCK}/${file}.json"
+    envsubst <"${BASE}/presets/storage_barrel/model_item.json" >"${MODELS_ITEM}/${file}.json"
 
-    envsubst <"${BASE}/presets/barrel/recipe_${TIER}.json" >"${RECIPES}/${file}.json"
+    #envsubst <"${BASE}/presets/barrel/recipe_${TIER}.json" >"${RECIPES}/${file}.json"
 
     PREVIOUS_TIER="${TIER}"
   done

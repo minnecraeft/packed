@@ -1,6 +1,9 @@
 package de.geekeey.packed.block;
 
 import de.geekeey.packed.block.entity.StorageBarrelEntity;
+import de.geekeey.packed.init.helpers.StorageBarrelTier;
+import de.geekeey.packed.init.helpers.WoodVariant;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -24,6 +27,8 @@ import net.minecraft.world.World;
 
 import java.util.UUID;
 
+import static net.minecraft.block.Blocks.BARREL;
+
 public class StorageBarrel extends BlockWithEntity {
     private static final int dropSize = 16;
     private static final int shiftingDropSize = 64;
@@ -37,8 +42,13 @@ public class StorageBarrel extends BlockWithEntity {
     //StorageBarrel can only point towards horizontal cardinal directions
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public StorageBarrel(Settings settings) {
-        super(settings);
+    private final StorageBarrelTier tier;
+    private final WoodVariant variant;
+
+    public StorageBarrel(StorageBarrelTier tier, WoodVariant variant) {
+        super(FabricBlockSettings.copyOf(BARREL));
+        this.tier = tier;
+        this.variant = variant;
         setDefaultState(getStateManager().getDefaultState().with(FACING, Direction.NORTH));
     }
 
@@ -50,7 +60,7 @@ public class StorageBarrel extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new StorageBarrelEntity();
+        return new StorageBarrelEntity(tier, variant);
     }
 
     /**

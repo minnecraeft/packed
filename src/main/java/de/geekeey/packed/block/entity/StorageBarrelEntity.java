@@ -2,6 +2,8 @@ package de.geekeey.packed.block.entity;
 
 import de.geekeey.packed.block.misc.ImplementedInventory;
 import de.geekeey.packed.init.PackedEntities;
+import de.geekeey.packed.init.helpers.StorageBarrelTier;
+import de.geekeey.packed.init.helpers.WoodVariant;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,8 +19,18 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
     private static final int maxItems = 32 * 64;
     private final DefaultedList<ItemStack> inventory;
 
+    private StorageBarrelTier tier;
+    private WoodVariant variant;
+
     public StorageBarrelEntity() {
         super(PackedEntities.STORAGE_BARREL_ENTITY);
+        inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    }
+
+    public StorageBarrelEntity(StorageBarrelTier tier, WoodVariant variant) {
+        super(PackedEntities.STORAGE_BARREL_ENTITY);
+        this.tier = tier;
+        this.variant = variant;
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
@@ -29,18 +41,25 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
 
     @Override
     public int getMaxCountPerStack() {
-        return maxItems;
+        return tier.capacity();
     }
 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
-        var item = tag.getCompound("item");
+        if (tag.contains("item", 10)) {
+            var item = tag.getCompound("item");
 
-        var id = item.getString("id");
-        var count = item.getInt("count");
+            var id = item.getString("id");
+            var count = item.getInt("count");
 
-        Item type = Registry.ITEM.get(new Identifier(id));
-        inventory.set(0, new ItemStack(type, count));
+            Item type = Registry.ITEM.get(new Identifier(id));
+            inventory.set(0, new ItemStack(type, count));
+        }
+
+        if (tag.contains("tier", 8)) {
+            this.tier = StorageBarrelTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+        }
+
         super.fromTag(state, tag);
     }
 
@@ -55,6 +74,7 @@ public class StorageBarrelEntity extends BlockEntity implements ImplementedInven
         item.putInt("count", stack.getCount());
 
         tag.put("item", item);
+        tag.putString("tier", tier.identifier().toString());
 
         return super.toTag(tag);
     }

@@ -1,0 +1,3 @@
+{
+  "parent": "packed:block/${VARIANT}_storage_barrel_${TIER}"
+}

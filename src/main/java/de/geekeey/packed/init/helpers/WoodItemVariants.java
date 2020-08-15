@@ -27,16 +27,15 @@ public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem>
      * Creates new instance of WoodItemVariants which will internally register all {@link BlockItem BlockItems} one for
      * each variant defined in WoodBlockVariants.
      *
-     * @param tier   The additional parameter for the common tier usage
      * @param id     A function creating an {@link Identifier} to register a item by its {@link WoodVariant}
      * @param blocks The corresponding WoodBlockVariants to register the {@link BlockItem} for
      * @param group  The {@link ItemGroup} in which the item will be registered
      */
-    public WoodItemVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, WoodBlockVariants<T, B> blocks, ItemGroup group) {
+    public WoodItemVariants(BiFunction<T, WoodVariant, Identifier> id, WoodBlockVariants<T, B> blocks, ItemGroup group) {
         ImmutableMap.Builder<WoodVariant, BlockItem> builder = ImmutableMap.builder();
 
         for (var variant : blocks.variants.keySet()) {
-            var identifier = id.apply(tier, variant);
+            var identifier = id.apply(blocks.tier, variant);
             var item = new BlockItem(blocks.variants.get(variant), new Item.Settings().group(group));
             Registry.register(Registry.ITEM, identifier, item);
             builder.put(variant, item);

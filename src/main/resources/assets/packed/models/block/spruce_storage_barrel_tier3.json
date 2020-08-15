@@ -2,12 +2,12 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/cube_bottom_top",
 	"textures": {
-		"0": "packed:block/oak_barrel_bottom",
-		"1": "packed:block/oak_barrel_default_top",
-		"2": "packed:block/oak_barrel_side",
-		"3": "minecraft:block/oak_planks",
-		"4": "minecraft:block/oak_log_top",
-		"particle": "packed:block/oak_barrel_side"
+		"0": "packed:block/spruce_barrel_bottom",
+		"1": "packed:block/spruce_barrel_tier3_top",
+		"2": "packed:block/spruce_barrel_side",
+		"3": "minecraft:block/spruce_planks",
+		"4": "minecraft:block/spruce_log_top",
+		"particle": "packed:block/spruce_barrel_side"
 	},
 	"elements": [
 		{

@@ -37,15 +37,21 @@ public class PackedEntities {
 
         BARREL_ENTITY_TYPES = ImmutableSet.of(BARREL_3_9, BARREL_4_9, BARREL_5_9, BARREL_6_9);
 
-        List<Block> blocks = new ArrayList<>();
-        Iterables.addAll(blocks, PackedBlocks.CHEST_DEFAULT_TIER);
-        Iterables.addAll(blocks, PackedBlocks.CHEST_TIER_1);
-        Iterables.addAll(blocks, PackedBlocks.CHEST_TIER_2);
-        Iterables.addAll(blocks, PackedBlocks.CHEST_TIER_3);
+        List<Block> chests = new ArrayList<>();
+        Iterables.addAll(chests, PackedBlocks.CHEST_DEFAULT_TIER);
+        Iterables.addAll(chests, PackedBlocks.CHEST_TIER_1);
+        Iterables.addAll(chests, PackedBlocks.CHEST_TIER_2);
+        Iterables.addAll(chests, PackedBlocks.CHEST_TIER_3);
 
-        CUSTOM_CHEST = register("chest", create(CustomChestEntity::new, blocks));
+        CUSTOM_CHEST = register("chest", create(CustomChestEntity::new, chests));
 
-        STORAGE_BARREL_ENTITY = register("storage_barrel", Builder.create(StorageBarrelEntity::new, PackedBlocks.STORAGE_BARREL));
+        List<Block> storageBarrels = new ArrayList<>();
+        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_DEFAULT);
+        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_1);
+        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_2);
+        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_3);
+
+        STORAGE_BARREL_ENTITY = register("storage_barrel", create(StorageBarrelEntity::new, storageBarrels));
     }
 
     private static <T extends BlockEntity, B extends Block> Builder<T> create(Supplier<T> supplier, Iterable<B> blocks) {

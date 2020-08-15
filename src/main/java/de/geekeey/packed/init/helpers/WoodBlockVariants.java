@@ -12,8 +12,10 @@ import java.util.function.BiFunction;
 public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
 
     public final ImmutableMap<WoodVariant, B> variants;
+    public final T tier;
 
     public WoodBlockVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, BiFunction<T, WoodVariant, B> factory) {
+        this.tier = tier;
         ImmutableMap.Builder<WoodVariant, B> builder = ImmutableMap.builder();
         for (var variant : WoodVariants.values()) {
             var identifier = id.apply(tier, variant);
