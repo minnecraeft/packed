@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PRP",
+        "PCP",
+        "PRP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:dark_oak_planks"
+        },
+        "C": {
+            "item": "packed:dark_oak_chest_default"
+        },
+        "R": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "packed:dark_oak_crate_tier1",
+        "count": 1
+    },
+    "group": "crate_tier1"
+}

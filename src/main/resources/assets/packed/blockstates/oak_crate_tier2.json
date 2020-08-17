@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "packed:block/oak_crate_tier2"
+    },
+    "facing=east": {
+      "model": "packed:block/oak_crate_tier2",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "packed:block/oak_crate_tier2",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "packed:block/oak_crate_tier2",
+      "y": 270
+    }
+  }
+}

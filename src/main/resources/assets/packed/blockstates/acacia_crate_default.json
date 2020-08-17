@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "packed:block/acacia_crate_default"
+    },
+    "facing=east": {
+      "model": "packed:block/acacia_crate_default",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "packed:block/acacia_crate_default",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "packed:block/acacia_crate_default",
+      "y": 270
+    }
+  }
+}
