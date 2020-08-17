@@ -10,7 +10,7 @@
             "item": "minecraft:dark_oak_planks"
         },
         "C": {
-            "item": "packed:dark_oak_chest_default"
+            "item": "packed:dark_oak_crate_default"
         },
         "R": {
             "item": "minecraft:iron_ingot"

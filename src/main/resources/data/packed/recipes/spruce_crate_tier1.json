@@ -10,7 +10,7 @@
             "item": "minecraft:spruce_planks"
         },
         "C": {
-            "item": "packed:spruce_chest_default"
+            "item": "packed:spruce_crate_default"
         },
         "R": {
             "item": "minecraft:iron_ingot"

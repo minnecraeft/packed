@@ -55,7 +55,7 @@ public enum StorageTiers implements StorageTier {
     }
 
     @Override
-    public int getMaxStackSize() {
+    public int getStackAmount() {
         return stackSize;
     }
 

@@ -10,7 +10,7 @@
             "item": "minecraft:acacia_planks"
         },
         "C": {
-            "item": "packed:acacia_chest_default"
+            "item": "packed:acacia_crate_default"
         },
         "R": {
             "item": "minecraft:iron_ingot"

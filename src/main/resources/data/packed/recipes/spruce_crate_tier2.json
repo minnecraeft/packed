@@ -10,7 +10,7 @@
             "item": "minecraft:spruce_planks"
         },
         "C": {
-            "item": "packed:spruce_chest_tier1"
+            "item": "packed:spruce_crate_tier1"
         },
         "R": {
             "item": "minecraft:gold_ingot"

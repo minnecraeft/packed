@@ -10,7 +10,7 @@
             "item": "minecraft:dark_oak_planks"
         },
         "C": {
-            "item": "packed:dark_oak_chest_tier1"
+            "item": "packed:dark_oak_crate_tier1"
         },
         "R": {
             "item": "minecraft:gold_ingot"

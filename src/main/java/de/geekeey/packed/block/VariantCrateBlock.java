@@ -13,6 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -79,43 +81,42 @@ public class VariantCrateBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            VariantCrateBlockEntity inv = (VariantCrateBlockEntity) world.getBlockEntity(pos);
+            VariantCrateBlockEntity crate = (VariantCrateBlockEntity) world.getBlockEntity(pos);
 
-            assert inv != null;
-            ItemStack stackInHand = player.getStackInHand(hand);
-            ItemStack barrelStack = inv.getStack(0);
+            assert crate != null;
+            ItemStack stack = player.getStackInHand(hand);
 
-            if (!inv.isFull())
-                //First case: The Barrel already has an Item in it and the player right clicks with an identical item
-                //we will insert all items in the players hand into the barrel and remove the items from the player
-                //we do not check against NBT here as there cant be an item in the barrel with NBT because of the next if
-                if (barrelStack.getItem().equals(stackInHand.getItem()) && stackInHand.isStackable()) {
-                    insertInBarrel(stackInHand, inv);
+            if (!crate.isFull()) {
+                ItemStack insert;
+                // First case:
+                //  The Barrel already has an Item in it and the player right clicks with an identical item we will
+                //  insert all items in the players hand into the barrel and remove the items from the player inventory
+                //  we do not check against nbt here as there can't be an item in the barrel with nbt because of the
+                //  following conditions
+                if ((crate.getItem().equals(Items.AIR) || crate.getItem().equals(stack.getItem())) && stack.isStackable() && !stack.hasTag()) {
+                    insert = crate.insert(stack);
+                    stack.setCount(insert.getCount());
                 }
-                //Second case: The Barrel is empty and the player right clicks it with a stackable item without NBT
-                //we will insert all items the player has in his hand into the barrel and remove the items from the player
-                else if (barrelStack.isEmpty() && stackInHand.isStackable() && !stackInHand.hasTag()) {
-                    inv.setStack(0, stackInHand.copy());
-                    //Sync here because the item to be displayed in the front changed
-                    inv.sync();
-                    stackInHand.setCount(0);
-                }
-                //Third case: The player has recently right clicked the barrel
-                //we will insert all items matching the ones in the barrel from the player inventory
-                else if (player.getUuid() == lastUsedPlayer && world.getTime() - lastUsedTime < doubleUseInterval) {
-                    int slot;
-                    while ((slot = player.inventory.getSlotWithStack(barrelStack)) > -1) {
-                        var removedStack = player.inventory.removeStack(slot);
-                        if (!insertInBarrel(removedStack, inv)) break;
+
+                // if the player has clicked twice in a certain period, clear the inventory
+                else if (player.getUuid().equals(lastUsedPlayer) && world.getTime() - lastUsedTime < doubleUseInterval) {
+                    var inv = player.inventory;
+                    for (int i = 0; i < inv.size(); i++) {
+                        var currentStack = inv.getStack(i);
+                        if (!currentStack.isEmpty() && crate.getItem().equals(currentStack.getItem())) {
+                            insert = crate.insertAll(currentStack);
+                            currentStack.setCount(insert.getCount());
+                            if (!insert.isEmpty()) break;
+                        }
                     }
                 }
-
-            //save the last used player and time so we can check against them next time.
+            }
+            // save the last used player and time so we can check against them next time.
             lastUsedPlayer = player.getUuid();
             lastUsedTime = world.getTime();
             return ActionResult.SUCCESS;
         }
-        //Consume is needed so that client does not place block in front of barrel
+        // Consume is needed so that client does not place block in front of barrel
         return ActionResult.CONSUME;
     }
 
@@ -151,24 +152,34 @@ public class VariantCrateBlock extends BlockWithEntity {
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient) {
-            VariantCrateBlockEntity inv = (VariantCrateBlockEntity) world.getBlockEntity(pos);
-            assert inv != null;
+            VariantCrateBlockEntity crate = (VariantCrateBlockEntity) world.getBlockEntity(pos);
+            assert crate != null;
 
+            var size = player.isSneaking() ? Math.min(shiftingDropSize, crate.getItem().getMaxCount()) : dropSize;
             //removed stack from inventory
-            ItemStack stack;
-            if (player.isSneaking()) {
-                stack = inv.removeStack(0, shiftingDropSize);
-            } else {
-                stack = inv.removeStack(0, dropSize);
+
+            ItemStack result = ItemStack.EMPTY;
+
+            for (int i = 0; i < crate.size(); i++) {
+                ItemStack stack = crate.removeStack(i, size);
+                if (stack.isEmpty()) continue;
+                if (stack.getCount() == size) {
+                    result = stack;
+                    break;
+                }
+                if (result.isEmpty()) {
+                    result = stack;
+                } else {
+                    result.increment(stack.getCount());
+                    if (result.getCount() == size) break;
+                }
             }
 
-            if (inv.getStack(0).isEmpty()) {
-                inv.removeStack(0);
+            if (crate.getItem().equals(Items.AIR)) {
                 //Sync here because the item to be displayed in the front changed as the barrel is now empty
-                inv.sync();
+                crate.sync();
             }
-
-            player.inventory.offerOrDrop(world, stack);
+            player.inventory.offerOrDrop(world, result);
         }
     }
 
@@ -196,5 +207,15 @@ public class VariantCrateBlock extends BlockWithEntity {
     @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
+    }
+
+    @Override
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 }

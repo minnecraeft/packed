@@ -20,5 +20,5 @@ public interface StorageTier {
 
     int getInventoryHeight();
 
-    int getMaxStackSize();
+    int getStackAmount();
 }

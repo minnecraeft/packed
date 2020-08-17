@@ -10,7 +10,7 @@
             "item": "minecraft:${VARIANT}_planks"
         },
         "C": {
-            "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
+            "item": "packed:${VARIANT}_crate_${PREVIOUS_TIER}"
         },
         "R": {
             "item": "minecraft:gold_ingot"
