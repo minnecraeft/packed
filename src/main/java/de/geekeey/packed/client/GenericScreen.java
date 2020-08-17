@@ -87,39 +87,36 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
         int offsetX = (width - backgroundWidth) / 2;
         int offsetY = (height - backgroundHeight) / 2;
 
-        int cox = containerInventoryOffsetX;
+        int containerInventoryOffsetX = this.containerInventoryOffsetX;
 
-        int pox = playerInventoryOffsetX;
-        int poy = containerHeight;
+        int playerInventoryOffsetX = this.playerInventoryOffsetX;
+        int playerInventoryOffsetY = containerHeight;
 
         int cp = 18;
         int rp = 17;
 
-        drawTexture(matrices, offsetX + cox, offsetY, 0, 0, 25, 17);
+        drawTexture(matrices, offsetX + containerInventoryOffsetX, offsetY, 0, 0, 25, 17);
         for (int column = 1; column < columns; column++) {
-            drawTexture(matrices, offsetX + cox + 7 + cp, offsetY, 7, 0, 18, 17);
+            drawTexture(matrices, offsetX + containerInventoryOffsetX + 7 + cp, offsetY, 7, 0, 18, 17);
             cp += 18;
         }
-        drawTexture(matrices, offsetX + cox + 7 + cp, offsetY, 25, 0, 7, 17);
+        drawTexture(matrices, offsetX + containerInventoryOffsetX + 7 + cp, offsetY, 25, 0, 7, 17);
 
         for (int row = 0; row < rows; row++) {
             cp = 18;
-            drawTexture(matrices, offsetX + cox, offsetY + rp, 0, 17, 25, 18);
+            drawTexture(matrices, offsetX + containerInventoryOffsetX, offsetY + rp, 0, 17, 25, 18);
             for (int column = 1; column < columns; column++) {
-                drawTexture(matrices, offsetX + cox + 7 + cp, offsetY + rp, 7, 17, 18, 18);
+                drawTexture(matrices, offsetX + containerInventoryOffsetX + 7 + cp, offsetY + rp, 7, 17, 18, 18);
                 cp += 18;
             }
-            drawTexture(matrices, offsetX + cox + 7 + cp, offsetY + rp, 25, 17, 7, 18);
+            drawTexture(matrices, offsetX + containerInventoryOffsetX + 7 + cp, offsetY + rp, 25, 17, 7, 18);
             rp += 18;
         }
 
+        int itx = containerInventoryOffsetX / 18;
+        int xp = containerInventoryOffsetX + 7;
 
-        int piw = PLAYER_INVENTORY_WIDTH;
-        int drx = cox;
-        int itx = drx / 18;
-        int xp = cox + 7;
-
-        if (containerInventoryOffsetX > 0) {
+        if (this.containerInventoryOffsetX > 0) {
 
             for (int column = 0; column < columns; column++) {
                 drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 49, 18, 7);
@@ -129,38 +126,41 @@ public class GenericScreen extends HandledScreen<ExtendedGenericContainerScreenH
             xp = 7;
             for (int column = 0; column < itx; column++) {
                 drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, 18, 7);
-                drawTexture(matrices, offsetX + piw - 18 - xp, offsetY + rp, 7, 42, 18, 7);
+                drawTexture(matrices, offsetX + PLAYER_INVENTORY_WIDTH - 18 - xp, offsetY + rp, 7, 42, 18, 7);
                 xp += 18;
             }
 
             // corners
             drawTexture(matrices, offsetX, offsetY + rp, 0, 42, 7, 7);
-            drawTexture(matrices, offsetX + 2 * cox + 7 + cp, offsetY + rp, 25, 42, 7, 7);
+            drawTexture(matrices, offsetX + 2 * containerInventoryOffsetX + 7 + cp, offsetY + rp, 25, 42, 7, 7);
             // transition
-            drawTexture(matrices, offsetX + cox, offsetY + rp, 64, 42, 7, 7);
-            drawTexture(matrices, offsetX + cox + cp + 7, offsetY + rp, 88, 42, 7, 7);
+            drawTexture(matrices, offsetX + containerInventoryOffsetX, offsetY + rp, 64, 42, 7, 7);
+            drawTexture(matrices, offsetX + containerInventoryOffsetX + cp + 7, offsetY + rp, 88, 42, 7, 7);
 
-            drawTexture(matrices, offsetX + pox, offsetY + poy - 1, 0, 56, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT);
-        } else if (playerInventoryOffsetX > 0) {
+            drawTexture(matrices, offsetX + playerInventoryOffsetX, offsetY + playerInventoryOffsetY - 1, 0, 56, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT);
+        } else if (this.playerInventoryOffsetX > 0) {
 
             for (int column = 0; column < columns; column++) {
                 int i = column * 18 + 7;
-                if (i < pox || i + 18 >= pox + PLAYER_INVENTORY_WIDTH)
+                if (i < playerInventoryOffsetX || i + 18 >= playerInventoryOffsetX + PLAYER_INVENTORY_WIDTH)
                     drawTexture(matrices, offsetX + i, offsetY + rp, 39, 42, 18, 7);
             }
 
             // corners
             drawTexture(matrices, offsetX, offsetY + rp, 32, 42, 7, 7);
-            drawTexture(matrices, offsetX + 2 * cox + 7 + cp, offsetY + rp, 57, 42, 7, 7);
+            drawTexture(matrices, offsetX + 2 * containerInventoryOffsetX + 7 + cp, offsetY + rp, 57, 42, 7, 7);
             // transition
-            drawTexture(matrices, offsetX + pox + 1, offsetY + rp, 96, 42, 7, 7);
-            drawTexture(matrices, offsetX - pox + 1 + cp + 7, offsetY + rp, 120, 42, 7, 7);
+            drawTexture(matrices, offsetX + playerInventoryOffsetX + 1, offsetY + rp, 96, 42, 7, 7);
+            drawTexture(matrices, offsetX - playerInventoryOffsetX + 1 + cp + 7, offsetY + rp, 120, 42, 7, 7);
 
-            drawTexture(matrices, offsetX + pox, offsetY + poy - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
+            drawTexture(matrices, offsetX + playerInventoryOffsetX, offsetY + playerInventoryOffsetY - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
         }
-        else
-            drawTexture(matrices, offsetX + pox, offsetY + poy - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
+        else{
+            drawTexture(matrices, offsetX + playerInventoryOffsetX, offsetY + playerInventoryOffsetY - 7 , 0, 50, PLAYER_INVENTORY_WIDTH, PLAYER_INVENTORY_HEIGHT + 6);
+            drawTexture(matrices,offsetX,offsetY+playerInventoryOffsetY-10,0,56,7,20);
+            drawTexture(matrices,offsetX+containerWidth-CONTAINER_LEFT_PADDING,offsetY+playerInventoryOffsetY-10,PLAYER_INVENTORY_WIDTH-CONTAINER_LEFT_PADDING,56,7,20);
+        }
 
-        drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, cox - itx * 18 - 7, 7);
+        drawTexture(matrices, offsetX + xp, offsetY + rp, 7, 42, containerInventoryOffsetX - itx * 18 - 7, 7);
     }
 }
