@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PRP",
+        "PCP",
+        "PPP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:${VARIANT}_planks"
+        },
+        "C": {
+            "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
+        },
+        "R": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "packed:${VARIANT}_crate_tier3",
+        "count": 1
+    },
+    "group": "crate_tier3"
+}

@@ -1,0 +1,3 @@
+{
+  "parent": "packed:block/${VARIANT}_crate_${TIER}"
+}
