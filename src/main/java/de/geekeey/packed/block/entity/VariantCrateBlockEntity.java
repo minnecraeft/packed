@@ -46,7 +46,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements ImplementedI
 
     @Override
     public int getMaxCountPerStack() {
-        return getTier().getMaxStackSize();
+        return getTier().getMaxStackSize()*64;
     }
 
     @Override

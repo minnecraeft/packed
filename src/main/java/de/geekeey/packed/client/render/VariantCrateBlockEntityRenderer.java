@@ -49,6 +49,9 @@ public class VariantCrateBlockEntityRenderer extends BlockEntityRenderer<Variant
             matrices.translate(0, 0, 0.5 - 1 / 9.0);
             matrices.scale(0.5f, 0.5f, 0.5f);
 
+            //rotate items by 180 degrees as they were the wrong way around without this
+            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
+
             // set the light level in front of the block
             var frontLight = WorldRenderer.getLightmapCoordinates(entity.getWorld(), pos.add(direction.getVector()));
             MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.FIXED, frontLight, OverlayTexture.DEFAULT_UV, matrices, vertices);
