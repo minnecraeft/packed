@@ -67,6 +67,12 @@ public class VariantCrateBlockEntity extends BlockEntity implements ImplementedI
                 setTier(tier);
         }
 
+        if (tag.contains("variant", 8)) {
+            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("tier")));
+            if (variant != null)
+                setVariant(variant);
+        }
+
         super.fromTag(state, tag);
     }
 
@@ -82,6 +88,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements ImplementedI
 
         tag.put("item", item);
         tag.putString("tier", getTier().getIdentifier().toString());
+        tag.putString("variant",getTier().getIdentifier().toString());
 
         return super.toTag(tag);
     }

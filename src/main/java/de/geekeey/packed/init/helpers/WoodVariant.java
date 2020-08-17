@@ -1,6 +1,7 @@
 package de.geekeey.packed.init.helpers;
 
 import de.geekeey.packed.Packed;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.SimpleRegistry;
 import static net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder.createSimple;
 
@@ -16,5 +17,5 @@ public interface WoodVariant {
      *
      * @return the identifier for the current variant of wood
      */
-    String identifier();
+    Identifier getIdentifier();
 }

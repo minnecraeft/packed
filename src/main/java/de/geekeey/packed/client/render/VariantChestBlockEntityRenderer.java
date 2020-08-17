@@ -125,9 +125,9 @@ public class VariantChestBlockEntityRenderer extends BlockEntityRenderer<Variant
         public final SpriteIdentifier right;
 
         public ChestTextureSprites(WoodVariant variant) {
-            left = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal_left"));
-            right = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal_right"));
-            normal = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.identifier() + "/normal"));
+            left = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.getIdentifier() + "/normal_left"));
+            right = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.getIdentifier() + "/normal_right"));
+            normal = new SpriteIdentifier(CHEST_ATLAS_TEXTURE, Packed.id("entity/chest/" + variant.getIdentifier() + "/normal"));
         }
     }
 

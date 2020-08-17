@@ -52,6 +52,11 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
             if (tier != null)
                 setTier(tier);
         }
+        if (tag.contains("variant", 8)) {
+            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("tier")));
+            if (variant != null)
+                setVariant(variant);
+        }
         super.fromTag(state, tag);
     }
 

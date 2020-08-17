@@ -52,6 +52,11 @@ public class VariantBarrelBlockEntity extends BarrelBlockEntity implements Exten
             if (tier != null)
                 setTier(tier);
         }
+        if (tag.contains("variant", 8)) {
+            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("tier")));
+            if (variant != null)
+                setVariant(variant);
+        }
         super.fromTag(state, tag);
     }
 
@@ -59,6 +64,7 @@ public class VariantBarrelBlockEntity extends BarrelBlockEntity implements Exten
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
         tag.putString("tier", getTier().getIdentifier().toString());
+        tag.putString("variant", getVariant().getIdentifier().toString());
         return tag;
     }
 
@@ -85,7 +91,7 @@ public class VariantBarrelBlockEntity extends BarrelBlockEntity implements Exten
     }
 
     public void setTier(@NotNull StorageTier tier) {
-        setInvStackList(Upgradable.ExtendInventory(getInvStackList(),tier.getInventoryHeight()*tier.getInventoryWidth()));
+        setInvStackList(Upgradable.ExtendInventory(getInvStackList(), tier.getInventoryHeight() * tier.getInventoryWidth()));
         this.tier = tier;
     }
 

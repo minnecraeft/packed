@@ -1,6 +1,8 @@
 package de.geekeey.packed.init.helpers;
 
 
+import de.geekeey.packed.Packed;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 /**
@@ -43,18 +45,18 @@ public enum WoodVariants implements WoodVariant {
 
     static {
         for (WoodVariant variant : values()){
-            Registry.register(WoodVariant.REGISTRY,variant.identifier(),variant);
+            Registry.register(WoodVariant.REGISTRY,variant.getIdentifier(),variant);
         }
     }
 
-    private final String identifier;
+    private final Identifier identifier;
 
-    WoodVariants(String identifier) {
-        this.identifier = identifier;
+    WoodVariants(String id) {
+        this.identifier = Packed.id(id);;
     }
 
     @Override
-    public String identifier() {
+    public Identifier getIdentifier() {
         return identifier;
     }
 }
