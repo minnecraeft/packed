@@ -4,7 +4,7 @@ import com.google.common.collect.Iterables;
 import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.entity.VariantBarrelBlockEntity;
 import de.geekeey.packed.block.entity.VariantChestBlockEntity;
-import de.geekeey.packed.block.entity.VariantStorageBarrelBlockEntity;
+import de.geekeey.packed.block.entity.VariantCrateBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -19,7 +19,7 @@ public class PackedEntities {
 
     public static final BlockEntityType<VariantChestBlockEntity> CUSTOM_CHEST;
     public static final BlockEntityType<VariantBarrelBlockEntity> CUSTOM_BARREL;
-    public static final BlockEntityType<VariantStorageBarrelBlockEntity> STORAGE_BARREL;
+    public static final BlockEntityType<VariantCrateBlockEntity> CRATE;
 
     static {
         List<Block> barrels = new ArrayList<>();
@@ -38,13 +38,13 @@ public class PackedEntities {
 
         CUSTOM_CHEST = register("chest", create(VariantChestBlockEntity::new, chests));
 
-        List<Block> storageBarrels = new ArrayList<>();
-        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_DEFAULT);
-        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_1);
-        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_2);
-        Iterables.addAll(storageBarrels, PackedBlocks.STORAGE_BARREL_TIER_3);
+        List<Block> crates = new ArrayList<>();
+        Iterables.addAll(crates, PackedBlocks.CRATE_DEFAULT);
+        Iterables.addAll(crates, PackedBlocks.CRATE_TIER_1);
+        Iterables.addAll(crates, PackedBlocks.CRATE_TIER_2);
+        Iterables.addAll(crates, PackedBlocks.CRATE_TIER_3);
 
-        STORAGE_BARREL = register("storage_barrel", create(VariantStorageBarrelBlockEntity::new, storageBarrels));
+        CRATE = register("crate", create(VariantCrateBlockEntity::new, crates));
     }
 
     private static <T extends BlockEntity, B extends Block> Builder<T> create(Supplier<T> supplier, Iterable<B> blocks) {

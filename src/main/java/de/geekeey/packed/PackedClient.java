@@ -3,8 +3,8 @@ package de.geekeey.packed;
 import de.geekeey.packed.block.VariantChestBlock;
 import de.geekeey.packed.block.entity.VariantChestBlockEntity;
 import de.geekeey.packed.client.GenericScreen;
-import de.geekeey.packed.client.render.CustomChestEntityRenderer;
-import de.geekeey.packed.client.render.StorageBarrelEntityRenderer;
+import de.geekeey.packed.client.render.VariantCrateBlockEntityRenderer;
+import de.geekeey.packed.client.render.VariantChestBlockEntityRenderer;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.PackedItems;
 import de.geekeey.packed.init.PackedScreenHandlers;
@@ -48,18 +48,18 @@ public class PackedClient implements ClientModInitializer {
         register(PackedItems.CHEST_TIER_2, variant -> new VariantChestBlockEntity(StorageTiers.TIER_2, variant));
         register(PackedItems.CHEST_TIER_3, variant -> new VariantChestBlockEntity(StorageTiers.TIER_3, variant));
 
-        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.STORAGE_BARREL, StorageBarrelEntityRenderer::new);
+        BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CRATE, VariantCrateBlockEntityRenderer::new);
 
     }
 
-    private static CustomChestEntityRenderer createDefaultRenderer(BlockEntityRenderDispatcher dispatcher) {
-        return new CustomChestEntityRenderer(dispatcher, Blocks.CHEST);
+    private static VariantChestBlockEntityRenderer createDefaultRenderer(BlockEntityRenderDispatcher dispatcher) {
+        return new VariantChestBlockEntityRenderer(dispatcher, Blocks.CHEST);
     }
 
     private static void register(WoodItemVariants<StorageTier, VariantChestBlock> items, Function<WoodVariant, VariantChestBlockEntity> factory) {
         items.variants.forEach((variant, item) -> {
             Block block = item.getBlock();
-            CustomChestEntityRenderer renderer = new CustomChestEntityRenderer(BlockEntityRenderDispatcher.INSTANCE, block);
+            VariantChestBlockEntityRenderer renderer = new VariantChestBlockEntityRenderer(BlockEntityRenderDispatcher.INSTANCE, block);
             BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, matrices, vertices, light, overlay) -> {
                 renderer.render(factory.apply(variant), 0.0f, matrices, vertices, light, overlay);
             });

@@ -3,7 +3,7 @@ package de.geekeey.packed.init;
 import de.geekeey.packed.Packed;
 import de.geekeey.packed.block.VariantBarrelBlock;
 import de.geekeey.packed.block.VariantChestBlock;
-import de.geekeey.packed.block.VariantStorageBarrel;
+import de.geekeey.packed.block.VariantCrateBlock;
 import de.geekeey.packed.init.helpers.*;
 import de.geekeey.packed.item.StorageUpgrader;
 import net.minecraft.item.Item;
@@ -21,10 +21,10 @@ public class PackedItems {
     public static final WoodItemVariants<StorageTier, VariantChestBlock> CHEST_TIER_2;
     public static final WoodItemVariants<StorageTier, VariantChestBlock> CHEST_TIER_3;
 
-    public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_DEFAULT;
-    public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_TIER_1;
-    public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_TIER_2;
-    public static final WoodItemVariants<StorageTier, VariantStorageBarrel> STORAGE_BARREL_TIER_3;
+    public static final WoodItemVariants<StorageTier, VariantCrateBlock> CRATE_DEFAULT;
+    public static final WoodItemVariants<StorageTier, VariantCrateBlock> CRATE_TIER_1;
+    public static final WoodItemVariants<StorageTier, VariantCrateBlock> CRATE_TIER_2;
+    public static final WoodItemVariants<StorageTier, VariantCrateBlock> CRATE_TIER_3;
 
     public static final StorageUpgrader STORAGE_UPGRADER_DEFAULT;
     public static final StorageUpgrader STORAGE_UPGRADER_TIER1;
@@ -41,10 +41,10 @@ public class PackedItems {
         CHEST_TIER_2 = new WoodItemVariants<>(PackedBlocks::chest, PackedBlocks.CHEST_TIER_2, Packed.ITEM_GROUP);
         CHEST_TIER_3 = new WoodItemVariants<>(PackedBlocks::chest, PackedBlocks.CHEST_TIER_3, Packed.ITEM_GROUP);
 
-        STORAGE_BARREL_DEFAULT = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_DEFAULT, Packed.ITEM_GROUP);
-        STORAGE_BARREL_TIER_1 = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_TIER_1, Packed.ITEM_GROUP);
-        STORAGE_BARREL_TIER_2 = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_TIER_2, Packed.ITEM_GROUP);
-        STORAGE_BARREL_TIER_3 = new WoodItemVariants<>(PackedBlocks::storageBarrel, PackedBlocks.STORAGE_BARREL_TIER_3, Packed.ITEM_GROUP);
+        CRATE_DEFAULT = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_DEFAULT, Packed.ITEM_GROUP);
+        CRATE_TIER_1 = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_TIER_1, Packed.ITEM_GROUP);
+        CRATE_TIER_2 = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_TIER_2, Packed.ITEM_GROUP);
+        CRATE_TIER_3 = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_TIER_3, Packed.ITEM_GROUP);
 
         STORAGE_UPGRADER_DEFAULT = Registry.register(Registry.ITEM,Packed.id("storage_upgrader_default"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.DEFAULT, StorageTiers.TIER_1));
         STORAGE_UPGRADER_TIER1 = Registry.register(Registry.ITEM,Packed.id("storage_upgrader_tier1"),new StorageUpgrader(new Item.Settings().group(Packed.ITEM_GROUP), StorageTiers.TIER_1, StorageTiers.TIER_2));

@@ -16,20 +16,20 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
 
-public class VariantStorageBarrelBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable, Upgradable {
+public class VariantCrateBlockEntity extends BlockEntity implements ImplementedInventory, BlockEntityClientSerializable, Upgradable {
 
     private final DefaultedList<ItemStack> inventory;
 
     private StorageTier tier;
     private WoodVariant variant;
 
-    public VariantStorageBarrelBlockEntity() {
-        super(PackedEntities.STORAGE_BARREL);
+    public VariantCrateBlockEntity() {
+        super(PackedEntities.CRATE);
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
     }
 
-    public VariantStorageBarrelBlockEntity(StorageTier tier, WoodVariant variant) {
-        super(PackedEntities.STORAGE_BARREL);
+    public VariantCrateBlockEntity(StorageTier tier, WoodVariant variant) {
+        super(PackedEntities.CRATE);
         this.tier = tier;
         this.variant = variant;
         inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);

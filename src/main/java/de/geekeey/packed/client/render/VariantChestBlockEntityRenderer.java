@@ -25,7 +25,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class CustomChestEntityRenderer extends BlockEntityRenderer<VariantChestBlockEntity> {
+public class VariantChestBlockEntityRenderer extends BlockEntityRenderer<VariantChestBlockEntity> {
     private static final Identifier CHEST_ATLAS_TEXTURE = TexturedRenderLayers.CHEST_ATLAS_TEXTURE;
 
     private static final SpriteIdentifier CLINCH_DEFAULT = createChestTextureId(StorageTiers.DEFAULT.getIdentifier());
@@ -57,7 +57,7 @@ public class CustomChestEntityRenderer extends BlockEntityRenderer<VariantChestB
 
     private final Block fallback;
 
-    public CustomChestEntityRenderer(BlockEntityRenderDispatcher dispatcher, Block fallback) {
+    public VariantChestBlockEntityRenderer(BlockEntityRenderDispatcher dispatcher, Block fallback) {
         super(dispatcher);
         this.fallback = fallback;
 

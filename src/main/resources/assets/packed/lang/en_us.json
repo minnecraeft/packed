@@ -71,5 +71,41 @@
   "block.packed.jungle_barrel_tier3": "Jungle Barrel Tier 3",
   "block.packed.dark_oak_barrel_tier3": "Dark Oak Barrel Tier 3",
   "block.packed.crimson_barrel_tier3": "Crimson Barrel Tier 3",
-  "block.packed.warped_barrel_tier3": "Warped Barrel Tier 3"
+  "block.packed.warped_barrel_tier3": "Warped Barrel Tier 3",
+
+  "block.packed.oak_crate_default": "Oak Crate",
+  "block.packed.birch_crate_default": "Birch Crate",
+  "block.packed.spruce_crate_default": "Spruce Crate",
+  "block.packed.acacia_crate_default": "Acacia Crate",
+  "block.packed.jungle_crate_default": "Jungle Crate",
+  "block.packed.dark_oak_crate_default": "Dark Oak Crate",
+  "block.packed.crimson_crate_default": "Crimson Crate",
+  "block.packed.warped_crate_default": "Warped Crate",
+
+  "block.packed.oak_crate_tier1": "Oak Crate Tier 1",
+  "block.packed.birch_crate_tier1": "Birch Crate Tier 1",
+  "block.packed.spruce_crate_tier1": "Spruce Crate Tier 1",
+  "block.packed.acacia_crate_tier1": "Acacia Crate Tier 1",
+  "block.packed.jungle_crate_tier1": "Jungle Crate Tier 1",
+  "block.packed.dark_oak_crate_tier1": "Dark Oak Crate Tier 1",
+  "block.packed.crimson_crate_tier1": "Crimson Crate Tier 1",
+  "block.packed.warped_crate_tier1": "Warped Crate Tier 1",
+
+  "block.packed.oak_crate_tier2": "Oak Crate Tier 2",
+  "block.packed.birch_crate_tier2": "Birch Crate Tier 2",
+  "block.packed.spruce_crate_tier2": "Spruce Crate Tier 2",
+  "block.packed.acacia_crate_tier2": "Acacia Crate Tier 2",
+  "block.packed.jungle_crate_tier2": "Jungle Crate Tier 2",
+  "block.packed.dark_oak_crate_tier2": "Dark Oak Crate Tier 2",
+  "block.packed.crimson_crate_tier2": "Crimson Crate Tier 2",
+  "block.packed.warped_crate_tier2": "Warped Crate Tier 2",
+
+  "block.packed.oak_crate_tier3": "Oak Crate Tier 3",
+  "block.packed.birch_crate_tier3": "Birch Crate Tier 3",
+  "block.packed.spruce_crate_tier3": "Spruce Crate Tier 3",
+  "block.packed.acacia_crate_tier3": "Acacia Crate Tier 3",
+  "block.packed.jungle_crate_tier3": "Jungle Crate Tier 3",
+  "block.packed.dark_oak_crate_tier3": "Dark Oak Crate Tier 3",
+  "block.packed.crimson_crate_tier3": "Crimson Crate Tier 3",
+  "block.packed.warped_crate_tier3": "Warped Crate Tier 3"
 }

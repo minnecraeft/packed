@@ -1,9 +1,9 @@
 package de.geekeey.packed.item;
 
-import de.geekeey.packed.block.VariantStorageBarrel;
+import de.geekeey.packed.block.VariantCrateBlock;
 import de.geekeey.packed.block.entity.VariantBarrelBlockEntity;
 import de.geekeey.packed.block.entity.VariantChestBlockEntity;
-import de.geekeey.packed.block.entity.VariantStorageBarrelBlockEntity;
+import de.geekeey.packed.block.entity.VariantCrateBlockEntity;
 import de.geekeey.packed.init.PackedBlocks;
 import de.geekeey.packed.init.helpers.StorageTier;
 import net.minecraft.block.BarrelBlock;
@@ -31,12 +31,12 @@ public class StorageUpgrader extends Item {
             var blockState = context.getWorld().getBlockState(pos);
             var blockEntity = context.getWorld().getBlockEntity(pos);
 
-            if (blockEntity instanceof VariantStorageBarrelBlockEntity) {
-                var entity = (VariantStorageBarrelBlockEntity) blockEntity;
+            if (blockEntity instanceof VariantCrateBlockEntity) {
+                var entity = (VariantCrateBlockEntity) blockEntity;
                 if (entity.getTier().equals(fromTier)) {
                     entity.setTier(toTier);
-                    var identifier = PackedBlocks.storageBarrel(entity.getTier(), entity.getVariant());
-                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantStorageBarrel.FACING, blockState.get(VariantStorageBarrel.FACING));
+                    var identifier = PackedBlocks.crate(entity.getTier(), entity.getVariant());
+                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantCrateBlock.FACING, blockState.get(VariantCrateBlock.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
                     return ActionResult.SUCCESS;
                 }

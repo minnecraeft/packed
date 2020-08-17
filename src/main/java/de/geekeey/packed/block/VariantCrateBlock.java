@@ -1,6 +1,6 @@
 package de.geekeey.packed.block;
 
-import de.geekeey.packed.block.entity.VariantStorageBarrelBlockEntity;
+import de.geekeey.packed.block.entity.VariantCrateBlockEntity;
 import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -30,7 +30,7 @@ import java.util.UUID;
 
 import static net.minecraft.block.Blocks.BARREL;
 
-public class VariantStorageBarrel extends BlockWithEntity {
+public class VariantCrateBlock extends BlockWithEntity {
 
     private static final int dropSize = 16;
     private static final int shiftingDropSize = 64;
@@ -46,7 +46,7 @@ public class VariantStorageBarrel extends BlockWithEntity {
     private final StorageTier tier;
     private final WoodVariant variant;
 
-    public VariantStorageBarrel(@NotNull StorageTier tier, @NotNull WoodVariant variant) {
+    public VariantCrateBlock(@NotNull StorageTier tier, @NotNull WoodVariant variant) {
         super(FabricBlockSettings.copyOf(BARREL));
         this.tier = tier;
         this.variant = variant;
@@ -69,7 +69,7 @@ public class VariantStorageBarrel extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockView world) {
-        return new VariantStorageBarrelBlockEntity(getTier(), getVariant());
+        return new VariantCrateBlockEntity(getTier(), getVariant());
     }
 
     /**
@@ -79,7 +79,7 @@ public class VariantStorageBarrel extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            VariantStorageBarrelBlockEntity inv = (VariantStorageBarrelBlockEntity) world.getBlockEntity(pos);
+            VariantCrateBlockEntity inv = (VariantCrateBlockEntity) world.getBlockEntity(pos);
 
             assert inv != null;
             ItemStack stackInHand = player.getStackInHand(hand);
@@ -121,7 +121,7 @@ public class VariantStorageBarrel extends BlockWithEntity {
 
     //Helper function to insert items into our storageBarrel,
     //returns weather itemStack could be inserted fully
-    private boolean insertInBarrel(ItemStack insert, VariantStorageBarrelBlockEntity inv) {
+    private boolean insertInBarrel(ItemStack insert, VariantCrateBlockEntity inv) {
         var barrelStack = inv.getStack(0);
         var barrelCount = barrelStack.getCount();
 
@@ -145,13 +145,13 @@ public class VariantStorageBarrel extends BlockWithEntity {
 
     /**
      * When player starts hitting block we extract Items from the Barrel, the amount is dependent on the
-     * {@link VariantStorageBarrel#dropSize} variable. When there is no space in the player inventory the items
+     * {@link VariantCrateBlock#dropSize} variable. When there is no space in the player inventory the items
      * get dropped onto the ground
      **/
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient) {
-            VariantStorageBarrelBlockEntity inv = (VariantStorageBarrelBlockEntity) world.getBlockEntity(pos);
+            VariantCrateBlockEntity inv = (VariantCrateBlockEntity) world.getBlockEntity(pos);
             assert inv != null;
 
             //removed stack from inventory
@@ -177,7 +177,7 @@ public class VariantStorageBarrel extends BlockWithEntity {
      **/
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (!state.isOf(newState.getBlock()) && !(newState.getBlock() instanceof VariantStorageBarrel)) {
+        if (!state.isOf(newState.getBlock()) && !(newState.getBlock() instanceof VariantCrateBlock)) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof Inventory) {
                 ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
