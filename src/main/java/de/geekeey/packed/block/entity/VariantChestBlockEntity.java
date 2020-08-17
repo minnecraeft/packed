@@ -53,7 +53,7 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
                 setTier(tier);
         }
         if (tag.contains("variant", 8)) {
-            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("tier")));
+            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
             if (variant != null)
                 setVariant(variant);
         }
@@ -64,6 +64,7 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
     public CompoundTag toTag(CompoundTag tag) {
         super.toTag(tag);
         tag.putString("tier", getTier().getIdentifier().toString());
+        tag.putString("variant",getVariant().getIdentifier().toString());
         return tag;
     }
 

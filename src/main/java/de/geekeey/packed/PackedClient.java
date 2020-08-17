@@ -32,9 +32,9 @@ public class PackedClient implements ClientModInitializer {
 
         //registration of chest textures
         for (WoodVariants value : WoodVariants.values()) {
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier() + "/normal")));
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier() + "/normal_left")));
-            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier() + "/normal_right")));
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier().getPath() + "/normal")));
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier().getPath() + "/normal_left")));
+            ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> registry.register(Packed.id("entity/chest/" + value.getIdentifier().getPath() + "/normal_right")));
         }
 
         //Registration of lock textures

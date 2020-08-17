@@ -42,15 +42,15 @@ public class PackedBlocks {
     }
 
     public static Identifier chest(StorageTier tier, WoodVariant variant) {
-        return Packed.id(String.format("%s_chest_%s", variant.getIdentifier(), tier.getIdentifier().getPath()));
+        return Packed.id(String.format("%s_chest_%s", variant.getIdentifier().getPath(), tier.getIdentifier().getPath()));
     }
 
     public static Identifier barrel(StorageTier tier, WoodVariant variant) {
-        return Packed.id(String.format("%s_barrel_%s", variant.getIdentifier(), tier.getIdentifier().getPath()));
+        return Packed.id(String.format("%s_barrel_%s", variant.getIdentifier().getPath(), tier.getIdentifier().getPath()));
     }
 
     public static Identifier crate(StorageTier tier, WoodVariant variant) {
-        return Packed.id(String.format("%s_crate_%s", variant.getIdentifier(), tier.getIdentifier().getPath()));
+        return Packed.id(String.format("%s_crate_%s", variant.getIdentifier().getPath(), tier.getIdentifier().getPath()));
     }
 
     public static void register() {

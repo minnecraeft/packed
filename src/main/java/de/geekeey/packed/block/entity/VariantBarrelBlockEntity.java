@@ -53,7 +53,7 @@ public class VariantBarrelBlockEntity extends BarrelBlockEntity implements Exten
                 setTier(tier);
         }
         if (tag.contains("variant", 8)) {
-            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("tier")));
+            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
             if (variant != null)
                 setVariant(variant);
         }
