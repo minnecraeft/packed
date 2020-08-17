@@ -1,5 +1,8 @@
 package de.geekeey.packed.init.helpers;
 
+
+import net.minecraft.util.registry.Registry;
+
 /**
  * The default implementation for the {@link WoodVariant WoodVariants} which are representing the vanilla variants.
  */
@@ -37,6 +40,12 @@ public enum WoodVariants implements WoodVariant {
      * The vanilla warped variant.
      */
     WARPED("warped");
+
+    static {
+        for (WoodVariant variant : values()){
+            Registry.register(WoodVariant.REGISTRY,variant.identifier(),variant);
+        }
+    }
 
     private final String identifier;
 
