@@ -107,5 +107,9 @@
   "block.packed.jungle_crate_tier3": "Jungle Crate Tier 3",
   "block.packed.dark_oak_crate_tier3": "Dark Oak Crate Tier 3",
   "block.packed.crimson_crate_tier3": "Crimson Crate Tier 3",
-  "block.packed.warped_crate_tier3": "Warped Crate Tier 3"
+  "block.packed.warped_crate_tier3": "Warped Crate Tier 3",
+
+  "item.packed.storage_upgrader_default": "Default Storage Upgrader",
+  "item.packed.storage_upgrader_tier1": "Tier 1 Storage Upgrader",
+  "item.packed.storage_upgrader_tier2": "Tier 2 Storage Upgrader"
 }
