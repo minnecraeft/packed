@@ -34,9 +34,9 @@ public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem>
     public WoodItemVariants(BiFunction<T, WoodVariant, Identifier> id, WoodBlockVariants<T, B> blocks, ItemGroup group) {
         ImmutableMap.Builder<WoodVariant, BlockItem> builder = ImmutableMap.builder();
 
-        for (var variant : blocks.variants.keySet()) {
-            var identifier = id.apply(blocks.tier, variant);
-            var item = new BlockItem(blocks.variants.get(variant), new Item.Settings().group(group));
+        for (WoodVariant variant : blocks.variants.keySet()) {
+            Identifier identifier = id.apply(blocks.tier, variant);
+            BlockItem item = new BlockItem(blocks.variants.get(variant), new Item.Settings().group(group));
             Registry.register(Registry.ITEM, identifier, item);
             builder.put(variant, item);
         }

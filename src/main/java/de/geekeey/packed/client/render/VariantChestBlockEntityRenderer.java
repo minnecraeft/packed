@@ -6,6 +6,7 @@ import de.geekeey.packed.block.VariantChestBlock;
 import de.geekeey.packed.block.entity.VariantChestBlockEntity;
 import de.geekeey.packed.init.helpers.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -135,7 +136,7 @@ public class VariantChestBlockEntityRenderer extends BlockEntityRenderer<Variant
         World world = entity.getWorld();
         boolean hasWorld = world != null;
 
-        var state = hasWorld ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+        BlockState state = hasWorld ? entity.getCachedState() : fallback.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         ChestType type = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
 
         Block block = state.getBlock();

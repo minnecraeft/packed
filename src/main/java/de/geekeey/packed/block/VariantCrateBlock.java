@@ -100,9 +100,9 @@ public class VariantCrateBlock extends BlockWithEntity {
 
                 // if the player has clicked twice in a certain period, clear the inventory
                 else if (player.getUuid().equals(lastUsedPlayer) && world.getTime() - lastUsedTime < doubleUseInterval) {
-                    var inv = player.inventory;
+                    Inventory inv = player.inventory;
                     for (int i = 0; i < inv.size(); i++) {
-                        var currentStack = inv.getStack(i);
+                        ItemStack currentStack = inv.getStack(i);
                         if (!currentStack.isEmpty() && crate.getItem().equals(currentStack.getItem())) {
                             insert = crate.insertAll(currentStack);
                             currentStack.setCount(insert.getCount());
@@ -123,8 +123,8 @@ public class VariantCrateBlock extends BlockWithEntity {
     //Helper function to insert items into our storageBarrel,
     //returns weather itemStack could be inserted fully
     private boolean insertInBarrel(ItemStack insert, VariantCrateBlockEntity inv) {
-        var barrelStack = inv.getStack(0);
-        var barrelCount = barrelStack.getCount();
+        ItemStack barrelStack = inv.getStack(0);
+        int barrelCount = barrelStack.getCount();
 
         if (barrelStack.getItem() != insert.getItem())
             throw new IllegalArgumentException("Stack to be inserted must have same item as barrel content");
@@ -155,7 +155,7 @@ public class VariantCrateBlock extends BlockWithEntity {
             VariantCrateBlockEntity crate = (VariantCrateBlockEntity) world.getBlockEntity(pos);
             assert crate != null;
 
-            var size = player.isSneaking() ? Math.min(shiftingDropSize, crate.getItem().getMaxCount()) : dropSize;
+            int size = player.isSneaking() ? Math.min(shiftingDropSize, crate.getItem().getMaxCount()) : dropSize;
             //removed stack from inventory
 
             ItemStack result = ItemStack.EMPTY;

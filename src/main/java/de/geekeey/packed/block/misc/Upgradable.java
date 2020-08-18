@@ -16,7 +16,7 @@ public interface Upgradable {
     void setVariant(WoodVariant variant);
 
     static DefaultedList<ItemStack> ExtendInventory(DefaultedList<ItemStack> old,int newsize){
-        var upgradedList = DefaultedList.ofSize(newsize,ItemStack.EMPTY);
+        DefaultedList<ItemStack> upgradedList = DefaultedList.ofSize(newsize,ItemStack.EMPTY);
         for(int i = 0; i < old.size() ; ++i){
             upgradedList.set(i,old.get(i));
         }

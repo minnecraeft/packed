@@ -4,6 +4,7 @@ import de.geekeey.packed.block.entity.VariantCrateBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BarrelBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.client.MinecraftClient;
@@ -15,6 +16,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -28,13 +30,13 @@ public class VariantCrateBlockEntityRenderer extends BlockEntityRenderer<Variant
 
     @Override
     public void render(VariantCrateBlockEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
-        var stack = entity.getStack(0);
+        ItemStack stack = entity.getStack(0);
 
         if (!stack.isEmpty()) {
             World world = entity.getWorld();
             boolean hasWorld = world != null;
 
-            var state = hasWorld ? entity.getCachedState() : Blocks.BARREL.getDefaultState().with(BarrelBlock.FACING, Direction.SOUTH);
+            BlockState state = hasWorld ? entity.getCachedState() : Blocks.BARREL.getDefaultState().with(BarrelBlock.FACING, Direction.SOUTH);
 
             matrices.push();
 
@@ -53,7 +55,7 @@ public class VariantCrateBlockEntityRenderer extends BlockEntityRenderer<Variant
             matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180));
 
             // set the light level in front of the block
-            var frontLight = WorldRenderer.getLightmapCoordinates(entity.getWorld(), pos.add(direction.getVector()));
+            int frontLight = WorldRenderer.getLightmapCoordinates(entity.getWorld(), pos.add(direction.getVector()));
             MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.FIXED, frontLight, OverlayTexture.DEFAULT_UV, matrices, vertices);
 
             matrices.pop();

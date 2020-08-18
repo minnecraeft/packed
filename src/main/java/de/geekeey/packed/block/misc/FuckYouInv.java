@@ -55,7 +55,7 @@ public interface FuckYouInv extends Inventory {
 
     @Override
     default ItemStack removeStack(int slot, int amount) {
-        var stack = Inventories.splitStack(stacks(), slot, amount);
+        ItemStack stack = Inventories.splitStack(stacks(), slot, amount);
         if (!stack.isEmpty()) {
             decrementCount(stack.getCount());
             markDirty();
@@ -65,7 +65,7 @@ public interface FuckYouInv extends Inventory {
 
     @Override
     default ItemStack removeStack(int slot) {
-        var stack = Inventories.removeStack(stacks(), slot);
+        ItemStack stack = Inventories.removeStack(stacks(), slot);
         if (!stack.isEmpty()) {
             decrementCount(stack.getCount());
             markDirty();
@@ -93,7 +93,7 @@ public interface FuckYouInv extends Inventory {
 
     default void insertToOld(ItemStack insert) {
         for (int i = 0; i < size(); ++i) {
-            var stack = getStack(i);
+            ItemStack stack = getStack(i);
             if (stack.getItem().equals(insert.getItem())) {
                 int cap = Math.min(getMaxCountPerStack(), stack.getMaxCount());
                 int len = Math.min(insert.getCount(), cap - stack.getCount());
@@ -110,7 +110,7 @@ public interface FuckYouInv extends Inventory {
 
     default void insertToNew(ItemStack insert) {
         for (int i = 0; i < size(); ++i) {
-            var stack = getStack(i);
+            ItemStack stack = getStack(i);
             if (stack.isEmpty()) {
                 setStack(i, insert.copy());
                 insert.setCount(0);

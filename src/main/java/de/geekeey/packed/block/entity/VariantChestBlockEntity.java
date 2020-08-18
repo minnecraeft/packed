@@ -48,12 +48,12 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         if (tag.contains("tier", 8)) {
-            var tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+            StorageTier tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
             if (tier != null)
                 setTier(tier);
         }
         if (tag.contains("variant", 8)) {
-            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
+            WoodVariant variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
             if (variant != null)
                 setVariant(variant);
         }
@@ -76,13 +76,13 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
 
     @Override
     protected ScreenHandler createScreenHandler(int id, PlayerInventory inventory) {
-        var rows = getTier().getInventoryHeight();
-        var columns = getTier().getInventoryWidth();
+        int rows = getTier().getInventoryHeight();
+        int columns = getTier().getInventoryWidth();
         return new ExtendedGenericContainerScreenHandler(id, inventory, this, rows, columns);
     }
 
     protected Text getContainerName() {
-        var name = getCustomName();
+        Text name = getCustomName();
         return name != null ? name : new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
 

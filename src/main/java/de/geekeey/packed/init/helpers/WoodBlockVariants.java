@@ -17,9 +17,9 @@ public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
     public WoodBlockVariants(T tier, BiFunction<T, WoodVariant, Identifier> id, BiFunction<T, WoodVariant, B> factory) {
         this.tier = tier;
         ImmutableMap.Builder<WoodVariant, B> builder = ImmutableMap.builder();
-        for (var variant : WoodVariants.values()) {
-            var identifier = id.apply(tier, variant);
-            var block = factory.apply(tier, variant);
+        for (WoodVariant variant : WoodVariants.values()) {
+            Identifier identifier = id.apply(tier, variant);
+            B block = factory.apply(tier, variant);
             Registry.register(Registry.BLOCK, identifier, block);
             builder.put(variant, block);
         }
