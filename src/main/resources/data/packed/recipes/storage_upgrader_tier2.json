@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#P#",
+        "#I#",
+        "#P#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:stick"
+        },
+        "I": {
+            "item": "minecraft:diamond"
+        },
+        "P": {
+            "tag": "minecraft:planks"
+        }
+    },
+    "result": {
+        "item": "packed:storage_upgrader_tier2",
+        "count": 1
+    },
+    "group": "upgrader"
+}
