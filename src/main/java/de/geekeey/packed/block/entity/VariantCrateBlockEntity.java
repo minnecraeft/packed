@@ -52,7 +52,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     @Override
     public void incrementCount(int count) {
         if (this.count <= 0) {
-            var type = this.inventory.stream()
+            Item type = this.inventory.stream()
                     .filter(s -> !s.isEmpty())
                     .findFirst()
                     .map(ItemStack::getItem)
@@ -94,7 +94,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     @Override
     public void fromTag(BlockState state, CompoundTag tag) {
         if (tag.contains("tier", 8)) {
-            var tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
+            StorageTier tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
             if (tier != null) {
                 setTier(tier);
                 this.inventory = DefaultedList.ofSize(tier.getStackAmount(), ItemStack.EMPTY);
@@ -102,24 +102,24 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
         }
 
         if (tag.contains("item", 10)) {
-            var item = tag.getCompound("item");
+            CompoundTag item = tag.getCompound("item");
 
-            var id = item.getString("id");
+            String id = item.getString("id");
             this.item = Registry.ITEM.get(new Identifier(id));
 
             this.count = item.getInt("count");
 
             if (count / 64 > getTier().getStackAmount()) {
-                var stacks = count / 64;
+                int stacks = count / 64;
                 stacks = stacks * 64 < count ? stacks + 1 : stacks;
                 this.inventory = DefaultedList.ofSize(stacks, ItemStack.EMPTY);
                 LOGGER.warn("Inventory is too small for items, maybe tier is missing? (bypass)");
             }
 
 
-            var index = 0;
-            var size = 0;
-            var c = count;
+            int index = 0;
+            int size = 0;
+            int c = count;
             while (c > 0) {
                 size = Math.min(this.item.getMaxCount(), c);
                 this.inventory.set(index++, new ItemStack(this.item, size));
@@ -129,7 +129,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
 
         if (tag.contains("variant", 8)) {
-            var variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
+            WoodVariant variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
             if (variant != null)
                 setVariant(variant);
         }
@@ -140,7 +140,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     @Override
     public CompoundTag toTag(CompoundTag tag) {
         if (item != Items.AIR) {
-            var item = new CompoundTag();
+            CompoundTag item = new CompoundTag();
             Identifier identifier = Registry.ITEM.getId(this.item);
             item.putString("id", identifier.toString());
 
@@ -155,8 +155,8 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
     @Override
     public void fromClientTag(CompoundTag compound) {
-        var id = compound.getString("item");
-        var item = Registry.ITEM.get(new Identifier(id));
+        String id = compound.getString("item");
+        Item item = Registry.ITEM.get(new Identifier(id));
         inventory.set(0, new ItemStack(item));
     }
 

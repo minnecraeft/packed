@@ -7,11 +7,15 @@ import de.geekeey.packed.block.entity.VariantCrateBlockEntity;
 import de.geekeey.packed.init.PackedBlocks;
 import de.geekeey.packed.init.helpers.StorageTier;
 import net.minecraft.block.BarrelBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 
 public class StorageUpgrader extends Item {
@@ -27,36 +31,36 @@ public class StorageUpgrader extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (!context.getWorld().isClient) {
-            var pos = context.getBlockPos();
-            var blockState = context.getWorld().getBlockState(pos);
-            var blockEntity = context.getWorld().getBlockEntity(pos);
+            BlockPos pos = context.getBlockPos();
+            BlockState blockState = context.getWorld().getBlockState(pos);
+            BlockEntity blockEntity = context.getWorld().getBlockEntity(pos);
 
             if (blockEntity instanceof VariantCrateBlockEntity) {
-                var entity = (VariantCrateBlockEntity) blockEntity;
+                VariantCrateBlockEntity entity = (VariantCrateBlockEntity) blockEntity;
                 if (entity.getTier().equals(fromTier)) {
                     entity.setTier(toTier);
-                    var identifier = PackedBlocks.crate(entity.getTier(), entity.getVariant());
-                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantCrateBlock.FACING, blockState.get(VariantCrateBlock.FACING));
+                    Identifier identifier = PackedBlocks.crate(entity.getTier(), entity.getVariant());
+                    BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantCrateBlock.FACING, blockState.get(VariantCrateBlock.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
                     return ActionResult.SUCCESS;
                 }
             }
             else if(blockEntity instanceof VariantBarrelBlockEntity){
-                var entity = (VariantBarrelBlockEntity) blockEntity;
+                VariantBarrelBlockEntity entity = (VariantBarrelBlockEntity) blockEntity;
                 if (entity.getTier().equals(fromTier)) {
                     entity.setTier(toTier);
-                    var identifier = PackedBlocks.barrel(entity.getTier(), entity.getVariant());
-                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(BarrelBlock.FACING, blockState.get(BarrelBlock.FACING));
+                    Identifier identifier = PackedBlocks.barrel(entity.getTier(), entity.getVariant());
+                    BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(BarrelBlock.FACING, blockState.get(BarrelBlock.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
                     return ActionResult.SUCCESS;
                 }
             }
             else if(blockEntity instanceof VariantChestBlockEntity){
-                var entity = (VariantChestBlockEntity) blockEntity;
+                VariantChestBlockEntity entity = (VariantChestBlockEntity) blockEntity;
                 if (entity.getTier().equals(fromTier)) {
                     entity.setTier(toTier);
-                    var identifier = PackedBlocks.chest(entity.getTier(), entity.getVariant());
-                    var newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(ChestBlock.FACING, blockState.get(ChestBlock.FACING)).with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
+                    Identifier identifier = PackedBlocks.chest(entity.getTier(), entity.getVariant());
+                    BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(ChestBlock.FACING, blockState.get(ChestBlock.FACING)).with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
                     context.getWorld().setBlockState(pos, newBlockState);
                     return ActionResult.SUCCESS;
                 }
