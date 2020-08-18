@@ -177,6 +177,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     }
 
     public void setTier(@NotNull StorageTier tier) {
+        this.inventory = Upgradable.ExtendInventory(this.inventory,tier.getStackAmount());
         this.tier = tier;
     }
 
