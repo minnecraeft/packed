@@ -1,1 +1,1 @@
-Initial Version
+Added Chinese Translation and Recipe Advancements
