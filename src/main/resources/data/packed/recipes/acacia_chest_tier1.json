@@ -1,19 +1,16 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#A#",
-        "#_#",
-        "#A#"
+        "PPP",
+        "PLP",
+        "PPP"
     ],
     "key": {
-        "#": {
+        "P": {
             "item": "minecraft:acacia_planks"
         },
-        "_": {
+        "L": {
             "item": "packed:acacia_chest_default"
-        },
-        "A": {
-            "item": "minecraft:iron_ingot"
         }
     },
     "result": {

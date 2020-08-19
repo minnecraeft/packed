@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "packed:block/dark_oak_chest_default"
+      "model": "packed:block/dark_oak_chest_tier1"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "packed:block/jungle_chest_default"
+      "model": "packed:block/jungle_chest_tier2"
     }
   }
 }

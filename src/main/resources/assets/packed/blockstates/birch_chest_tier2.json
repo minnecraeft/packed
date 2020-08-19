@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "packed:block/birch_chest_default"
+      "model": "packed:block/birch_chest_tier2"
     }
   }
 }

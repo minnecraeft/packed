@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "packed:acacia_barrel_tier1"
+    ]
+  },
+  "criteria": {
+    "has_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:iron_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:acacia_barrel_tier1"
+      }
+    },
+    "has_previous": {
+      "trigger" : "minecraft:recipe_unlocked",
+      "conditions" : {
+        "recipe": "packed:acacia_barrel_default"
+      }
+    }
+  },
+  "requirements": [
+    ["has_the_recipe",
+    "has_resource"],
+    ["has_the_recipe",
+    "has_previous"]
+  ]
+}

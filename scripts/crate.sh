@@ -11,8 +11,10 @@ MODELS_ITEM="${ASSETS}/models/item"
 [[ ! -d "${MODELS_ITEM}" ]] && mkdir -p "${MODELS_ITEM}"
 
 RECIPES="${DATA}/recipes"
+RECIPE_ADVANCEMENTS="${DATA}/advancements/recipes"
 
 [[ ! -d "${RECIPES}" ]] && mkdir -p "${RECIPES}"
+[[ ! -d "${RECIPE_ADVANCEMENTS}" ]] && mkdir -p "${RECIPE_ADVANCEMENTS}"
 
 VARIANTS=('acacia' 'birch' 'dark_oak' 'jungle' 'oak' 'spruce' 'crimson' 'warped')
 TIERS=('default' 'tier1' 'tier2' 'tier3')
@@ -35,6 +37,8 @@ for VARIANT in "${VARIANTS[@]}"; do
     envsubst <"${BASE}/presets/crate/model_item.json" >"${MODELS_ITEM}/${file}.json"
 
     envsubst <"${BASE}/presets/crate/recipe_${TIER}.json" >"${RECIPES}/${file}.json"
+
+    envsubst < "${BASE}/presets/crate/advancement_${TIER}.json" > "${RECIPE_ADVANCEMENTS}/${file}.json"
 
     PREVIOUS_TIER="${TIER}"
   done

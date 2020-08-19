@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "packed:${VARIANT}_crate_tier3"
+    ]
+  },
+  "criteria": {
+    "has_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:diamond"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:${VARIANT}_crate_tier3"
+      }
+    },
+    "has_previous": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:${VARIANT}_crate_tier2"
+      }
+    }
+  },
+  "requirements": [
+    ["has_the_recipe",
+      "has_resource"],
+    ["has_the_recipe",
+      "has_previous"]
+  ]
+}

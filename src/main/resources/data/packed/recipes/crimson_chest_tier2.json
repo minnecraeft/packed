@@ -1,19 +1,16 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#A#",
-        "#_#",
-        "#A#"
+        "PPP",
+        "PLP",
+        "PPP"
     ],
     "key": {
-        "#": {
+        "P": {
             "item": "minecraft:crimson_planks"
         },
-        "_": {
+        "L": {
             "item": "packed:crimson_chest_tier1"
-        },
-        "A": {
-            "item": "minecraft:gold_ingot"
         }
     },
     "result": {

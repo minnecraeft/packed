@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "packed:block/spruce_chest_default"
+      "model": "packed:block/spruce_chest_tier3"
     }
   }
 }

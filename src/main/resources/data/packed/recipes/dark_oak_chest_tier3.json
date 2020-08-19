@@ -1,19 +1,16 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "#A#",
-        "#_#",
-        "###"
+        "PPP",
+        "PLP",
+        "PPP"
     ],
     "key": {
-        "#": {
+        "P": {
             "item": "minecraft:dark_oak_planks"
         },
-        "_": {
+        "L": {
             "item": "packed:dark_oak_chest_tier2"
-        },
-        "A": {
-            "item": "minecraft:diamond"
         }
     },
     "result": {
