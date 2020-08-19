@@ -88,7 +88,7 @@ curseforge{
         id = '403096'
         changelogType = 'markdown'
         changelog = file("changelog.md")
-        releaseType = 'beta'
+        releaseType = 'release'
         addGameVersion project.minecraft_version
         addGameVersion "Java 8"
         addGameVersion "Fabric"
