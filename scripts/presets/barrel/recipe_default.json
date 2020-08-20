@@ -7,14 +7,14 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:TMP_planks"
+            "item": "minecraft:${VARIANT}_planks"
         },
         "_": {
-            "item": "minecraft:TMP_slab"
+            "item": "minecraft:${VARIANT}_slab"
         }
     },
     "result": {
-        "item": "packed:TMP_barrel_default",
+        "item": "packed:${VARIANT}_barrel_default",
         "count": 1
     },
     "group": "barrel_default"

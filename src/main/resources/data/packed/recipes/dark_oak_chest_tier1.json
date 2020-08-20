@@ -1,9 +1,9 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "PPP",
+        "PAP",
         "PLP",
-        "PPP"
+        "PAP"
     ],
     "key": {
         "P": {
@@ -11,6 +11,9 @@
         },
         "L": {
             "item": "packed:dark_oak_chest_default"
+        },
+        "A": {
+            "item": "minecraft:iron_ingot"
         }
     },
     "result": {

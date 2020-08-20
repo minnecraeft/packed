@@ -7,17 +7,17 @@
     ],
     "key": {
         "#": {
-            "item": "minecraft:TMP_planks"
+            "item": "minecraft:${VARIANT}_planks"
         },
         "i": {
             "item": "minecraft:gold_ingot"
         },
         "P": {
-            "item": "packed:TMP_barrel_tier1"
+            "item": "packed:${VARIANT}_barrel_tier1"
         }
     },
     "result": {
-        "item": "packed:TMP_barrel_tier2",
+        "item": "packed:${VARIANT}_barrel_tier2",
         "count": 1
     },
     "group": "barrel_tier2"
