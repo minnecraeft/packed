@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "packed:acacia_barrel_default"
+      "packed:acacia/acacia_barrel_default"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packed:acacia_barrel_default"
+        "recipe": "packed:acacia/acacia_barrel_default"
       }
     }
   },
