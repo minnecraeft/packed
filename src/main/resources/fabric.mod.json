@@ -3,15 +3,15 @@
   "id": "packed",
   "version": "${version}",
   "name": "Packed",
-  "description": "desc",
+  "description": "Packed is a mod that adds a variety of storage blocks such as chest, barrels, and crates. These storage blocks all have different tiers, with each tier the blocks has the ability to store more items than the previous one.",
   "authors": [
     "manymoney2",
     "Louis9902"
   ],
   "contact": {
-    "website": "website"
+    "issues": "https://github.com/Louis9902/packed/issues"
   },
-  "license": "MIT",
+  "license": "GPLv3",
   "icon": "assets/packed/icon.png",
   "environment": "*",
   "entrypoints": {
