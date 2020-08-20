@@ -42,6 +42,7 @@ public class StorageUpgrader extends Item {
                     Identifier identifier = PackedBlocks.crate(entity.getTier(), entity.getVariant());
                     BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(VariantCrateBlock.FACING, blockState.get(VariantCrateBlock.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
+                    context.getStack().decrement(1);
                     return ActionResult.SUCCESS;
                 }
             }
@@ -52,6 +53,7 @@ public class StorageUpgrader extends Item {
                     Identifier identifier = PackedBlocks.barrel(entity.getTier(), entity.getVariant());
                     BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(BarrelBlock.FACING, blockState.get(BarrelBlock.FACING));
                     context.getWorld().setBlockState(pos, newBlockState);
+                    context.getStack().decrement(1);
                     return ActionResult.SUCCESS;
                 }
             }
@@ -62,6 +64,7 @@ public class StorageUpgrader extends Item {
                     Identifier identifier = PackedBlocks.chest(entity.getTier(), entity.getVariant());
                     BlockState newBlockState = Registry.BLOCK.get(identifier).getDefaultState().with(ChestBlock.FACING, blockState.get(ChestBlock.FACING)).with(ChestBlock.CHEST_TYPE, ChestType.SINGLE);
                     context.getWorld().setBlockState(pos, newBlockState);
+                    context.getStack().decrement(1);
                     return ActionResult.SUCCESS;
                 }
             }

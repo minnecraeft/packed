@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "packed:${VARIANT}_crate_tier2"
+      "packed:${VARIANT}/${VARIANT}_crate_tier2"
     ]
   },
   "criteria": {
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packed:${VARIANT}_crate_tier2"
+        "recipe": "packed:${VARIANT}/${VARIANT}_crate_tier2"
       }
     },
     "has_previous": {
       "trigger" : "minecraft:recipe_unlocked",
       "conditions" : {
-        "recipe": "packed:${VARIANT}_crate_tier1"
+        "recipe": "packed:${VARIANT}/${VARIANT}_crate_tier1"
       }
     }
   },

@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "packed:crimson/crimson_crate_tier2"
+    ]
+  },
+  "criteria": {
+    "has_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:gold_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:crimson/crimson_crate_tier2"
+      }
+    },
+    "has_previous": {
+      "trigger" : "minecraft:recipe_unlocked",
+      "conditions" : {
+        "recipe": "packed:crimson/crimson_crate_tier1"
+      }
+    }
+  },
+  "requirements": [
+    ["has_the_recipe",
+      "has_resource"],
+    ["has_the_recipe",
+      "has_previous"]
+  ]
+}

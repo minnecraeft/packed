@@ -30,9 +30,11 @@ for VARIANT in "${VARIANTS[@]}"; do
     envsubst <"${BASE}/presets/chest/model_block.json" >"${MODELS_BLOCK}/${file}.json"
     envsubst <"${BASE}/presets/chest/model_item.json" >"${MODELS_ITEM}/${file}.json"
 
-    envsubst <"${BASE}/presets/chest/recipe_${TIER}.json" >"${RECIPES}/${file}.json"
+    [[ ! -d "${RECIPES}/${VARIANT}" ]] && mkdir -p "${RECIPES}/${VARIANT}"
+    envsubst <"${BASE}/presets/chest/recipe_${TIER}.json" >"${RECIPES}/${VARIANT}/${file}.json"
 
-    envsubst < "${BASE}/presets/chest/advancement_${TIER}.json" > "${RECIPE_ADVANCEMENTS}/${file}.json"
+    [[ ! -d "${RECIPE_ADVANCEMENTS}/${VARIANT}" ]] && mkdir -p "${RECIPE_ADVANCEMENTS}/${VARIANT}"
+    envsubst < "${BASE}/presets/chest/advancement_${TIER}.json" > "${RECIPE_ADVANCEMENTS}/${VARIANT}/${file}.json"
 
     PREVIOUS_TIER="${TIER}"
   done

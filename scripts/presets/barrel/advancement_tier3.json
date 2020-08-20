@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "packed:${VARIANT}_barrel_tier3"
+      "packed:${VARIANT}/${VARIANT}_barrel_tier3"
     ]
   },
   "criteria": {
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packed:${VARIANT}_barrel_tier3"
+        "recipe": "packed:${VARIANT}/${VARIANT}_barrel_tier3"
       }
     },
     "has_previous": {
       "trigger" : "minecraft:recipe_unlocked",
       "conditions" : {
-        "recipe": "packed:${VARIANT}_barrel_tier2"
+        "recipe": "packed:${VARIANT}/${VARIANT}_barrel_tier2"
       }
     }
   },

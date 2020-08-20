@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "packed:${VARIANT}_crate_${TIER}"
+      "packed:${VARIANT}/${VARIANT}_crate_${TIER}"
     ]
   },
   "criteria": {
@@ -23,7 +23,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "packed:${VARIANT}_crate_default"
+        "recipe": "packed:${VARIANT}/${VARIANT}_crate_default"
       }
     }
   },
