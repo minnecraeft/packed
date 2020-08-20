@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#_#",
+        "# #",
+        "#_#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:jungle_planks"
+        },
+        "_": {
+            "item": "minecraft:jungle_slab"
+        }
+    },
+    "result": {
+        "item": "packed:jungle_barrel_default",
+        "count": 1
+    },
+    "group": "barrel_default"
+}

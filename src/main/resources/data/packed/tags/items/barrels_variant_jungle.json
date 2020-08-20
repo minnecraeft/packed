@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:jungle_barrel_default",
+    "packed:jungle_barrel_tier1",
+    "packed:jungle_barrel_tier2",
+    "packed:jungle_barrel_tier3"
+  ]
+}

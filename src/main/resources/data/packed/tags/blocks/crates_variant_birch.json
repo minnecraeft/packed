@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:birch_crate_default",
+    "packed:birch_crate_tier1",
+    "packed:birch_crate_tier2",
+    "packed:birch_crate_tier3"
+  ]
+}

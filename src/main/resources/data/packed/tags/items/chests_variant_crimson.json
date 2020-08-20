@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:crimson_chest_default",
+    "packed:crimson_chest_tier1",
+    "packed:crimson_chest_tier2",
+    "packed:crimson_chest_tier3"
+  ]
+}

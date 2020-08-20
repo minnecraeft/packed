@@ -1,0 +1,13 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_crate_default",
+    "packed:spruce_crate_default",
+    "packed:birch_crate_default",
+    "packed:acacia_crate_default",
+    "packed:jungle_crate_default",
+    "packed:dark_oak_crate_default",
+    "packed:crimson_crate_default",
+    "packed:warped_crate_default"
+  ]
+}

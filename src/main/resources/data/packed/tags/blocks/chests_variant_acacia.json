@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:acacia_chest_default",
+    "packed:acacia_chest_tier1",
+    "packed:acacia_chest_tier2",
+    "packed:acacia_chest_tier3"
+  ]
+}

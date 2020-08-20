@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PRP",
+        "PCP",
+        "PRP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:jungle_planks"
+        },
+        "C": {
+            "item": "packed:jungle_crate_tier1"
+        },
+        "R": {
+            "item": "minecraft:gold_ingot"
+        }
+    },
+    "result": {
+        "item": "packed:jungle_crate_tier2",
+        "count": 1
+    },
+    "group": "crate_tier2"
+}

@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:crimson_barrel_default",
+    "packed:crimson_barrel_tier1",
+    "packed:crimson_barrel_tier2",
+    "packed:crimson_barrel_tier3"
+  ]
+}

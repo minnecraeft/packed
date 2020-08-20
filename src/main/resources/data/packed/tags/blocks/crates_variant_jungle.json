@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:jungle_crate_default",
+    "packed:jungle_crate_tier1",
+    "packed:jungle_crate_tier2",
+    "packed:jungle_crate_tier3"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:spruce_barrel_default",
+    "packed:spruce_barrel_tier1",
+    "packed:spruce_barrel_tier2",
+    "packed:spruce_barrel_tier3"
+  ]
+}

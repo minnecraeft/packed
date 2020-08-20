@@ -1,0 +1,13 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_chest_tier1",
+    "packed:spruce_chest_tier1",
+    "packed:birch_chest_tier1",
+    "packed:acacia_chest_tier1",
+    "packed:jungle_chest_tier1",
+    "packed:dark_oak_chest_tier1",
+    "packed:crimson_chest_tier1",
+    "packed:warped_chest_tier1"
+  ]
+}

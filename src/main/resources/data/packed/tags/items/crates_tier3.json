@@ -1,0 +1,13 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_crate_tier3",
+    "packed:spruce_crate_tier3",
+    "packed:birch_crate_tier3",
+    "packed:acacia_crate_tier3",
+    "packed:jungle_crate_tier3",
+    "packed:dark_oak_crate_tier3",
+    "packed:crimson_crate_tier3",
+    "packed:warped_crate_tier3"
+  ]
+}

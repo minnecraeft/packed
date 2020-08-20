@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:spruce_chest_default",
+    "packed:spruce_chest_tier1",
+    "packed:spruce_chest_tier2",
+    "packed:spruce_chest_tier3"
+  ]
+}

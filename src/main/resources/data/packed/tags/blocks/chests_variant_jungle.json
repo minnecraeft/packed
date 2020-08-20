@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:jungle_chest_default",
+    "packed:jungle_chest_tier1",
+    "packed:jungle_chest_tier2",
+    "packed:jungle_chest_tier3"
+  ]
+}

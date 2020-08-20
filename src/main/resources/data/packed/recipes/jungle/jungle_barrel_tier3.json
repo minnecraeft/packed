@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#i#",
+        "#P#",
+        "#_#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:jungle_planks"
+        },
+        "i": {
+            "item": "minecraft:diamond"
+        },
+        "P": {
+            "item": "packed:jungle_barrel_tier2"
+        },
+        "_": {
+            "item": "minecraft:jungle_slab"
+        }
+    },
+    "result": {
+        "item": "packed:jungle_barrel_tier3",
+        "count": 1
+    },
+    "group": "barrel_tier3"
+}

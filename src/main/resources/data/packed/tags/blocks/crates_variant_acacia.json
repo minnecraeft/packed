@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:acacia_crate_default",
+    "packed:acacia_crate_tier1",
+    "packed:acacia_crate_tier2",
+    "packed:acacia_crate_tier3"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_barrel_default",
+    "packed:oak_barrel_tier1",
+    "packed:oak_barrel_tier2",
+    "packed:oak_barrel_tier3"
+  ]
+}

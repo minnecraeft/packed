@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:crimson_crate_default",
+    "packed:crimson_crate_tier1",
+    "packed:crimson_crate_tier2",
+    "packed:crimson_crate_tier3"
+  ]
+}

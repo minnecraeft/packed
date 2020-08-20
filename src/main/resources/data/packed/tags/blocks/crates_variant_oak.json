@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_crate_default",
+    "packed:oak_crate_tier1",
+    "packed:oak_crate_tier2",
+    "packed:oak_crate_tier3"
+  ]
+}

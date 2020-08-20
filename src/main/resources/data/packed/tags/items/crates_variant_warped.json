@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:warped_crate_default",
+    "packed:warped_crate_tier1",
+    "packed:warped_crate_tier2",
+    "packed:warped_crate_tier3"
+  ]
+}

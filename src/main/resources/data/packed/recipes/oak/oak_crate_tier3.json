@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PRP",
+        "PCP",
+        "PPP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:oak_planks"
+        },
+        "C": {
+            "item": "packed:oak_crate_tier2"
+        },
+        "R": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "packed:oak_crate_tier3",
+        "count": 1
+    },
+    "group": "crate_tier3"
+}

@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:dark_oak_chest_default",
+    "packed:dark_oak_chest_tier1",
+    "packed:dark_oak_chest_tier2",
+    "packed:dark_oak_chest_tier3"
+  ]
+}

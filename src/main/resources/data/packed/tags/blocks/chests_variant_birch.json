@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:birch_chest_default",
+    "packed:birch_chest_tier1",
+    "packed:birch_chest_tier2",
+    "packed:birch_chest_tier3"
+  ]
+}

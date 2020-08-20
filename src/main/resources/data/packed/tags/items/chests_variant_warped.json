@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:warped_chest_default",
+    "packed:warped_chest_tier1",
+    "packed:warped_chest_tier2",
+    "packed:warped_chest_tier3"
+  ]
+}

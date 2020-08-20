@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:birch_barrel_default",
+    "packed:birch_barrel_tier1",
+    "packed:birch_barrel_tier2",
+    "packed:birch_barrel_tier3"
+  ]
+}

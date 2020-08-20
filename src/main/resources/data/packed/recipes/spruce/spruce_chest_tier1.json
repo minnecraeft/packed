@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "PAP",
+        "PLP",
+        "PAP"
+    ],
+    "key": {
+        "P": {
+            "item": "minecraft:spruce_planks"
+        },
+        "L": {
+            "item": "packed:spruce_chest_default"
+        },
+        "A": {
+            "item": "minecraft:iron_ingot"
+        }
+    },
+    "result": {
+        "item": "packed:spruce_chest_tier1",
+        "count": 1
+    },
+    "group": "chest_tier1"
+}

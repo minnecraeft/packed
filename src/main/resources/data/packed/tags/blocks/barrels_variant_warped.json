@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:warped_barrel_default",
+    "packed:warped_barrel_tier1",
+    "packed:warped_barrel_tier2",
+    "packed:warped_barrel_tier3"
+  ]
+}

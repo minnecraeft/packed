@@ -1,0 +1,13 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:oak_barrel_tier3",
+    "packed:spruce_barrel_tier3",
+    "packed:birch_barrel_tier3",
+    "packed:acacia_barrel_tier3",
+    "packed:jungle_barrel_tier3",
+    "packed:dark_oak_barrel_tier3",
+    "packed:crimson_barrel_tier3",
+    "packed:warped_barrel_tier3"
+  ]
+}

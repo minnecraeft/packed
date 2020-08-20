@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:acacia_barrel_default",
+    "packed:acacia_barrel_tier1",
+    "packed:acacia_barrel_tier2",
+    "packed:acacia_barrel_tier3"
+  ]
+}

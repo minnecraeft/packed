@@ -1,0 +1,9 @@
+{
+  "replace": "false",
+  "values": [
+    "packed:spruce_crate_default",
+    "packed:spruce_crate_tier1",
+    "packed:spruce_crate_tier2",
+    "packed:spruce_crate_tier3"
+  ]
+}
