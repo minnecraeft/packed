@@ -1,16 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "P  ",
-    "   ",
-    "   "
-  ],
-  "key": {
-    "P": {
-      "item": "minecraft:air"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:barrel"
     }
-  },
+
+  ],
   "result": {
-    "item": "minecraft:air"
+    "item": "minecraft:barrel"
   }
 }
