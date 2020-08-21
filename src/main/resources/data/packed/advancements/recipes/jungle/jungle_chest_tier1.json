@@ -16,23 +16,27 @@
         ]
       }
     },
+    "has_previous": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:jungle/jungle_chest_default"
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "packed:jungle/jungle_chest_tier1"
       }
-    },
-    "has_previous": {
-      "trigger" : "minecraft:recipe_unlocked",
-      "conditions" : {
-        "recipe": "packed:jungle/jungle_chest_default"
-      }
     }
   },
   "requirements": [
-    ["has_the_recipe",
-      "has_resource"],
-    ["has_the_recipe",
-      "has_previous"]
+    [
+      "has_the_recipe",
+      "has_resource"
+    ],
+    [
+      "has_the_recipe",
+      "has_previous"
+    ]
   ]
 }

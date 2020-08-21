@@ -1,8 +1,8 @@
 {
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "top": "packed:block/spruce_barrel_tier2_top",
-        "side": "packed:block/spruce_barrel_side",
-        "bottom": "packed:block/spruce_barrel_bottom"
-    }
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "packed:block/spruce_barrel_tier2_top",
+    "side": "packed:block/spruce_barrel_side",
+    "bottom": "packed:block/spruce_barrel_bottom"
+  }
 }

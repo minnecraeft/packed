@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#i#",
-        "#P#",
-        "#i#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:${VARIANT}_planks"
-        },
-        "i": {
-            "item": "minecraft:iron_ingot"
-        },
-        "P": {
-            "item": "packed:${VARIANT}_barrel_default"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#B#",
+    "#I#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:${VARIANT}_planks"
     },
-    "result": {
-        "item": "packed:${VARIANT}_barrel_tier1",
-        "count": 1
+    "I": {
+      "item": "minecraft:iron_ingot"
     },
-    "group": "barrel_tier1"
+    "B": {
+      "item": "packed:${VARIANT}_barrel_default"
+    }
+  },
+  "result": {
+    "item": "packed:${VARIANT}_barrel_tier1",
+    "count": 1
+  },
+  "group": "barrel_tier1"
 }

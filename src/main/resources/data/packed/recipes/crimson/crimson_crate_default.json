@@ -1,21 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PPP",
-        "PCP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:crimson_planks"
-        },
-        "C": {
-            "item": "packed:crimson_chest_default"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:crimson_planks"
     },
-    "result": {
-        "item": "packed:crimson_crate_default",
-        "count": 1
-    },
-    "group": "crate_default"
+    "C": {
+      "item": "packed:crimson_chest_default"
+    }
+  },
+  "result": {
+    "item": "packed:crimson_crate_default",
+    "count": 1
+  },
+  "group": "crate_default"
 }

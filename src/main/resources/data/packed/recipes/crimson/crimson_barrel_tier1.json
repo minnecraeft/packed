@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#i#",
-        "#P#",
-        "#i#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:crimson_planks"
-        },
-        "i": {
-            "item": "minecraft:iron_ingot"
-        },
-        "P": {
-            "item": "packed:crimson_barrel_default"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#B#",
+    "#I#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:crimson_planks"
     },
-    "result": {
-        "item": "packed:crimson_barrel_tier1",
-        "count": 1
+    "I": {
+      "item": "minecraft:iron_ingot"
     },
-    "group": "barrel_tier1"
+    "B": {
+      "item": "packed:crimson_barrel_default"
+    }
+  },
+  "result": {
+    "item": "packed:crimson_barrel_tier1",
+    "count": 1
+  },
+  "group": "barrel_tier1"
 }

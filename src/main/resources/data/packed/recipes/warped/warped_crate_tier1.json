@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PRP",
-        "PCP",
-        "PRP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:warped_planks"
-        },
-        "C": {
-            "item": "packed:warped_crate_default"
-        },
-        "R": {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PCP",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:warped_planks"
     },
-    "result": {
-        "item": "packed:warped_crate_tier1",
-        "count": 1
+    "I": {
+      "item": "minecraft:iron_ingot"
     },
-    "group": "crate_tier1"
+    "C": {
+      "item": "packed:warped_crate_default"
+    }
+  },
+  "result": {
+    "item": "packed:warped_crate_tier1",
+    "count": 1
+  },
+  "group": "crate_tier1"
 }

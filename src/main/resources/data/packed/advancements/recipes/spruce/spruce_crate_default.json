@@ -12,9 +12,9 @@
         "items": [
           {
             "item": "packed:spruce_chest_default",
-            "count" :  {
+            "count": {
               "min": 4,
-              "max" : 64
+              "max": 64
             }
           }
         ]

@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PAP",
-        "PLP",
-        "PAP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:${VARIANT}_planks"
-        },
-        "L": {
-            "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
-        },
-        "A": {
-            "item": "minecraft:gold_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PCP",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:${VARIANT}_planks"
     },
-    "result": {
-        "item": "packed:${VARIANT}_chest_tier2",
-        "count": 1
+    "I": {
+      "item": "minecraft:gold_ingot"
     },
-    "group": "chest_tier2"
+    "C": {
+      "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
+    }
+  },
+  "result": {
+    "item": "packed:${VARIANT}_chest_tier2",
+    "count": 1
+  },
+  "group": "chest_tier2"
 }

@@ -1,24 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PRP",
-        "PCP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:acacia_planks"
-        },
-        "C": {
-            "item": "packed:acacia_crate_tier2"
-        },
-        "R": {
-            "item": "minecraft:diamond"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PCP",
+    "P_P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:acacia_planks"
     },
-    "result": {
-        "item": "packed:acacia_crate_tier3",
-        "count": 1
+    "D": {
+      "item": "minecraft:diamond"
     },
-    "group": "crate_tier3"
+    "C": {
+      "item": "packed:acacia_crate_tier2"
+    },
+    "_": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "result": {
+    "item": "packed:acacia_crate_tier3",
+    "count": 1
+  },
+  "group": "crate_tier3"
 }

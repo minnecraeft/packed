@@ -1,21 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#_#",
-        "# #",
-        "#_#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:warped_planks"
-        },
-        "_": {
-            "item": "minecraft:warped_slab"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "# #",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
     },
-    "result": {
-        "item": "packed:warped_barrel_default",
-        "count": 1
-    },
-    "group": "barrel_default"
+    "_": {
+      "item": "minecraft:warped_slab"
+    }
+  },
+  "result": {
+    "item": "packed:warped_barrel_default",
+    "count": 1
+  },
+  "group": "barrel_default"
 }

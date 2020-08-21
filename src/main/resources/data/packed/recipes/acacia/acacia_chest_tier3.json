@@ -1,24 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PAP",
-        "PLP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:acacia_planks"
-        },
-        "L": {
-            "item": "packed:acacia_chest_tier2"
-        },
-        "A": {
-            "item": "minecraft:diamond"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PCP",
+    "P_P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:acacia_planks"
     },
-    "result": {
-        "item": "packed:acacia_chest_tier3",
-        "count": 1
+    "D": {
+      "item": "minecraft:diamond"
     },
-    "group": "chest_tier3"
+    "C": {
+      "item": "packed:acacia_chest_tier2"
+    },
+    "_": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "result": {
+    "item": "packed:acacia_chest_tier3",
+    "count": 1
+  },
+  "group": "chest_tier3"
 }

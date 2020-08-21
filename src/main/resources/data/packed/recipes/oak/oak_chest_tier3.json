@@ -1,24 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PAP",
-        "PLP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:oak_planks"
-        },
-        "L": {
-            "item": "packed:oak_chest_tier2"
-        },
-        "A": {
-            "item": "minecraft:diamond"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PCP",
+    "P_P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:oak_planks"
     },
-    "result": {
-        "item": "packed:oak_chest_tier3",
-        "count": 1
+    "D": {
+      "item": "minecraft:diamond"
     },
-    "group": "chest_tier3"
+    "C": {
+      "item": "packed:oak_chest_tier2"
+    },
+    "_": {
+      "item": "minecraft:oak_slab"
+    }
+  },
+  "result": {
+    "item": "packed:oak_chest_tier3",
+    "count": 1
+  },
+  "group": "chest_tier3"
 }

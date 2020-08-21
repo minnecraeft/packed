@@ -16,23 +16,27 @@
         ]
       }
     },
+    "has_previous": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:acacia/acacia_chest_tier2"
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "packed:acacia/acacia_chest_tier3"
       }
-    },
-    "has_previous": {
-      "trigger" : "minecraft:recipe_unlocked",
-      "conditions" : {
-        "recipe": "packed:acacia/acacia_chest_tier2"
-      }
     }
   },
   "requirements": [
-    ["has_the_recipe",
-      "has_resource"],
-    ["has_the_recipe",
-      "has_previous"]
+    [
+      "has_the_recipe",
+      "has_resource"
+    ],
+    [
+      "has_the_recipe",
+      "has_previous"
+    ]
   ]
 }

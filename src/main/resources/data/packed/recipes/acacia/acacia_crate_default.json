@@ -1,21 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PPP",
-        "PCP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:acacia_planks"
-        },
-        "C": {
-            "item": "packed:acacia_chest_default"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:acacia_planks"
     },
-    "result": {
-        "item": "packed:acacia_crate_default",
-        "count": 1
-    },
-    "group": "crate_default"
+    "C": {
+      "item": "packed:acacia_chest_default"
+    }
+  },
+  "result": {
+    "item": "packed:acacia_crate_default",
+    "count": 1
+  },
+  "group": "crate_default"
 }

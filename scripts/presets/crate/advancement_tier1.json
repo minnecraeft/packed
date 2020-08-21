@@ -16,23 +16,27 @@
         ]
       }
     },
+    "has_previous": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:${VARIANT}/${VARIANT}_crate_default"
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "packed:${VARIANT}/${VARIANT}_crate_tier1"
       }
-    },
-    "has_previous": {
-      "trigger" : "minecraft:recipe_unlocked",
-      "conditions" : {
-        "recipe": "packed:${VARIANT}/${VARIANT}_crate_default"
-      }
     }
   },
   "requirements": [
-    ["has_the_recipe",
-      "has_resource"],
-    ["has_the_recipe",
-      "has_previous"]
+    [
+      "has_the_recipe",
+      "has_resource"
+    ],
+    [
+      "has_the_recipe",
+      "has_previous"
+    ]
   ]
 }

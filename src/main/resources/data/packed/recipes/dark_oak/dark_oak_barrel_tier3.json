@@ -1,27 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#i#",
-        "#P#",
-        "#_#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:dark_oak_planks"
-        },
-        "i": {
-            "item": "minecraft:diamond"
-        },
-        "P": {
-            "item": "packed:dark_oak_barrel_tier2"
-        },
-        "_": {
-            "item": "minecraft:dark_oak_slab"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "#B#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_planks"
     },
-    "result": {
-        "item": "packed:dark_oak_barrel_tier3",
-        "count": 1
+    "D": {
+      "item": "minecraft:diamond"
     },
-    "group": "barrel_tier3"
+    "B": {
+      "item": "packed:dark_oak_barrel_tier2"
+    },
+    "_": {
+      "item": "minecraft:dark_oak_slab"
+    }
+  },
+  "result": {
+    "item": "packed:dark_oak_barrel_tier3",
+    "count": 1
+  },
+  "group": "barrel_tier3"
 }

@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PAP",
-        "PLP",
-        "PAP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:birch_planks"
-        },
-        "L": {
-            "item": "packed:birch_chest_default"
-        },
-        "A": {
-            "item": "minecraft:iron_ingot"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PCP",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:birch_planks"
     },
-    "result": {
-        "item": "packed:birch_chest_tier1",
-        "count": 1
+    "I": {
+      "item": "minecraft:iron_ingot"
     },
-    "group": "chest_tier1"
+    "C": {
+      "item": "packed:birch_chest_default"
+    }
+  },
+  "result": {
+    "item": "packed:birch_chest_tier1",
+    "count": 1
+  },
+  "group": "chest_tier1"
 }

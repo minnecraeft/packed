@@ -1,21 +1,21 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#_#",
-        "# #",
-        "#_#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:acacia_planks"
-        },
-        "_": {
-            "item": "minecraft:acacia_slab"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "# #",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_planks"
     },
-    "result": {
-        "item": "packed:acacia_barrel_default",
-        "count": 1
-    },
-    "group": "barrel_default"
+    "_": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "result": {
+    "item": "packed:acacia_barrel_default",
+    "count": 1
+  },
+  "group": "barrel_default"
 }

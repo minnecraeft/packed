@@ -1,24 +1,27 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PAP",
-        "PLP",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:${VARIANT}_planks"
-        },
-        "L": {
-            "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
-        },
-        "A": {
-            "item": "minecraft:diamond"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PCP",
+    "P_P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:${VARIANT}_planks"
     },
-    "result": {
-        "item": "packed:${VARIANT}_chest_tier3",
-        "count": 1
+    "D": {
+      "item": "minecraft:diamond"
     },
-    "group": "chest_tier3"
+    "C": {
+      "item": "packed:${VARIANT}_chest_${PREVIOUS_TIER}"
+    },
+    "_": {
+      "item": "minecraft:${VARIANT}_slab"
+    }
+  },
+  "result": {
+    "item": "packed:${VARIANT}_chest_tier3",
+    "count": 1
+  },
+  "group": "chest_tier3"
 }

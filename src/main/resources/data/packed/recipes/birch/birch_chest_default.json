@@ -1,18 +1,18 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "PPP",
-        "P P",
-        "PPP"
-    ],
-    "key": {
-        "P": {
-            "item": "minecraft:birch_planks"
-        }
-    },
-    "result": {
-        "item": "packed:birch_chest_default",
-        "count": 1
-    },
-    "group": "chest_default"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:birch_planks"
+    }
+  },
+  "result": {
+    "item": "packed:birch_chest_default",
+    "count": 1
+  },
+  "group": "chest_default"
 }

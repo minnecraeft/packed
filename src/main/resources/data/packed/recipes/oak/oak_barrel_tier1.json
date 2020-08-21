@@ -1,24 +1,24 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "#i#",
-        "#P#",
-        "#i#"
-    ],
-    "key": {
-        "#": {
-            "item": "minecraft:oak_planks"
-        },
-        "i": {
-            "item": "minecraft:iron_ingot"
-        },
-        "P": {
-            "item": "packed:oak_barrel_default"
-        }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#B#",
+    "#I#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_planks"
     },
-    "result": {
-        "item": "packed:oak_barrel_tier1",
-        "count": 1
+    "I": {
+      "item": "minecraft:iron_ingot"
     },
-    "group": "barrel_tier1"
+    "B": {
+      "item": "packed:oak_barrel_default"
+    }
+  },
+  "result": {
+    "item": "packed:oak_barrel_tier1",
+    "count": 1
+  },
+  "group": "barrel_tier1"
 }
