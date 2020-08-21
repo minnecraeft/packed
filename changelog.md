@@ -1,9 +1,4 @@
-Fixed Blocks not dropping themself when mined
+Fixed Tier 3 Chest recipes
 
-Fixed upgrade item not getting consumed
-
-Added recipe to convert mod chests to vanilla chests
-
-Vanilla Recipes which need chets now support mod chests
-
-Fixed recipe unlock advancements
+When you change your recipe datagen script, you also need to run it.
+Or: Dont program at 1AM
