@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.function.BiFunction;
+import java.util.stream.Stream;
 
 public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
 
@@ -63,5 +64,10 @@ public class WoodBlockVariants<T, B extends Block> implements Iterable<B> {
     public Iterator<B> iterator() {
         return variants.values().iterator();
     }
+
+    public Stream<B> stream() {
+        return variants.values().stream();
+    }
+
 }
 

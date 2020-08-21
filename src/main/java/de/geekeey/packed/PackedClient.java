@@ -43,7 +43,7 @@ public class PackedClient implements ClientModInitializer {
         }
 
         BlockEntityRendererRegistry.INSTANCE.register(PackedEntities.CUSTOM_CHEST, PackedClient::createDefaultRenderer);
-        register(PackedItems.CHEST_DEFAULT_TIER, variant -> new VariantChestBlockEntity(StorageTiers.DEFAULT, variant));
+        register(PackedItems.CHEST_DEFAULT, variant -> new VariantChestBlockEntity(StorageTiers.DEFAULT, variant));
         register(PackedItems.CHEST_TIER_1, variant -> new VariantChestBlockEntity(StorageTiers.TIER_1, variant));
         register(PackedItems.CHEST_TIER_2, variant -> new VariantChestBlockEntity(StorageTiers.TIER_2, variant));
         register(PackedItems.CHEST_TIER_3, variant -> new VariantChestBlockEntity(StorageTiers.TIER_3, variant));
