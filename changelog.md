@@ -1,4 +1,8 @@
-Fixed Tier 3 Chest recipes
+Fixed crash with piston entity renderes.
+This bug was much bigger as it caused vanilla rendering logic to be called way too early, so many variables were null.
 
-When you change your recipe datagen script, you also need to run it.
-Or: Dont program at 1AM
+Properly formatted creative item group
+
+Fixed item rendering in crate and item duplication glitches
+(Caused by us trying to get better performance than vanilla, but we realised this is not possible)
+

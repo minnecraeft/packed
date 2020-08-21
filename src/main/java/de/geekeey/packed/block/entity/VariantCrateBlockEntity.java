@@ -28,7 +28,6 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
     private DefaultedList<ItemStack> inventory;
     private Item item;
-    private int count;
 
     public VariantCrateBlockEntity() {
         super(PackedEntities.CRATE);
@@ -50,45 +49,16 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     }
 
     @Override
-    public void incrementCount(int count) {
-        if (this.count <= 0) {
-            Item type = this.inventory.stream()
-                    .filter(s -> !s.isEmpty())
-                    .findFirst()
-                    .map(ItemStack::getItem)
-                    .orElse(Items.AIR);
-            if (type != Items.AIR) {
-                this.item = type;
-                this.sync();
-            }
-        }
-        this.count += count;
-    }
-
-    @Override
-    public void decrementCount(int count) {
-        this.count -= count;
-        if (this.count <= 0) {
-            this.item = Items.AIR;
+    public void markDirty() {
+        Item i = this.inventory.stream()
+                .filter(s -> !s.isEmpty())
+                .findFirst()
+                .map(ItemStack::getItem)
+                .orElse(Items.AIR);
+        if (!this.item.equals(i)) {
+            this.item = i;
             this.sync();
         }
-    }
-
-    @Override
-    public void clearCount() {
-        this.count = 0;
-        this.item = Items.AIR;
-        this.sync();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.count <= 0;
-    }
-
-    @Override
-    public boolean isFull() {
-        return this.count >= getTier().getStackAmount() * getItem().getMaxCount();
     }
 
     @Override
@@ -107,7 +77,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
             String id = item.getString("id");
             this.item = Registry.ITEM.get(new Identifier(id));
 
-            this.count = item.getInt("count");
+            int count = item.getInt("count");
 
             if (count / 64 > getTier().getStackAmount()) {
                 int stacks = count / 64;
@@ -144,7 +114,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
             Identifier identifier = Registry.ITEM.getId(this.item);
             item.putString("id", identifier.toString());
 
-            item.putInt("count", count);
+            item.putInt("count", getItemAmount());
 
             tag.put("item", item);
         }
@@ -156,8 +126,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     @Override
     public void fromClientTag(CompoundTag compound) {
         String id = compound.getString("item");
-        Item item = Registry.ITEM.get(new Identifier(id));
-        inventory.set(0, new ItemStack(item));
+        this.item = Registry.ITEM.get(new Identifier(id));
     }
 
     @Override
@@ -177,7 +146,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     }
 
     public void setTier(@NotNull StorageTier tier) {
-        this.inventory = Upgradable.ExtendInventory(this.inventory,tier.getStackAmount());
+        this.inventory = Upgradable.ExtendInventory(this.inventory, tier.getStackAmount());
         this.tier = tier;
     }
 

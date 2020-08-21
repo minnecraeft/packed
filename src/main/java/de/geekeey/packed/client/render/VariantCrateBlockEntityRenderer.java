@@ -30,7 +30,7 @@ public class VariantCrateBlockEntityRenderer extends BlockEntityRenderer<Variant
 
     @Override
     public void render(VariantCrateBlockEntity entity, float delta, MatrixStack matrices, VertexConsumerProvider vertices, int light, int overlay) {
-        ItemStack stack = entity.getStack(0);
+        ItemStack stack = entity.getItem().getStackForRender();
 
         if (!stack.isEmpty()) {
             World world = entity.getWorld();

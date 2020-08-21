@@ -6,29 +6,25 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
-import java.util.stream.IntStream;
-
 public interface FuckYouInv extends Inventory {
 
     DefaultedList<ItemStack> stacks();
 
-    void incrementCount(int count);
-
-    void decrementCount(int count);
-
-    void clearCount();
-
     @Override
     default boolean isEmpty() {
-        return IntStream.range(0, size() - 1)
-                .mapToObj(this::getStack)
+        return stacks().stream()
                 .allMatch(ItemStack::isEmpty);
     }
 
     default boolean isFull() {
-        return IntStream.range(0, size() - 1)
-                .mapToObj(this::getStack)
+        return stacks().stream()
                 .noneMatch(stack -> stack.isEmpty() || stack.getCount() < stack.getMaxCount());
+    }
+
+    default int getItemAmount() {
+        return stacks().stream()
+                .mapToInt(ItemStack::getCount)
+                .sum();
     }
 
     @Override
@@ -43,12 +39,10 @@ public interface FuckYouInv extends Inventory {
 
     @Override
     default void setStack(int slot, ItemStack stack) {
-        decrementCount(stacks().get(slot).getCount());
         stacks().set(slot, stack);
         if (!stack.isEmpty()) {
             int max = getMaxCountPerStack();
             if (stack.getCount() > max) stack.setCount(max);
-            incrementCount(stack.getCount());
         }
         markDirty();
     }
@@ -57,7 +51,6 @@ public interface FuckYouInv extends Inventory {
     default ItemStack removeStack(int slot, int amount) {
         ItemStack stack = Inventories.splitStack(stacks(), slot, amount);
         if (!stack.isEmpty()) {
-            decrementCount(stack.getCount());
             markDirty();
         }
         return stack;
@@ -67,7 +60,6 @@ public interface FuckYouInv extends Inventory {
     default ItemStack removeStack(int slot) {
         ItemStack stack = Inventories.removeStack(stacks(), slot);
         if (!stack.isEmpty()) {
-            decrementCount(stack.getCount());
             markDirty();
         }
         return stack;
@@ -100,7 +92,6 @@ public interface FuckYouInv extends Inventory {
                 if (len > 0) {
                     stack.increment(len);
                     insert.decrement(len);
-                    incrementCount(len);
                     markDirty();
                 }
                 if (insert.isEmpty()) return;
@@ -131,7 +122,6 @@ public interface FuckYouInv extends Inventory {
     @Override
     default void clear() {
         stacks().clear();
-        clearCount();
         markDirty();
     }
 
