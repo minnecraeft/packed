@@ -11,6 +11,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoubleBlockProperties;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -26,10 +27,12 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.function.BiPredicate;
 
 import static net.minecraft.block.Blocks.CHEST;
 
@@ -129,5 +132,20 @@ public class VariantChestBlock extends ChestBlock {
             //This super call will kill the BlockEntity, so this only gets called when we're not upgrading our block
             super.onStateReplaced(state, world, pos, newState, moved);
         }
+    }
+
+    /*
+    copied from ChestBlock class, this is done because otherwise the game would crash with a no such method error
+    however: i cannot explain you why this happens. So dont touch it
+     */
+    public DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> getBlockEntitySource(BlockState state, World world, BlockPos pos, boolean ignoreBlocked) {
+        BiPredicate<WorldAccess,BlockPos> biPredicate2;
+        if (ignoreBlocked) {
+            biPredicate2 = (worldAccess, blockPos) -> false;
+        } else {
+            biPredicate2 = ChestBlock::isChestBlocked;
+        }
+
+        return DoubleBlockProperties.toPropertySource(this.entityTypeRetriever.get(), ChestBlock::getDoubleBlockType, ChestBlock::getFacing, FACING, state, world, pos, biPredicate2);
     }
 }

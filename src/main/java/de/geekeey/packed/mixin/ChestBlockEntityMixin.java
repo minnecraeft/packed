@@ -13,9 +13,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ChestBlockEntity.class)
 public class ChestBlockEntityMixin {
-    @Shadow
-    private DefaultedList<ItemStack> inventory;
-
     //This is necessary as countViewers only checks for Vanilla genericContainerScreenHandler classes, but our
     //extended ScreenHandler class does not subclass this. Therefore custom logic is needed.
     //This logic is identical to the BarrelBlockEntity Mixin
