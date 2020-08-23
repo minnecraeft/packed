@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "id": "packed",
   "version": "${version}",
-  "name": "Packed",
+  "name": "Packed Storage",
   "description": "Packed is a mod that adds a variety of storage blocks such as chest, barrels, and crates. These storage blocks all have different tiers, with each tier the blocks has the ability to store more items than the previous one.",
   "authors": [
     "manymoney2",
     "Louis9902"
   ],
   "contact": {
-    "issues": "https://github.com/Louis9902/packed/issues"
+    "issues": "https://github.com/minnecraeft/packed/issues",
+    "website": "https://www.curseforge.com/minecraft/mc-mods/packed-storage"
   },
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "icon": "assets/packed/icon.png",
   "environment": "*",
   "entrypoints": {
