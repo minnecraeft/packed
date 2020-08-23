@@ -93,7 +93,7 @@ public class VariantCrateBlock extends BlockWithEntity {
                 //  insert all items in the players hand into the barrel and remove the items from the player inventory
                 //  we do not check against nbt here as there can't be an item in the barrel with nbt because of the
                 //  following conditions
-                if ((crate.getItem().equals(Items.AIR) || crate.getItem().equals(stack.getItem())) && stack.isStackable() && !stack.hasTag()) {
+                if (crate.isValid(0, stack)) {
                     insert = crate.insert(stack);
                     stack.setCount(insert.getCount());
                 }

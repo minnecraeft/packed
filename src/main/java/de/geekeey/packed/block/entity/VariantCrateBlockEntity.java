@@ -138,7 +138,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        return !stack.isEmpty() && stack.getItem().equals(getItem()) || getItem().equals(Items.AIR);
+        return (getItem().equals(Items.AIR) || getItem().equals(stack.getItem())) && stack.isStackable() && !stack.hasTag();
     }
 
     public @NotNull StorageTier getTier() {
