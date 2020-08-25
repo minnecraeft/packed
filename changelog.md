@@ -1,1 +1,2 @@
-Fixed crash when opening chest which only happened outside dev environment and i have no explanation on why it happened.
+Fixed chests not opening on dedicated servers with astromine
+Added fallback recipe to vanilla blocks when mod recipes dont match. This will make modded wood planks craft vanilla blocks aswell
