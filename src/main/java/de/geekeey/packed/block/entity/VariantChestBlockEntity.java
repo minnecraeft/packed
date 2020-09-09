@@ -93,7 +93,7 @@ public class VariantChestBlockEntity extends ChestBlockEntity implements Extende
     }
 
     public void setTier(@NotNull StorageTier tier) {
-        setInvStackList(Upgradable.ExtendInventory(getInvStackList(),tier.getInventoryHeight()*tier.getInventoryWidth()));
+        setInvStackList(Upgradable.resize(getInvStackList(),tier.getInventoryHeight()*tier.getInventoryWidth()));
         this.tier = tier;
     }
 

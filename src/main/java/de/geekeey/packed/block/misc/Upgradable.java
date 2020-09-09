@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.stream.IntStream;
+
 public interface Upgradable {
     @NotNull StorageTier getTier();
 
@@ -15,11 +17,9 @@ public interface Upgradable {
 
     void setVariant(WoodVariant variant);
 
-    static DefaultedList<ItemStack> ExtendInventory(DefaultedList<ItemStack> old,int newsize){
-        DefaultedList<ItemStack> upgradedList = DefaultedList.ofSize(newsize,ItemStack.EMPTY);
-        for(int i = 0; i < old.size() ; ++i){
-            upgradedList.set(i,old.get(i));
-        }
-        return upgradedList;
+    static DefaultedList<ItemStack> resize(DefaultedList<ItemStack> current, int size) {
+        DefaultedList<ItemStack> stacks = DefaultedList.ofSize(size, ItemStack.EMPTY);
+        IntStream.range(0, current.size()).forEach(i -> stacks.set(i, current.get(i)));
+        return stacks;
     }
 }

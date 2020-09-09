@@ -91,7 +91,7 @@ public class VariantBarrelBlockEntity extends BarrelBlockEntity implements Exten
     }
 
     public void setTier(@NotNull StorageTier tier) {
-        setInvStackList(Upgradable.ExtendInventory(getInvStackList(), tier.getInventoryHeight() * tier.getInventoryWidth()));
+        setInvStackList(Upgradable.resize(getInvStackList(), tier.getInventoryHeight() * tier.getInventoryWidth()));
         this.tier = tier;
     }
 

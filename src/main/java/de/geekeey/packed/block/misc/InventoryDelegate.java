@@ -6,7 +6,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
-public interface FuckYouInv extends Inventory {
+public interface InventoryDelegate extends Inventory {
 
     DefaultedList<ItemStack> stacks();
 

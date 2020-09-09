@@ -5,6 +5,7 @@ import de.geekeey.packed.block.VariantBarrelBlock;
 import de.geekeey.packed.block.VariantChestBlock;
 import de.geekeey.packed.block.VariantCrateBlock;
 import de.geekeey.packed.init.helpers.*;
+import de.geekeey.packed.item.StorageLocker;
 import de.geekeey.packed.item.StorageUpgrader;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
@@ -34,6 +35,8 @@ public class PackedItems {
     public static final StorageUpgrader STORAGE_UPGRADER_DEFAULT;
     public static final StorageUpgrader STORAGE_UPGRADER_TIER1;
     public static final StorageUpgrader STORAGE_UPGRADER_TIER2;
+
+    public static final StorageLocker STORAGE_LOCKER;
 
     static {
         BARREL_DEFAULT = new WoodItemVariants<>(PackedBlocks::barrel, PackedBlocks.BARREL_DEFAULT);
@@ -81,9 +84,15 @@ public class PackedItems {
                 })
                 .build();
 
-        STORAGE_UPGRADER_DEFAULT = Registry.register(Registry.ITEM, Packed.id("storage_upgrader_default"), new StorageUpgrader(new Item.Settings().group(ITEM_GROUP), StorageTiers.DEFAULT, StorageTiers.TIER_1));
-        STORAGE_UPGRADER_TIER1 = Registry.register(Registry.ITEM, Packed.id("storage_upgrader_tier1"), new StorageUpgrader(new Item.Settings().group(ITEM_GROUP), StorageTiers.TIER_1, StorageTiers.TIER_2));
-        STORAGE_UPGRADER_TIER2 = Registry.register(Registry.ITEM, Packed.id("storage_upgrader_tier2"), new StorageUpgrader(new Item.Settings().group(ITEM_GROUP), StorageTiers.TIER_2, StorageTiers.TIER_3));
+        STORAGE_UPGRADER_DEFAULT = RegistryHelpers.register("storage_upgrader_default", new StorageUpgrader(newSettings(), StorageTiers.DEFAULT, StorageTiers.TIER_1));
+        STORAGE_UPGRADER_TIER1 = RegistryHelpers.register("storage_upgrader_tier1", new StorageUpgrader(newSettings(), StorageTiers.TIER_1, StorageTiers.TIER_2));
+        STORAGE_UPGRADER_TIER2 = RegistryHelpers.register("storage_upgrader_tier2", new StorageUpgrader(newSettings(), StorageTiers.TIER_2, StorageTiers.TIER_3));
+
+        STORAGE_LOCKER = RegistryHelpers.register("storage_locker", new StorageLocker(newSettings().maxCount(1)));
+    }
+
+    private static Item.Settings newSettings() {
+        return new Item.Settings().group(ITEM_GROUP);
     }
 
     public static void register() {

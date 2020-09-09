@@ -1,11 +1,13 @@
 package de.geekeey.packed.block.entity;
 
-import de.geekeey.packed.block.misc.FuckYouInv;
+import de.geekeey.packed.block.misc.InventoryDelegate;
 import de.geekeey.packed.block.misc.Upgradable;
+import de.geekeey.packed.helper.ItemStacks;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.helpers.StorageTier;
 import de.geekeey.packed.init.helpers.WoodVariant;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.Item;
@@ -19,7 +21,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
-public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, BlockEntityClientSerializable, Upgradable {
+import java.util.Optional;
+
+public class VariantCrateBlockEntity extends BlockEntity implements InventoryDelegate, BlockEntityClientSerializable, Upgradable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -28,6 +32,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
     private DefaultedList<ItemStack> inventory;
     private Item item;
+    private boolean keep;
 
     public VariantCrateBlockEntity() {
         super(PackedEntities.CRATE);
@@ -48,37 +53,53 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
         return inventory;
     }
 
-    @Override
-    public void markDirty() {
-        Item i = this.inventory.stream()
-                .filter(s -> !s.isEmpty())
+    public void refreshFilter() {
+        Optional<Item> stack = stacks().stream()
+                .filter(ItemStacks::notEmpty)
                 .findFirst()
-                .map(ItemStack::getItem)
-                .orElse(Items.AIR);
-        if (!this.item.equals(i)) {
-            this.item = i;
-            this.sync();
+                .map(ItemStack::getItem);
+
+        if (stack.isPresent()) {
+            Item item = stack.get();
+            if (item.equals(getItem())) return;
+            setItem(item);
+            sync();
+        } else if (!isKeep()) {
+            setItem(Items.AIR);
+            sync();
         }
     }
 
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        if (tag.contains("tier", 8)) {
-            StorageTier tier = StorageTier.REGISTRY.get(new Identifier(tag.getString("tier")));
-            if (tier != null) {
-                setTier(tier);
-                this.inventory = DefaultedList.ofSize(tier.getStackAmount(), ItemStack.EMPTY);
-            }
+    public void markDirty() {
+        refreshFilter();
+    }
+
+    @Override
+    public void fromTag(BlockState state, CompoundTag compound) {
+        if (compound.contains("tier", NbtType.STRING)) {
+            Identifier id = new Identifier(compound.getString("tier"));
+            StorageTier.REGISTRY.getOrEmpty(id).ifPresent(this::setTier);
         }
 
-        if (tag.contains("item", 10)) {
-            CompoundTag item = tag.getCompound("item");
+        if (compound.contains("variant", NbtType.STRING)) {
+            Identifier id = new Identifier(compound.getString("variant"));
+            WoodVariant.REGISTRY.getOrEmpty(id).ifPresent(this::setVariant);
+        }
 
-            String id = item.getString("id");
-            this.item = Registry.ITEM.get(new Identifier(id));
+        if (compound.contains("keep", NbtType.BYTE)) {
+            setKeep(compound.getByte("keep") != 0);
+        }
+
+        if (compound.contains("item", NbtType.COMPOUND)) {
+            CompoundTag item = compound.getCompound("item");
+
+            Identifier id = new Identifier(item.getString("id"));
+            setItem(Registry.ITEM.getOrEmpty(id).orElse(Items.AIR));
 
             int count = item.getInt("count");
 
+            // safe check so no items will be lost on error
             if (count / 64 > getTier().getStackAmount()) {
                 int stacks = count / 64;
                 stacks = stacks * 64 < count ? stacks + 1 : stacks;
@@ -86,53 +107,47 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
                 LOGGER.warn("Inventory is too small for items, maybe tier is missing? (bypass)");
             }
 
-
-            int index = 0;
-            int size = 0;
-            int c = count;
-            while (c > 0) {
-                size = Math.min(this.item.getMaxCount(), c);
-                this.inventory.set(index++, new ItemStack(this.item, size));
-                c -= size;
+            // populate the inventory with it's items
+            for (int s, i = 0, c = count; c > 0; c -= s) {
+                s = Math.min(this.getItem().getMaxCount(), c);
+                this.inventory.set(i++, new ItemStack(getItem(), s));
             }
         }
 
-
-        if (tag.contains("variant", 8)) {
-            WoodVariant variant = WoodVariant.REGISTRY.get(new Identifier(tag.getString("variant")));
-            if (variant != null)
-                setVariant(variant);
-        }
-
-        super.fromTag(state, tag);
+        super.fromTag(state, compound);
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
+    public CompoundTag toTag(CompoundTag compound) {
+        compound.putString("tier", getTier().getIdentifier().toString());
+        compound.putString("variant", getVariant().getIdentifier().toString());
+        compound.putByte("keep", (byte) (isKeep() ? 1 : 0));
         if (item != Items.AIR) {
             CompoundTag item = new CompoundTag();
-            Identifier identifier = Registry.ITEM.getId(this.item);
+            Identifier identifier = Registry.ITEM.getId(getItem());
             item.putString("id", identifier.toString());
-
             item.putInt("count", getItemAmount());
-
-            tag.put("item", item);
+            compound.put("item", item);
         }
-        tag.putString("tier", getTier().getIdentifier().toString());
-        tag.putString("variant", getVariant().getIdentifier().toString());
-        return super.toTag(tag);
+        return super.toTag(compound);
     }
 
     @Override
     public void fromClientTag(CompoundTag compound) {
-        String id = compound.getString("item");
-        this.item = Registry.ITEM.get(new Identifier(id));
+        if (compound.contains("item", NbtType.STRING)) {
+            Identifier id = new Identifier(compound.getString("item"));
+            setItem(Registry.ITEM.getOrEmpty(id).orElse(Items.AIR));
+        }
+        if (compound.contains("keep", NbtType.BYTE)) {
+            setKeep(compound.getByte("keep") != 0);
+        }
     }
 
     @Override
     public CompoundTag toClientTag(CompoundTag compound) {
-        Identifier identifier = Registry.ITEM.getId(getItem());
-        compound.putString("item", identifier.toString());
+        Identifier id = Registry.ITEM.getId(getItem());
+        compound.putString("item", id.toString());
+        compound.putByte("keep", (byte) (isKeep() ? 1 : 0));
         return compound;
     }
 
@@ -141,15 +156,19 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
         return (getItem().equals(Items.AIR) || getItem().equals(stack.getItem())) && stack.isStackable() && !stack.hasTag();
     }
 
+    //region Properties Accessors
+    //region Storage Tier
     public @NotNull StorageTier getTier() {
         return tier;
     }
 
     public void setTier(@NotNull StorageTier tier) {
-        this.inventory = Upgradable.ExtendInventory(this.inventory, tier.getStackAmount());
+        this.inventory = Upgradable.resize(this.inventory, tier.getStackAmount());
         this.tier = tier;
     }
+    //endregion
 
+    //region Wood Variant
     public @NotNull WoodVariant getVariant() {
         return variant;
     }
@@ -158,8 +177,26 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
     public void setVariant(@NotNull WoodVariant variant) {
         this.variant = variant;
     }
+    //endregion
 
+    //region Keep
+    public boolean isKeep() {
+        return keep;
+    }
+
+    public void setKeep(boolean keep) {
+        this.keep = keep;
+    }
+    //endregion
+
+    //region Item
     public @NotNull Item getItem() {
         return item;
     }
+
+    private void setItem(Item item) {
+        this.item = item;
+    }
+    //endregion
+    //endregion
 }
