@@ -22,6 +22,7 @@ public class PackedRecipes {
         return Registry.register(Registry.RECIPE_SERIALIZER, Packed.id(identifier), serializer);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

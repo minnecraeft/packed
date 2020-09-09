@@ -88,7 +88,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements FuckYouInv, 
 
 
             int index = 0;
-            int size = 0;
+            int size;
             int c = count;
             while (c > 0) {
                 size = Math.min(this.item.getMaxCount(), c);

@@ -17,20 +17,19 @@ public class ChestBlockEntityExtra {
     //non-Mixin classes in the mixin package this needs to be outside so we don't have to write the same code twice
     public static int countViewersHandler(World world, LockableContainerBlockEntity container, int ticksOpen, int x, int y) {
         int i = 0;
-        float f = 5.0F;
-        List<PlayerEntity> list = world.getNonSpectatingEntities(PlayerEntity.class, new Box((double) ((float) ticksOpen - 5.0F), (double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) (ticksOpen + 1) + 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F)));
-        Iterator var8 = list.iterator();
+        List<PlayerEntity> list = world.getNonSpectatingEntities(PlayerEntity.class, new Box((float) ticksOpen - 5.0F, (float) x - 5.0F, (float) y - 5.0F, (float) (ticksOpen + 1) + 5.0F, (float) (x + 1) + 5.0F, (float) (y + 1) + 5.0F));
+        Iterator<PlayerEntity> players = list.iterator();
 
         while (true) {
             Inventory inventory;
             do {
                 PlayerEntity playerEntity;
                 do {
-                    if (!var8.hasNext()) {
+                    if (!players.hasNext()) {
                         return i;
                     }
 
-                    playerEntity = (PlayerEntity) var8.next();
+                    playerEntity = players.next();
                 } while (!(playerEntity.currentScreenHandler instanceof GenericContainerScreenHandler || playerEntity.currentScreenHandler instanceof ExtendedGenericContainerScreenHandler));
 
                 //As our extendedScreenHandler class does not extend the vanilla variant. We need to check for both classes

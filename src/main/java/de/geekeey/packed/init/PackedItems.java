@@ -86,6 +86,7 @@ public class PackedItems {
         STORAGE_UPGRADER_TIER2 = Registry.register(Registry.ITEM, Packed.id("storage_upgrader_tier2"), new StorageUpgrader(new Item.Settings().group(ITEM_GROUP), StorageTiers.TIER_2, StorageTiers.TIER_3));
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

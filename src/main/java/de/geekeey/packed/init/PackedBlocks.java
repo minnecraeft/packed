@@ -53,6 +53,7 @@ public class PackedBlocks {
         return Packed.id(String.format("%s_crate_%s", variant.getIdentifier().getPath(), tier.getIdentifier().getPath()));
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

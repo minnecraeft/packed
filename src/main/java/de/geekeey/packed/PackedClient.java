@@ -3,8 +3,8 @@ package de.geekeey.packed;
 import de.geekeey.packed.block.VariantChestBlock;
 import de.geekeey.packed.block.entity.VariantChestBlockEntity;
 import de.geekeey.packed.client.GenericScreen;
-import de.geekeey.packed.client.render.VariantCrateBlockEntityRenderer;
 import de.geekeey.packed.client.render.VariantChestBlockEntityRenderer;
+import de.geekeey.packed.client.render.VariantCrateBlockEntityRenderer;
 import de.geekeey.packed.init.PackedEntities;
 import de.geekeey.packed.init.PackedItems;
 import de.geekeey.packed.init.PackedScreenHandlers;
@@ -14,12 +14,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 
@@ -66,9 +64,8 @@ public class PackedClient implements ClientModInitializer {
             Block block = item.getBlock();
 
             VariantChestBlockEntityRenderer renderer = new VariantChestBlockEntityRenderer(dispatcher, block);
-            BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, matrices, vertices, light, overlay) -> {
-                renderer.render(factory.apply(variant), 0.0f, matrices, vertices, light, overlay);
-            });
+            BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, matrices, vertices, light, overlay) ->
+                    renderer.render(factory.apply(variant), 0.0f, matrices, vertices, light, overlay));
         });
     }
 

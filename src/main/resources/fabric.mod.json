@@ -31,5 +31,11 @@
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   },
-  "accessWidener": "packed.accesswidener"
+  "accessWidener": "packed.accesswidener",
+  "custom": {
+    "waila:plugins": {
+      "id": "packed:crate",
+      "initializer": "de.geekeey.packed.compat.HwylaCompat"
+    }
+  }
 }
