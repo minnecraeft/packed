@@ -32,7 +32,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
 
     private DefaultedList<ItemStack> inventory;
     private Item item;
-    private boolean keep;
+    private boolean locked;
 
     public VariantCrateBlockEntity() {
         super(PackedEntities.CRATE);
@@ -64,7 +64,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
             if (item.equals(getItem())) return;
             setItem(item);
             sync();
-        } else if (!isKeep()) {
+        } else if (!isLocked()) {
             setItem(Items.AIR);
             sync();
         }
@@ -87,8 +87,8 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
             WoodVariant.REGISTRY.getOrEmpty(id).ifPresent(this::setVariant);
         }
 
-        if (compound.contains("keep", NbtType.BYTE)) {
-            setKeep(compound.getByte("keep") != 0);
+        if (compound.contains("locked", NbtType.BYTE)) {
+            setLocked(compound.getByte("locked") != 0);
         }
 
         if (compound.contains("item", NbtType.COMPOUND)) {
@@ -121,7 +121,7 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
     public CompoundTag toTag(CompoundTag compound) {
         compound.putString("tier", getTier().getIdentifier().toString());
         compound.putString("variant", getVariant().getIdentifier().toString());
-        compound.putByte("keep", (byte) (isKeep() ? 1 : 0));
+        compound.putByte("locked", (byte) (isLocked() ? 1 : 0));
         if (item != Items.AIR) {
             CompoundTag item = new CompoundTag();
             Identifier identifier = Registry.ITEM.getId(getItem());
@@ -138,8 +138,8 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
             Identifier id = new Identifier(compound.getString("item"));
             setItem(Registry.ITEM.getOrEmpty(id).orElse(Items.AIR));
         }
-        if (compound.contains("keep", NbtType.BYTE)) {
-            setKeep(compound.getByte("keep") != 0);
+        if (compound.contains("locked", NbtType.BYTE)) {
+            setLocked(compound.getByte("locked") != 0);
         }
     }
 
@@ -147,13 +147,18 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
     public CompoundTag toClientTag(CompoundTag compound) {
         Identifier id = Registry.ITEM.getId(getItem());
         compound.putString("item", id.toString());
-        compound.putByte("keep", (byte) (isKeep() ? 1 : 0));
+        compound.putByte("keep", (byte) (isLocked() ? 1 : 0));
         return compound;
     }
 
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        return (getItem().equals(Items.AIR) || getItem().equals(stack.getItem())) && stack.isStackable() && !stack.hasTag();
+        if (getItem().equals(Items.AIR)) {
+            if (isLocked()) return false;
+            return !stack.hasTag() && stack.isStackable();
+        } else {
+            return getItem().equals(stack.getItem()) && !stack.hasTag() && stack.isStackable();
+        }
     }
 
     //region Properties Accessors
@@ -180,12 +185,12 @@ public class VariantCrateBlockEntity extends BlockEntity implements InventoryDel
     //endregion
 
     //region Keep
-    public boolean isKeep() {
-        return keep;
+    public boolean isLocked() {
+        return locked;
     }
 
-    public void setKeep(boolean keep) {
-        this.keep = keep;
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
     //endregion
 

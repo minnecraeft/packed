@@ -23,7 +23,7 @@ public class StorageLocker extends Item {
 
         if (container instanceof VariantCrateBlockEntity) {
             VariantCrateBlockEntity crate = (VariantCrateBlockEntity) container;
-            crate.setKeep(!crate.isKeep());
+            crate.setLocked(!crate.isLocked());
             crate.refreshFilter();
             return ActionResult.SUCCESS;
         }
