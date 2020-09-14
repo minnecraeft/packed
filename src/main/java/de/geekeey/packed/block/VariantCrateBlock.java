@@ -78,6 +78,7 @@ public class VariantCrateBlock extends BlockWithEntity {
      * When the player right clicks the block we insert the entire Stack in the players Hand into the barrel,
      * If the Items in the Barrel do not match those in the players Hand we do nothing.
      **/
+    @SuppressWarnings("deprecation")
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
@@ -149,6 +150,7 @@ public class VariantCrateBlock extends BlockWithEntity {
      * {@link VariantCrateBlock#dropSize} variable. When there is no space in the player inventory the items
      * get dropped onto the ground
      **/
+    @SuppressWarnings("deprecation")
     @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isClient) {
@@ -186,6 +188,7 @@ public class VariantCrateBlock extends BlockWithEntity {
     /**
      * When block is broken, this method will drop all contained items onto the ground
      **/
+    @SuppressWarnings("deprecation")
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock()) && !(newState.getBlock() instanceof VariantCrateBlock)) {
@@ -209,12 +212,14 @@ public class VariantCrateBlock extends BlockWithEntity {
         return BlockRenderType.MODEL;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }

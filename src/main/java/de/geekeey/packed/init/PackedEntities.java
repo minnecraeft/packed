@@ -55,6 +55,7 @@ public class PackedEntities {
         return Registry.register(Registry.BLOCK_ENTITY_TYPE, Packed.id(identifier), builder.build(null));
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

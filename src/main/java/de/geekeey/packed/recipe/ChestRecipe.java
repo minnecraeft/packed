@@ -18,20 +18,19 @@ import java.util.stream.IntStream;
 
 public class ChestRecipe extends SpecialCraftingRecipe {
 
-    private final HashSet<Item> vanilla;
+    private final static HashSet<Item> vanilla = Sets.newHashSet(
+            Items.OAK_PLANKS,
+            Items.SPRUCE_PLANKS,
+            Items.BIRCH_PLANKS,
+            Items.ACACIA_PLANKS,
+            Items.JUNGLE_PLANKS,
+            Items.DARK_OAK_PLANKS,
+            Items.CRIMSON_PLANKS,
+            Items.WARPED_PLANKS
+            );
 
     public ChestRecipe(Identifier identifier) {
         super(identifier);
-        vanilla = Sets.newHashSet(
-                Items.OAK_PLANKS,
-                Items.SPRUCE_PLANKS,
-                Items.BIRCH_PLANKS,
-                Items.ACACIA_PLANKS,
-                Items.JUNGLE_PLANKS,
-                Items.DARK_OAK_PLANKS,
-                Items.CRIMSON_PLANKS,
-                Items.WARPED_PLANKS
-        );
     }
 
     @Override
@@ -50,6 +49,8 @@ public class ChestRecipe extends SpecialCraftingRecipe {
                 .distinct()
                 .mapToInt(item -> 1)
                 .reduce(-1, Integer::sum);
+
+        if(!crafting.getStack(4).isEmpty())return false;
 
         if (different == 0) {
             return !vanilla.contains(items[0]);

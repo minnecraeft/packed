@@ -12,6 +12,7 @@ public class PackedScreenHandlers {
         GENERIC = ScreenHandlerRegistry.registerExtended(Packed.id("generic"), ExtendedGenericContainerScreenHandler::create);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

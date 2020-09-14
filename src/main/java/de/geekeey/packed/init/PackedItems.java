@@ -95,6 +95,7 @@ public class PackedItems {
         return new Item.Settings().group(ITEM_GROUP);
     }
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {
         // keep so class will get called and initialized
     }

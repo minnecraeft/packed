@@ -52,7 +52,7 @@ public enum WoodVariants implements WoodVariant {
     private final Identifier identifier;
 
     WoodVariants(String id) {
-        this.identifier = Packed.id(id);;
+        this.identifier = Packed.id(id);
     }
 
     @Override
