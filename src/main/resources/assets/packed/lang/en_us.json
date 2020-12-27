@@ -111,5 +111,7 @@
 
   "item.packed.storage_upgrader_default": "Default Storage Upgrader",
   "item.packed.storage_upgrader_tier1": "Tier 1 Storage Upgrader",
-  "item.packed.storage_upgrader_tier2": "Tier 2 Storage Upgrader"
+  "item.packed.storage_upgrader_tier2": "Tier 2 Storage Upgrader",
+
+  "item.packed.storage_locker" : "Storage Key"
 }

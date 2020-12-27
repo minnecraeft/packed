@@ -17,10 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "de.geekeey.packed.PackedClient"
+      "com.github.minnecraeft.packed.PackedClient"
     ],
     "main": [
-      "de.geekeey.packed.Packed"
+      "com.github.minnecraeft.packed.Packed"
     ]
   },
   "mixins": [
@@ -28,8 +28,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.9.0+build.204",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "fabric": "*"
   },
   "accessWidener": "packed.accesswidener",
   "custom": {

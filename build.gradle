@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.5.1'
+    id 'fabric-loom' version '0.6.13'
     id 'maven-publish'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
@@ -7,9 +7,10 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name + "-mc${project.minecraft_version}"
+setArchivesBaseName "${project.mod_artifact}-mc${project.minecraft_version}"
+
 version = project.mod_version
-group = project.maven_group
+group = project.mod_group
 
 repositories {
     //Repository for HWYLA
@@ -17,18 +18,20 @@ repositories {
 }
 
 dependencies {
-    //to change the versions see the gradle.properties file
+    // minecraft fabric versions for mappings
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
+    // fabric api version
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+    // additional mods for api compat
     modImplementation "mcp.mobius.waila:Hwyla:${hwyla_version}"
 
-    // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-    // You may need to force-disable transitiveness on them.
+    // additional mods for runtime checks
+    modRuntime "com.terraformersmc:traverse:3.2.0+build.17"
+
     implementation 'org.jetbrains:annotations:20.1.0'
 }
 
@@ -38,8 +41,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         include "fabric.mod.json"
         expand(
-            "version": project.version,
-            "minecraft_version": project.minecraft_version
+                "version": project.version,
+                "minecraft_version": project.minecraft_version
         )
     }
 
@@ -92,7 +95,7 @@ minecraft {
     accessWidener "src/main/resources/packed.accesswidener"
 }
 
-curseforge{
+curseforge {
     apiKey = project.hasProperty("curse_api_key") ? project.curse_api_key : "###"
     project {
         id = '403096'

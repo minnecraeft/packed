@@ -1,2 +1,3 @@
-Fixed chests not opening on dedicated servers with astromine
-Added fallback recipe to vanilla blocks when mod recipes dont match. This will make modded wood planks craft vanilla blocks aswell
+Add HWYLA support for storage crates
+
+Added Storage Key to lock storage crates to their item
