@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "packed:${WOOD}_barrel_${TIER}_upgrade"
+    ]
+  },
+  "criteria": {
+    "has_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packed:${WOOD}_barrel_${LAST_TIER}"
+          },
+          {
+            "item": "packed:storage_upgrader_${LAST_TIER}"
+          }
+        ]
+      }
+    },
+    "has_next_tier": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:${WOOD}_barrel_${TIER}"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:${WOOD}_barrel_${TIER}_upgrade"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_resource"
+    ],
+    [
+      "has_the_recipe",
+      "has_next_tier"
+    ]
+  ]
+}

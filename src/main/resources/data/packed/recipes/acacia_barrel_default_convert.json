@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:acacia_barrel_default"
+    }
+  ],
+  "result": {
+    "item": "minecraft:barrel",
+    "count": 1
+  },
+  "group": "vanilla_barrel"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PDP",
+    "PCP",
+    "P_P"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "packed:${WOOD}_chest_${LAST_TIER}"
+    },
+    "_": {
+      "item": "minecraft:${WOOD}_slab"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_chest_tier3",
+    "count": 1
+  },
+  "group": "chest_tier3"
+}

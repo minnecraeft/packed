@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:chest"
+    ]
+  },
+  "criteria": {
+    "has_some_chest": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "packed:chests_default"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:chest"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_some_chest",
+      "has_the_recipe"
+    ]
+  ]
+}

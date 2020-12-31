@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "# #",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "_": {
+      "item": "minecraft:${WOOD}_slab"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_barrel_default",
+    "count": 1
+  },
+  "group": "barrel_default"
+}

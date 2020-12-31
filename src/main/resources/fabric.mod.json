@@ -34,7 +34,7 @@
   "custom": {
     "waila:plugins": {
       "id": "packed:crate",
-      "initializer": "de.geekeey.packed.compat.HwylaCompat"
+      "initializer": "com.github.minnecraeft.packed.compat.HwylaCompat"
     }
   }
 }

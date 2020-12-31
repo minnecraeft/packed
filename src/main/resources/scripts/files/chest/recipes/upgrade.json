@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:${WOOD}_chest_${LAST_TIER}"
+    },
+    {
+      "item": "packed:storage_upgrader_${LAST_TIER}"
+    }
+  ],
+  "result": {
+    "item": "packed:${WOOD}_chest_${TIER}",
+    "count": 1
+  },
+  "group": "chest_${TIER}"
+}

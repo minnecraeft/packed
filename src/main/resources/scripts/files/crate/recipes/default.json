@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "C": {
+      "item": "packed:${WOOD}_chest_default"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_crate_default",
+    "count": 1
+  },
+  "group": "crate_default"
+}

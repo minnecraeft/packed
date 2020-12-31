@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "packed:birch_barrel_tier1_upgrade"
+    ]
+  },
+  "criteria": {
+    "has_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "packed:birch_barrel_default"
+          },
+          {
+            "item": "packed:storage_upgrader_default"
+          }
+        ]
+      }
+    },
+    "has_next_tier": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:birch_barrel_tier1"
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "packed:birch_barrel_tier1_upgrade"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_resource"
+    ],
+    [
+      "has_the_recipe",
+      "has_next_tier"
+    ]
+  ]
+}

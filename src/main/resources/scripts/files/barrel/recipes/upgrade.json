@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:${WOOD}_barrel_${LAST_TIER}"
+    },
+    {
+      "item": "packed:storage_upgrader_${LAST_TIER}"
+    }
+  ],
+  "result": {
+    "item": "packed:${WOOD}_barrel_${TIER}",
+    "count": 1
+  },
+  "group": "barrel_${TIER}"
+}

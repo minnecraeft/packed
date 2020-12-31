@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:jungle_barrel_default"
+    },
+    {
+      "item": "packed:storage_upgrader_default"
+    }
+  ],
+  "result": {
+    "item": "packed:jungle_barrel_tier1",
+    "count": 1
+  },
+  "group": "barrel_tier1"
+}

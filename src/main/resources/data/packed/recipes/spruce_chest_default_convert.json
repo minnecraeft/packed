@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:spruce_chest_default"
+    }
+  ],
+  "result": {
+    "item": "minecraft:chest",
+    "count": 1
+  },
+  "group": "vanilla_chest"
+}

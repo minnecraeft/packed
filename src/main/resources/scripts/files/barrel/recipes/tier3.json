@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "#B#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "packed:${WOOD}_barrel_tier2"
+    },
+    "_": {
+      "item": "minecraft:${WOOD}_slab"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_barrel_tier3",
+    "count": 1
+  },
+  "group": "barrel_tier3"
+}

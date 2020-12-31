@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:acacia_barrel_tier1"
+    },
+    {
+      "item": "packed:storage_upgrader_tier1"
+    }
+  ],
+  "result": {
+    "item": "packed:acacia_barrel_tier2",
+    "count": 1
+  },
+  "group": "barrel_tier2"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:dark_oak_barrel_tier2"
+    },
+    {
+      "item": "packed:storage_upgrader_tier2"
+    }
+  ],
+  "result": {
+    "item": "packed:dark_oak_barrel_tier3",
+    "count": 1
+  },
+  "group": "barrel_tier3"
+}

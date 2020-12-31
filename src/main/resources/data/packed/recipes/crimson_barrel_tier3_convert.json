@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:crimson_barrel_tier3"
+    }
+  ],
+  "result": {
+    "item": "minecraft:barrel",
+    "count": 1
+  },
+  "group": "vanilla_barrel"
+}

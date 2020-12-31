@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:oak_chest_default"
+    },
+    {
+      "item": "packed:storage_upgrader_default"
+    }
+  ],
+  "result": {
+    "item": "packed:oak_chest_tier1",
+    "count": 1
+  },
+  "group": "chest_tier1"
+}

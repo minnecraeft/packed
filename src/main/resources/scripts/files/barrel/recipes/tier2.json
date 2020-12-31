@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#B#",
+    "#I#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "B": {
+      "item": "packed:${WOOD}_barrel_tier1"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_barrel_tier2",
+    "count": 1
+  },
+  "group": "barrel_tier2"
+}

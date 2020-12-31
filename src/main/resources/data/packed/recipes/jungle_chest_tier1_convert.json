@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "packed:jungle_chest_tier1"
+    }
+  ],
+  "result": {
+    "item": "minecraft:chest",
+    "count": 1
+  },
+  "group": "vanilla_chest"
+}

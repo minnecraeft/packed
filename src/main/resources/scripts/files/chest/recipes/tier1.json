@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PCP",
+    "PIP"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:${WOOD}_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "packed:${WOOD}_chest_${LAST_TIER}"
+    }
+  },
+  "result": {
+    "item": "packed:${WOOD}_chest_tier1",
+    "count": 1
+  },
+  "group": "chest_tier1"
+}
