@@ -1,14 +1,10 @@
 {
   "replace": "false",
   "values": [
-    "packed:oak_chest_default",
-    "packed:spruce_chest_default",
-    "packed:birch_chest_default",
-    "packed:acacia_chest_default",
-    "packed:jungle_chest_default",
-    "packed:dark_oak_chest_default",
-    "packed:crimson_chest_default",
-    "packed:warped_chest_default",
+    "#packed:chests_default",
+    "#packed:chests_tier1",
+    "#packed:chests_tier2",
+    "#packed:chests_tier3",
     "minecraft:chest",
     "minecraft:trapped_chest"
   ]

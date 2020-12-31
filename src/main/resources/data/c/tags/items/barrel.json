@@ -1,14 +1,10 @@
 {
   "replace": "false",
   "values": [
-    "packed:oak_barrel_default",
-    "packed:spruce_barrel_default",
-    "packed:birch_barrel_default",
-    "packed:acacia_barrel_default",
-    "packed:jungle_barrel_default",
-    "packed:dark_oak_barrel_default",
-    "packed:crimson_barrel_default",
-    "packed:warped_barrel_default",
+    "#packed:barrels_default",
+    "#packed:barrels_tier1",
+    "#packed:barrels_tier2",
+    "#packed:barrels_tier3",
     "minecraft:barrel"
   ]
 }

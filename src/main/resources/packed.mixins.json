@@ -5,11 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BarrelBlockEntityMixin",
-    "ChestBlockEntityMixin"
+    "ChestBlockEntityMixin",
+    "BarrelBlockCompatEntityMixin"
   ],
   "client": [
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "com.github.minnecraeft.packed.PackedMixinConfigPlugin"
 }
