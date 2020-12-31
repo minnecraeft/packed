@@ -55,6 +55,12 @@ public class PackedItems {
         CRATE_TIER_2 = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_TIER_2);
         CRATE_TIER_3 = new WoodItemVariants<>(PackedBlocks::crate, PackedBlocks.CRATE_TIER_3);
 
+        STORAGE_UPGRADER_DEFAULT = RegistryHelpers.register("storage_upgrader_default", new StorageUpgrader(newSettings(), StorageTiers.DEFAULT, StorageTiers.TIER_1));
+        STORAGE_UPGRADER_TIER1 = RegistryHelpers.register("storage_upgrader_tier1", new StorageUpgrader(newSettings(), StorageTiers.TIER_1, StorageTiers.TIER_2));
+        STORAGE_UPGRADER_TIER2 = RegistryHelpers.register("storage_upgrader_tier2", new StorageUpgrader(newSettings(), StorageTiers.TIER_2, StorageTiers.TIER_3));
+
+        STORAGE_LOCKER = RegistryHelpers.register("storage_locker", new StorageLocker(newSettings().maxCount(1)));
+
         ITEM_GROUP = FabricItemGroupBuilder.create(Packed.identifier("packed"))
                 .icon(() -> new ItemStack(PackedItems.BARREL_DEFAULT.oak()))
                 .appendItems(stacks -> {
@@ -82,14 +88,12 @@ public class PackedItems {
                     stacks.add(ItemStack.EMPTY);
                     CRATE_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
                     stacks.add(ItemStack.EMPTY);
+                    stacks.add(STORAGE_UPGRADER_DEFAULT.getDefaultStack());
+                    stacks.add(STORAGE_UPGRADER_TIER1.getDefaultStack());
+                    stacks.add(STORAGE_UPGRADER_TIER2.getDefaultStack());
+                    stacks.add(STORAGE_LOCKER.getDefaultStack());
                 })
                 .build();
-
-        STORAGE_UPGRADER_DEFAULT = RegistryHelpers.register("storage_upgrader_default", new StorageUpgrader(newSettings(), StorageTiers.DEFAULT, StorageTiers.TIER_1));
-        STORAGE_UPGRADER_TIER1 = RegistryHelpers.register("storage_upgrader_tier1", new StorageUpgrader(newSettings(), StorageTiers.TIER_1, StorageTiers.TIER_2));
-        STORAGE_UPGRADER_TIER2 = RegistryHelpers.register("storage_upgrader_tier2", new StorageUpgrader(newSettings(), StorageTiers.TIER_2, StorageTiers.TIER_3));
-
-        STORAGE_LOCKER = RegistryHelpers.register("storage_locker", new StorageLocker(newSettings().maxCount(1)));
     }
 
     private static Item.Settings newSettings() {
