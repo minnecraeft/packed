@@ -14,6 +14,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
+import java.util.List;
+
 public class PackedItems {
 
     public static final ItemGroup ITEM_GROUP;
@@ -63,41 +65,43 @@ public class PackedItems {
 
         ITEM_GROUP = FabricItemGroupBuilder.create(Packed.identifier("packed"))
                 .icon(() -> new ItemStack(PackedItems.BARREL_DEFAULT.oak()))
-                .appendItems(stacks -> {
-                    BARREL_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    BARREL_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    BARREL_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    BARREL_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CHEST_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CHEST_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CHEST_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CHEST_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CRATE_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CRATE_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CRATE_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    CRATE_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
-                    stacks.add(ItemStack.EMPTY);
-                    stacks.add(STORAGE_UPGRADER_DEFAULT.getDefaultStack());
-                    stacks.add(STORAGE_UPGRADER_TIER1.getDefaultStack());
-                    stacks.add(STORAGE_UPGRADER_TIER2.getDefaultStack());
-                    stacks.add(STORAGE_LOCKER.getDefaultStack());
-                })
+                .appendItems(PackedItems::formatStacks)
                 .build();
     }
 
     private static Item.Settings newSettings() {
-        return new Item.Settings().group(ITEM_GROUP);
+        return new Item.Settings().group(ItemGroup.SEARCH);
+    }
+
+    private static void formatStacks(List<ItemStack> stacks) {
+        BARREL_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        BARREL_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        BARREL_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        BARREL_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CHEST_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CHEST_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CHEST_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CHEST_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CRATE_DEFAULT.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CRATE_TIER_1.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CRATE_TIER_2.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        CRATE_TIER_3.stream().map(ItemStack::new).forEach(stacks::add);
+        stacks.add(ItemStack.EMPTY);
+        stacks.add(STORAGE_UPGRADER_DEFAULT.getDefaultStack());
+        stacks.add(STORAGE_UPGRADER_TIER1.getDefaultStack());
+        stacks.add(STORAGE_UPGRADER_TIER2.getDefaultStack());
+        stacks.add(STORAGE_LOCKER.getDefaultStack());
     }
 
     @SuppressWarnings("EmptyMethod")

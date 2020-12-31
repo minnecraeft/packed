@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class WoodItemVariants<T, B extends Block> implements Iterable<BlockItem>
 
         for (WoodVariant variant : blocks.variants.keySet()) {
             Identifier identifier = id.apply(blocks.tier, variant);
-            BlockItem item = new BlockItem(blocks.variants.get(variant), new Item.Settings());
+            BlockItem item = new BlockItem(blocks.variants.get(variant), new Item.Settings().group(ItemGroup.SEARCH));
             Registry.register(Registry.ITEM, identifier, item);
             builder.put(variant, item);
         }
